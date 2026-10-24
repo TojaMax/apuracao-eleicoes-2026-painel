@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f5">
+  <meta name="description" content="Painel independente de acompanhamento da eleição presidencial de 2026.">
+  <title>Eleição presidencial 2026 — painel independente</title>
+  <style>
+    :root{color-scheme:light;--ink:#172b35;--muted:#5b6e73;--line:#d9e1dd;--paper:#f7f8f5;--card:#fff;--green:#17694f;--lime:#d4ef90;--blue:#215d72;--shadow:0 14px 42px #1028200d;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);line-height:1.5}a{color:inherit}.wrap{width:min(1100px,calc(100% - 32px));margin:auto}.top{border-bottom:1px solid var(--line);background:#ffffffbd}.topin{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:11px;font-weight:750;letter-spacing:.015em}.mark{width:28px;height:28px;border-radius:9px;background:var(--green);position:relative}.mark:after{content:"";position:absolute;inset:7px;border:2px solid white;border-radius:50%}.live{font-size:.76rem;font-weight:700;color:var(--green);display:flex;gap:8px;align-items:center}.live:before{content:"";width:8px;height:8px;border-radius:50%;background:#38a875}.hero{padding:48px 0 26px}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:.74rem;color:var(--green);font-weight:750;margin:0 0 10px}h1{font-size:clamp(2rem,5vw,3.55rem);line-height:1.04;letter-spacing:-.045em;max-width:780px;margin:0} .intro{font-size:1.05rem;color:var(--muted);max-width:660px;margin:16px 0 0}.grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,.85fr);gap:18px;padding:15px 0 36px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.maincard{padding:clamp(20px,4vw,34px)}.side{padding:24px}.cardhead{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.card h2{font-size:1.12rem;letter-spacing:-.015em;margin:0}.tag{font-size:.72rem;border-radius:999px;padding:5px 10px;background:#eaf3ed;color:var(--green);font-weight:700;white-space:nowrap}.sub{margin:7px 0 23px;color:var(--muted);font-size:.9rem}.contest{display:grid;grid-template-columns:1fr 1fr;gap:14px}.candidate{border:1px solid var(--line);border-radius:14px;padding:18px 17px 16px;min-width:0}.candidate.lead{background:#f0f6ec;border-color:#d2e3c7}.candidate-name{font-size:.95rem;font-weight:700}.candidate-number{font-size:clamp(2.6rem,7vw,4.4rem);line-height:1;letter-spacing:-.06em;font-weight:780;margin:13px 0 7px;font-variant-numeric:tabular-nums}.candidate-caption{font-size:.8rem;color:var(--muted)}.bar{height:8px;background:#e7ece8;border-radius:99px;margin-top:18px;overflow:hidden}.bar>span{display:block;height:100%;background:var(--green);border-radius:inherit}.candidate:nth-child(2) .bar>span{background:var(--blue)}.stamp{margin:17px 0 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.8rem}.ballots{margin-top:18px;border-top:1px solid var(--line);padding-top:17px;color:var(--muted);font-size:.88rem}.ballots strong{color:var(--ink)}.side h2{margin:0 0 15px}.reportline{padding:12px 0;border-top:1px solid var(--line);font-size:.87rem}.reportline span{color:var(--muted);display:block;font-size:.76rem;margin-bottom:3px}.notice{margin-top:17px;padding:13px 14px;background:#f1f4f1;border-radius:12px;color:#40545a;font-size:.82rem}.empty{margin-top:9px;padding:24px 18px;border:1px dashed #bdcbc4;border-radius:14px;text-align:center}.empty .icon{font-size:1.3rem}.empty strong{display:block;margin-top:7px}.empty p{margin:5px auto 0;color:var(--muted);font-size:.85rem;max-width:360px}.lower{padding-bottom:38px}.lower h2{font-size:1.12rem;margin:0 0 14px}.emptycard{padding:22px}.footer{border-top:1px solid var(--line);padding:19px 0 30px;color:var(--muted);font-size:.76rem}.footerin{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.error{padding:22px;color:#923b25;background:#fff2ed;border:1px solid #f1c7b8;border-radius:14px}
+    @media(max-width:760px){.hero{padding-top:35px}.grid{grid-template-columns:1fr;gap:13px}.side{padding:21px}.topin{min-height:60px}.candidate{padding:16px 14px}.sub{margin-bottom:17px}}
+    @media(max-width:390px){.wrap{width:min(100% - 22px,1100px)}.contest{gap:9px}.candidate-name{font-size:.83rem}.candidate-number{font-size:2.55rem}.tag{font-size:.67rem;padding:4px 8px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="wrap topin"><div class="brand"><span class="mark" aria-hidden="true"></span><span>PAINEL ELEITORAL</span></div><span class="live">ATUALIZAÇÃO POR DADOS</span></div></header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="title"><p class="eyebrow">Brasil · 2º turno · 25 de outubro de 2026</p><h1 id="title">Acompanhe a eleição presidencial.</h1><p class="intro">Estimativa independente antes da apuração e, quando os boletins chegarem, projeção baseada nos votos já contabilizados.</p></section>
+    <div id="app" class="grid" aria-live="polite"><p class="error">Carregando os dados do painel…</p></div>
+    <section class="lower" aria-labelledby="votes-heading"><h2 id="votes-heading">Votos já coletados</h2><div id="collected" class="card emptycard"></div></section>
+  </main>
+  <footer class="footer"><div class="wrap footerin"><span>Projeção independente, não oficial.</span><span id="updated"></span></div></footer>
+<script>
+const pct = value => `${Number(value).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})}%`;
+const date = value => { if(!value)return 'horário não informado'; const d=new Date(value); return Number.isNaN(d.getTime())?value:d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short',timeZone:'America/Sao_Paulo'})+' BRT'; };
+function cardCandidate(name,value,lead,caption){return `<article class="candidate${lead?' lead':''}"><div class="candidate-name">${name}</div><div class="candidate-number">${pct(value)}</div><div class="candidate-caption">${caption}</div><div class="bar" aria-hidden="true"><span style="width:${Math.max(0,Math.min(100,value))}%"></span></div></article>`}
+function render(data){
+  const vote=data.urna&&data.urna.available===true;
+  const p=data.pesquisas||{};
+  const chosen=vote?data.urna:p;
+  const title=vote?'Projeção por votos':'Chance de vitória segundo pesquisas';
+  const pill=vote?'DADOS DE URNA':'ANTES DOS VOTOS';
+  const fl=vote?chosen.flavio_pct:chosen.flavio_win_pct;
+  const lu=vote?chosen.lula_pct:chosen.lula_win_pct;
+  const stamp=vote?chosen.updated_at:chosen.as_of;
+  const source=vote?'Projeção independente baseada em votos apurados':'Agregado de pesquisas (modelo próprio)';
+  const caption=vote?'dos votos válidos projetados':'chance de vitória no modelo';
+  const valid=(!vote&&p.valid_votes_pct!=null)?`<div class="ballots"><strong>Votos válidos estimados:</strong> ${pct(p.valid_votes_pct)}</div>`:'';
+  document.querySelector('#app').innerHTML=`<section class="card maincard"><div class="cardhead"><div><h2>${title}</h2><p class="sub">${vote?'Estimativa sobre o resultado final; não é placar oficial.':'Probabilidade estimada para cada candidato.'}</p></div><span class="tag">${pill}</span></div><div class="contest">${cardCandidate('Flávio Bolsonaro',fl,fl>=lu,caption)}${cardCandidate('Lula',lu,lu>fl,caption)}</div><div class="stamp"><span>${source}</span><span>Atualizado ${date(stamp)}</span></div>${valid}</section><aside class="card side"><h2>Relatório</h2><div class="reportline"><span>Fonte</span>${source}</div><div class="reportline"><span>Horário da estimativa</span>${date(stamp)}</div><div class="reportline"><span>Status</span>${vote?'Projeção em atualização':'Aguardando os primeiros boletins do exterior'}</div><div class="notice">Projeção independente, não oficial.</div></aside>`;
+  const collected=document.querySelector('#collected');
+  if(vote){collected.innerHTML=`<strong>Há projeção baseada em votos.</strong><p>${data.urna.collected_summary||'Os dados recebidos estão considerados na estimativa acima.'}</p>`;}else{collected.innerHTML=`<div class="icon" aria-hidden="true">◷</div><strong>A coleta ainda não começou</strong><p>Os votos começam a aparecer com os primeiros boletins do exterior.</p>`;}
+  document.querySelector('#updated').textContent=`Dados atualizados ${date(data.updated_at)}`;
+}
+fetch('./dados.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Dados indisponíveis');return r.json()}).then(render).catch(()=>{document.querySelector('#app').innerHTML='<p class="error">Não foi possível carregar os dados agora. Tente atualizar a página em instantes.</p>';document.querySelector('#collected').textContent='Os dados de votos serão exibidos quando os boletins começarem a chegar.'});
+</script>
+</body>
+</html>
