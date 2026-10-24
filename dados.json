@@ -1,11 +1,27 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-24T20:19:06-03:00",
-  "stage": "pre-election",
+  "updated_at": "2026-10-24T20:54:48-03:00",
+  "stage": "poll-model",
   "estimate": {
-    "available": false,
-    "mode": "pre-election",
-    "status": "painel preparado; coleta prevista para 25/10/2026 a partir de 1h BRT"
+    "available": true,
+    "mode": "poll",
+    "lula_pct": 48.677978065538895,
+    "flavio_pct": 51.322021934461105,
+    "lula_range_pct": [
+      46.688415688856274,
+      50.667540442221515
+    ],
+    "flavio_range_pct": [
+      49.332459557778485,
+      53.311584311143726
+    ],
+    "lula_win_probability_pct": 13.720342157696642,
+    "flavio_win_probability_pct": 86.27965784230337,
+    "updated_at": "2026-10-24T17:13-03:00",
+    "source": "modelo de pesquisas de Pedro",
+    "range_label": "Intervalo de 90% do modelo",
+    "model_sd_pp": 2.419136078837632,
+    "probability_description": "chance condicional; não calibrada empiricamente"
   },
   "report": {
     "evidence_levels": {
@@ -27,7 +43,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 0,
-    "updated_at": "2026-10-24T23:19:06.869923+00:00",
+    "updated_at": "2026-10-24T23:54:47.996995+00:00",
     "exterior_status": "aguardando_dados",
     "raw_bu_count": 0
   },
