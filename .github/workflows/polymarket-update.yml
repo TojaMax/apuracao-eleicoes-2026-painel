@@ -1,0 +1,39 @@
+name: Atualiza o retrato do Polymarket
+
+on:
+  schedule:
+    - cron: "0,20,40 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: polymarket-snapshot
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Baixa o repositório
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Consulta Gamma e o histórico CLOB
+        run: python scripts/update_polymarket.py
+
+      - name: Grava somente o retrato do mercado
+        run: |
+          git add polymarket.json
+          if git diff --cached --quiet -- polymarket.json; then
+            echo "O arquivo não mudou."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Atualiza dados do Polymarket"
+          git push
