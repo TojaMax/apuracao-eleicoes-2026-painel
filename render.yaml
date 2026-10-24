@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: apuracao-eleicoes-2026-painel
+    runtime: static
+    buildCommand: echo "Static site; no build step"
+    staticPublishPath: .
+    autoDeployTrigger: commit

@@ -1,17 +1,36 @@
 {
-  "updated_at": "2026-10-24T22:48:52+00:00",
-  "pesquisas": {
-    "flavio_win_pct": 86.27965784230337,
-    "lula_win_pct": 13.720342157696642,
-    "valid_votes_pct": null,
-    "as_of": "2026-10-24T17:19:31-03:00",
-    "source": "Agregado de pesquisas (modelo próprio)"
-  },
-  "urna": {
-    "available": false
+  "schema": 2,
+  "updated_at": "2026-10-24T20:19:06-03:00",
+  "stage": "pre-election",
+  "estimate": {
+    "available": false,
+    "mode": "pre-election",
+    "status": "painel preparado; coleta prevista para 25/10/2026 a partir de 1h BRT"
   },
   "report": {
-    "source": "Agregado de pesquisas (modelo próprio)",
-    "notice": "Projeção independente, não oficial."
-  }
+    "evidence_levels": {
+      "N1": {
+        "scopes": 0,
+        "bus": 0
+      },
+      "N2": {
+        "scopes": 0,
+        "bus": 0
+      },
+      "N3": {
+        "scopes": 0,
+        "bus": 0
+      }
+    },
+    "used_bu_count": 0,
+    "used_scope_count": 0,
+    "quarantine_count": 0,
+    "quarantine": [],
+    "partial_count": 0,
+    "updated_at": "2026-10-24T23:19:06.869923+00:00",
+    "exterior_status": "aguardando_dados",
+    "raw_bu_count": 0
+  },
+  "notice": "projeção independente, não oficial",
+  "national_probability": "not calculated by the national model; no calibrated probability is supplied"
 }
