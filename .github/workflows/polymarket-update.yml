@@ -28,11 +28,11 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Atualiza o snapshot a cada múltiplo de 20 minutos
+      - name: Atualiza o snapshot a cada múltiplo de 3 minutos
         env:
           DEADLINE_UTC: "2026-10-26T06:00:00Z"
           LOOP_SECONDS: "20400"
-          SLOT_SECONDS: "1200"
+          SLOT_SECONDS: "180"
         run: |
           set -uo pipefail
 
@@ -123,7 +123,7 @@ jobs:
             fi
             sleep_for=$((wake_at - now))
             if (( sleep_for > 0 )); then
-              echo "Próxima leitura no próximo múltiplo de 20 minutos UTC; aguardando ${sleep_for}s."
+              echo "Próxima leitura no próximo múltiplo de 3 minutos UTC; aguardando ${sleep_for}s."
               sleep "$sleep_for"
             fi
           done
