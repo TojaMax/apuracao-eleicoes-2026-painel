@@ -52,6 +52,8 @@
     .market-history #market-chart{height:78px;max-height:78px}
     .market-history .market-figure figcaption{margin-top:0;font-size:.65rem}
     .market-history .market-status{margin-top:5px;font-size:.65rem;line-height:1.35}
+    .bu-votes .flavio{color:var(--orange)}.bu-votes .lula{color:var(--green)}
+    .waiting-score .flavio{color:var(--orange);font-weight:700}.waiting-score .lula{color:var(--green);font-weight:700}
     @media(max-width:800px){.headin{grid-template-columns:minmax(0,1fr) max-content;grid-template-areas:"identity state" "ticker ticker";gap:5px 8px;padding-block:8px}.market-ticker{column-gap:8px;row-gap:3px}.market-ticker-source{font-size:.64rem}.market-ticker-values{font-size:.7rem;gap:5px}.market-quote{gap:3px}.market-quote strong{font-size:.77rem}.market-ticker-track{height:3px}.market-history{margin:4px 0 22px;width:100%}}
     @media(max-width:430px){.headin{min-height:68px}.identity{font-size:.65rem;gap:7px}.symbol{width:24px;height:24px}.symbol:after{width:7px;height:7px;left:6.5px;top:6.5px}.state{font-size:.58rem;padding:4px 6px}.market-ticker{column-gap:7px}.market-ticker-source{font-size:.61rem}.market-ticker-values{font-size:.67rem;letter-spacing:-.01em}.market-quote{gap:2px}.market-quote strong{font-size:.73rem}.market-history{padding:13px 14px}.market-history #market-chart{height:68px;max-height:68px}}
   </style>
@@ -85,7 +87,7 @@
     </section>
     <aside class="market-history" aria-label="Histórico do mercado Polymarket nas últimas 24 horas" aria-live="polite">
       <div class="market-history-head"><div><p class="market-kicker">Polymarket</p><h2>Últimas 24 horas</h2></div><p class="market-updated" id="market-updated" role="status" aria-live="polite">Aguardando a primeira leitura automatizada.</p></div>
-      <div class="market-legend" aria-hidden="true"><span class="legend-key"><i class="legend-swatch"></i>Lula</span><span class="legend-key"><i class="legend-swatch flavio"></i>Flávio</span></div>
+      <div class="market-legend" aria-hidden="true"><span class="legend-key"><i class="legend-swatch flavio"></i>Flávio</span><span class="legend-key"><i class="legend-swatch"></i>Lula</span></div>
       <figure class="market-figure">
         <svg id="market-chart" role="img" aria-labelledby="market-chart-title market-chart-desc" viewBox="0 0 640 140" preserveAspectRatio="none">
           <title id="market-chart-title">Probabilidades do Polymarket nas últimas 24 horas</title>
@@ -140,8 +142,8 @@ function renderCandidates(data){
   const subtitle=$('#estimate-subtitle');
   const note=$('#model-note');
   if(estimate.available===true){
-    target.append(candidateCard('Lula',estimate.lula_pct,estimate.lula_range_pct,estimate.lula_win_probability_pct,'lula',estimate.range_label||'Faixa'));
     target.append(candidateCard('Flávio Bolsonaro',estimate.flavio_pct,estimate.flavio_range_pct,estimate.flavio_win_probability_pct,'flavio',estimate.range_label||'Faixa'));
+    target.append(candidateCard('Lula',estimate.lula_pct,estimate.lula_range_pct,estimate.lula_win_probability_pct,'lula',estimate.range_label||'Faixa'));
     if(estimate.mode==='poll'){
       status.textContent='Modelo de pesquisas';
       subtitle.textContent='Projeção condicional das pesquisas; destaque até o primeiro boletim de urna identificado.';
@@ -160,7 +162,18 @@ function renderCandidates(data){
     subtitle.textContent=estimate.status||estimate.reason||'A estimativa aparecerá quando houver evidência quente e pareável suficiente.';
     const waiting=element('div',null,'waiting');
     waiting.append(element('strong',data.bu_status?.available?'Projeção do exterior ainda não disponível':'Estimativa ainda não disponível'));
-    waiting.append(element('span',data.bu_status?.available?'O placar bruto recente aparece abaixo; a projeção aguarda evidência comparável suficiente.':(estimate.raw_a||estimate.raw_b?`Placar bruto identificado: Lula ${estimate.raw_a||0} · Flávio ${estimate.raw_b||0}`:'Os dados aguardam conferência e comparação com o mesmo âmbito do primeiro turno.')));
+    if(data.bu_status?.available){
+      waiting.append(element('span','O placar bruto recente aparece abaixo; a projeção aguarda evidência comparável suficiente.'));
+    }else if(estimate.raw_a||estimate.raw_b){
+      const rawScore=element('span',null,'waiting-score');
+      rawScore.append(document.createTextNode('Placar bruto identificado: '));
+      rawScore.append(element('span',`Flávio ${estimate.raw_b||0}`,'flavio'));
+      rawScore.append(document.createTextNode(' · '));
+      rawScore.append(element('span',`Lula ${estimate.raw_a||0}`,'lula'));
+      waiting.append(rawScore);
+    }else{
+      waiting.append(element('span','Os dados aguardam conferência e comparação com o mesmo âmbito do primeiro turno.'));
+    }
     target.append(waiting);
     note.textContent='O placar bruto é parcial e não é uma projeção. A projeção independente exige dados recentes, publicados depois do fechamento local e comparáveis ao mesmo recorte do primeiro turno.';
   }
@@ -181,9 +194,9 @@ function renderBUs(status){
     const head=element('div',null,'bu-row-head');
     head.append(element('strong',label));head.append(element('span',detail,'bu-count'));
     const totals=element('div',null,'bu-votes');
-    const lula=element('span');lula.append(element('strong',`Lula ${formatVotes(votes?.a)}`));
-    const flavio=element('span');flavio.append(element('strong',`Flávio ${formatVotes(votes?.b)}`));
-    totals.append(lula,flavio);
+    const flavio=element('span',null,'flavio');flavio.append(element('strong',`Flávio ${formatVotes(votes?.b)}`));
+    const lula=element('span',null,'lula');lula.append(element('strong',`Lula ${formatVotes(votes?.a)}`));
+    totals.append(flavio,lula);
     row.append(head,totals);list.append(row);
   };
   const received=status.received||{};
@@ -267,7 +280,7 @@ function renderMarket(data){
   grid.append(svgNode('line',{x1:left,y1:bottom,x2:right,y2:bottom,class:'chart-axis'}));
   grid.append(svgNode('text',{x:left,y:132,'text-anchor':'start',class:'chart-label'},'há 24 h'));
   grid.append(svgNode('text',{x:right,y:132,'text-anchor':'end',class:'chart-label'},'agora'));
-  for(const [key,series] of [['lula',lula],['flavio',flavio]]){
+  for(const [key,series] of [['flavio',flavio],['lula',lula]]){
     const points=series.points.filter(point=>Number.isFinite(Number(point.t))&&Number.isFinite(Number(point.probability_pct)));
     const commands=points.map((point,index)=>{
       const x=left+Math.max(0,Math.min(1,(Number(point.t)-start)/(end-start)))*(right-left);
@@ -276,13 +289,13 @@ function renderMarket(data){
     });
     if(commands.length)lines.append(svgNode('path',{d:commands.join(' '),class:`chart-series ${key}`}));
   }
-  $('#market-chart-desc').textContent=`Nas últimas 24 horas, Lula está em ${pct(lula.price_pct)} e Flávio Bolsonaro em ${pct(flavio.price_pct)}. As probabilidades são implícitas nos preços do mercado.`;
+  $('#market-chart-desc').textContent=`Nas últimas 24 horas, Flávio Bolsonaro está em ${pct(flavio.price_pct)} e Lula em ${pct(lula.price_pct)}. As probabilidades são implícitas nos preços do mercado.`;
   const table=$('#market-access-table');table.replaceChildren();
   const caption=document.createElement('caption');caption.textContent='Resumo acessível do gráfico de 24 horas';table.append(caption);
   const head=document.createElement('thead'),headRow=document.createElement('tr');
   for(const label of ['Candidato','Agora','Primeiro ponto da janela']){const th=document.createElement('th');th.scope='col';th.textContent=label;headRow.append(th);}head.append(headRow);table.append(head);
   const body=document.createElement('tbody');
-  for(const [name,series] of [['Lula',lula],['Flávio Bolsonaro',flavio]]){const row=document.createElement('tr'),first=series.points[0];for(const value of [name,pct(series.price_pct),first?`${pct(first.probability_pct)} · ${new Date(Number(first.t)*1000).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'})}`:'sem ponto histórico']){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}body.append(row);}table.append(body);
+  for(const [name,series,candidateClass] of [['Flávio Bolsonaro',flavio,'flavio'],['Lula',lula,'lula']]){const row=document.createElement('tr'),first=series.points[0];row.className=candidateClass;for(const value of [name,pct(series.price_pct),first?`${pct(first.probability_pct)} · ${new Date(Number(first.t)*1000).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'})}`:'sem ponto histórico']){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}body.append(row);}table.append(body);
   $('#market-status').textContent='Leitura obtida pelo GitHub Actions e servida como arquivo estático neste painel.';$('#market-status').classList.remove('error');
 }
 async function refreshMarket(){
