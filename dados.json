@@ -1,27 +1,25 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T06:59:59-03:00",
-  "stage": "poll-model",
+  "updated_at": "2026-10-25T07:13:36-03:00",
+  "stage": "exterior",
   "estimate": {
     "available": true,
-    "mode": "poll",
-    "lula_pct": 48.677978065538895,
-    "flavio_pct": 51.322021934461105,
+    "mode": "exterior",
+    "lula_pct": 49.4059065670208,
+    "flavio_pct": 50.59409343297921,
     "lula_range_pct": [
-      46.688415688856274,
-      50.667540442221515
+      42.085500055486754,
+      56.726313078554846
     ],
     "flavio_range_pct": [
-      49.332459557778485,
-      53.311584311143726
+      43.273686921445154,
+      57.914499944513246
     ],
-    "lula_win_probability_pct": 13.720342157696642,
-    "flavio_win_probability_pct": 86.27965784230337,
-    "updated_at": "2026-10-24T17:13-03:00",
-    "source": "modelo de pesquisas de Pedro",
-    "range_label": "Intervalo de 90% do modelo",
-    "model_sd_pp": 2.419136078837632,
-    "probability_description": "chance condicional; não calibrada empiricamente"
+    "lula_win_probability_pct": 43.68086880099449,
+    "flavio_win_probability_pct": 56.31913119900551,
+    "updated_at": "2026-10-25T10:13:36.377025+00:00",
+    "source": "pares BU e âmbitos completos do exterior",
+    "range_label": "intervalo do modelo"
   },
   "report": {
     "evidence_levels": {
@@ -43,7 +41,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T09:59:58.990166+00:00",
+    "updated_at": "2026-10-25T10:13:36.377025+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
