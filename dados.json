@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T17:10:57-03:00",
+  "updated_at": "2026-10-25T17:11:12-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
@@ -17,7 +17,7 @@
     ],
     "lula_win_probability_pct": 54.79934133610338,
     "flavio_win_probability_pct": 45.20065866389662,
-    "updated_at": "2026-10-25T20:10:57.744200+00:00",
+    "updated_at": "2026-10-25T20:11:12.838341+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -512,7 +512,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T20:10:57.744200+00:00",
+    "updated_at": "2026-10-25T20:11:12.838341+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -1393,6 +1393,14 @@
       "b": 0
     },
     "note": "BUs recentes, conferidos com chave, grupo e carimbo do inventário. A assinatura criptográfica não foi verificada."
+  },
+  "official": {
+    "a": 193574,
+    "b": 142169,
+    "pct": 0.24536903502868315,
+    "counted_sections": 1225,
+    "total_sections": 499248,
+    "generated_at": "2026-10-25T17:06:31-03:00"
   },
   "history": [
     {

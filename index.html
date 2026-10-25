@@ -316,7 +316,9 @@ function placar(d){
   // Apurado até agora: placar oficial do TSE depois das 17h; antes, a soma dos países do exterior.
   const pj = d.projection || {};
   let ca = null, cb = null, onde = "";
+  const of = d.official || {};
   if(e.mode === "national" && isNum(e.official_a) && isNum(e.official_b)){ ca = e.official_a; cb = e.official_b; onde = isNum(e.official_pct) ? `${fmt2.format(e.official_pct)}% das urnas` : "TSE"; }
+  else if(isNum(of.a) && isNum(of.b) && of.a + of.b > 0){ ca = of.a; cb = of.b; onde = `TSE, ${fmt2.format(of.pct || 0)}% das urnas do país`; }
   else if(e.mode === "exterior" && Array.isArray(pj.used_scopes)){
     ca = pj.used_scopes.reduce((t,s) => t + (isNum(s.a2) ? s.a2 : 0), 0); cb = pj.used_scopes.reduce((t,s) => t + (isNum(s.b2) ? s.b2 : 0), 0); onde = `${pj.used_scopes.length} países do exterior`;
   }
