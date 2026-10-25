@@ -1,23 +1,23 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T08:07:55-03:00",
+  "updated_at": "2026-10-25T08:19:40-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
     "mode": "exterior",
-    "lula_pct": 49.411589200903585,
-    "flavio_pct": 50.588410799096415,
+    "lula_pct": 49.3995720297483,
+    "flavio_pct": 50.6004279702517,
     "lula_range_pct": [
-      42.096198843386325,
-      56.726979558420844
+      42.09873632650506,
+      56.70040773299153
     ],
     "flavio_range_pct": [
-      43.273020441579156,
-      57.903801156613675
+      43.29959226700847,
+      57.90126367349494
     ],
-    "lula_win_probability_pct": 43.736555354188766,
-    "flavio_win_probability_pct": 56.263444645811234,
-    "updated_at": "2026-10-25T11:07:55.084741+00:00",
+    "lula_win_probability_pct": 43.597095535333416,
+    "flavio_win_probability_pct": 56.402904464666584,
+    "updated_at": "2026-10-25T11:19:40.415761+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -28,7 +28,7 @@
         "bus": 0
       },
       "N2": {
-        "scopes": 8,
+        "scopes": 10,
         "bus": 0
       },
       "N3": {
@@ -37,7 +37,7 @@
       }
     },
     "used_bu_count": 0,
-    "used_scope_count": 10,
+    "used_scope_count": 12,
     "country_sources": [
       {
         "country": "AU",
@@ -88,11 +88,27 @@
         "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
       },
       {
+        "country": "MY",
+        "scope_label": "Malásia",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T08:19:11-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
         "country": "NZ",
         "scope_label": "Nova Zelândia",
         "source_level": "N2",
         "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
         "observed_at": "2026-10-25T06:21:01-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "PH",
+        "scope_label": "Filipinas",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T08:19:11-03:00",
         "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
       },
       {
@@ -123,7 +139,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T11:07:55.084741+00:00",
+    "updated_at": "2026-10-25T11:19:40.415761+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -136,20 +152,20 @@
       "valid1": 119300788,
       "sections": 499206
     },
-    "p_s_lula_pct": 50.763636151295664,
+    "p_s_lula_pct": 50.73960180898509,
     "p_t_lula_pct": 48.0595422505115,
-    "mu_lula_pct": 49.411589200903585,
-    "sigma_pp": 3.7323420191414596,
+    "mu_lula_pct": 49.3995720297483,
+    "sigma_pp": 3.724916175124101,
     "sigma_components_pp": {
-      "amostra": 2.386159238293877,
-      "fonte": 0.3982337018500535,
+      "amostra": 2.3814605969239238,
+      "fonte": 0.3974495285674622,
       "transferencia": 2.5,
-      "modelo": 1.352046950392083
+      "modelo": 1.3400297792367954
     },
     "transfer_fraction_other_to_lula": 0.3709314650331441,
-    "lula_win_probability_pct": 43.736555354188766,
-    "flavio_win_probability_pct": 56.263444645811234,
-    "used_scope_count": 10,
+    "lula_win_probability_pct": 43.597095535333416,
+    "flavio_win_probability_pct": 56.402904464666584,
+    "used_scope_count": 12,
     "used_scopes": [
       {
         "scope": "AU",
@@ -159,7 +175,7 @@
         "bu_count": 0,
         "continente": "Oceania",
         "flag": null,
-        "robust_z": -0.4292994155205584
+        "robust_z": -0.2702725940896452
       },
       {
         "scope": "CN",
@@ -169,7 +185,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.13684606531537136
+        "robust_z": 0.022180756115541822
       },
       {
         "scope": "HK",
@@ -179,7 +195,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.181207577546455
+        "robust_z": -0.022180756115541822
       },
       {
         "scope": "ID",
@@ -188,8 +204,8 @@
         "v1": 31,
         "bu_count": 0,
         "continente": "Asia",
-        "flag": null,
-        "robust_z": 2.9945632556031203
+        "flag": "|z| > 3; peso reduzido à metade",
+        "robust_z": 3.1535900770340337
       },
       {
         "scope": "JP",
@@ -199,7 +215,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.5048471868472442
+        "robust_z": 0.6638740082781573
       },
       {
         "scope": "KR",
@@ -209,7 +225,17 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.13684606531537136
+        "robust_z": 0.29587288674628454
+      },
+      {
+        "scope": "MY",
+        "level": "N2",
+        "swing": -0.13736536868268429,
+        "v1": 82,
+        "bu_count": 0,
+        "continente": "Asia",
+        "flag": "|z| > 3; peso reduzido à metade",
+        "robust_z": -4.706607072687673
       },
       {
         "scope": "NZ",
@@ -219,7 +245,17 @@
         "bu_count": 0,
         "continente": "Oceania",
         "flag": null,
-        "robust_z": 0.3852147632118774
+        "robust_z": 0.5442415846427906
+      },
+      {
+        "scope": "PH",
+        "level": "N2",
+        "swing": -0.03158705701078579,
+        "v1": 62,
+        "bu_count": 0,
+        "continente": null,
+        "flag": null,
+        "robust_z": -1.1806633502910557
       },
       {
         "scope": "SG",
@@ -229,7 +265,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -1.4879320830298879
+        "robust_z": -1.3289052615989747
       },
       {
         "scope": "TH",
@@ -239,7 +275,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 1.1531510996114123
+        "robust_z": 1.3121779210423254
       },
       {
         "scope": "TW",
@@ -249,12 +285,12 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.24796839558604566
+        "robust_z": -0.08894157415513249
       }
     ],
-    "covered_exterior_v1": 44305,
+    "covered_exterior_v1": 44392,
     "total_exterior_v1": 330882,
-    "exterior_v1_coverage_pct": 13.38996983819005,
+    "exterior_v1_coverage_pct": 13.416414310841931,
     "continents": [
       "Asia",
       "Oceania"
@@ -264,22 +300,13 @@
   },
   "mobilization": {
     "exterior": {
-      "available": true,
-      "scope_count": 10,
+      "available": false,
+      "scope_count": 12,
       "reference_2022": {
         "scope_count": 99,
         "valid_change_pct": 1.2,
         "larger_share_candidate": "Bolsonaro"
-      },
-      "valid1": 44305,
-      "valid2": 47348,
-      "valid_change_pct": 6.868299289019308,
-      "new_finalist_votes": 8725,
-      "flavio_change": 4999,
-      "flavio_share_pct": 57.295128939828075,
-      "lula_change": 3726,
-      "lula_share_pct": 42.70487106017192,
-      "unconfirmed_scope_count": 10
+      }
     },
     "national_sample": null
   },
