@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T17:29:01-03:00",
+  "updated_at": "2026-10-25T17:32:33-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
@@ -17,7 +17,7 @@
     ],
     "lula_win_probability_pct": 54.79934133610338,
     "flavio_win_probability_pct": 45.20065866389662,
-    "updated_at": "2026-10-25T20:29:01.174813+00:00",
+    "updated_at": "2026-10-25T20:32:33.510093+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -512,7 +512,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T20:29:01.174813+00:00",
+    "updated_at": "2026-10-25T20:32:33.510093+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -1377,23 +1377,6 @@
   },
   "notice": "projeção independente, não oficial",
   "national_probability": "not calculated by the national model; no calibrated probability is supplied",
-  "bu_status": {
-    "available": true,
-    "source": "tse",
-    "source_label": "Relatório do TSE exterior",
-    "updated_at": "2026-10-25T19:45:28.104844+00:00",
-    "received": {
-      "sections": 707,
-      "a": 126207,
-      "b": 85973
-    },
-    "totalized": {
-      "sections": 0,
-      "a": 0,
-      "b": 0
-    },
-    "note": "BUs recentes, conferidos com chave, grupo e carimbo do inventário. A assinatura criptográfica não foi verificada."
-  },
   "official": {
     "a": 193574,
     "b": 142169,
