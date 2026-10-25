@@ -129,17 +129,6 @@ footer p{margin:4px 0}
   .score{padding:18px}
   .cand{padding:16px}
 }
-@media (max-width:430px){
-  .pm .wrap{gap:5px;font-size:11px}
-  .pm .nm{font-size:11px}
-  .pm .bar{min-width:20px}
-  .score .cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
-  .cand{min-width:0;padding:10px 8px 8px}
-  .cand .pct{font-size:clamp(28px,8vw,32px)}
-  .row{grid-template-columns:minmax(0,1fr) auto auto;gap:4px}
-  .delta{min-width:0;font-size:11px}
-  .tag{font-size:10px;padding:2px 4px}
-}
 </style>
 </head>
 <body>
@@ -247,7 +236,9 @@ function cabecalho(d){
   $("updated").textContent = "atualizado às " + (hora(d.updated_at) || "—");
   const temNum = e.available && isNum(e.flavio_pct) && isNum(e.lula_pct);
   const onde = {poll:"nas pesquisas", exterior:"no que o exterior indica", national:"na projeção da apuração"}[e.mode] || "";
-  if(temNum){
+  if(temNum && e.projected_winner){
+    $("headline").innerHTML = e.projected_winner === "flavio" ? '<span class="f">Flávio</span> vence, crava a projeção' : '<span class="l">Lula</span> vence, crava a projeção';
+  } else if(temNum){
     const m = Math.abs(e.flavio_pct - e.lula_pct);
     const quem = e.flavio_pct >= e.lula_pct ? '<span class="f">Flávio</span>' : '<span class="l">Lula</span>';
     $("headline").innerHTML = m < 0.3 ? `Empate ${onde}` : `${quem} à frente por ${fmt1.format(m)} ${m < 2 ? "ponto" : "pontos"} ${onde}`;
@@ -377,7 +368,7 @@ function comoCalculamos(d){
   if(e.mode === "poll"){
     h = `<p>Antes de chegarem votos, o destaque é um modelo próprio de pesquisas, que reúne as pesquisas publicadas e considera o erro delas no 1º turno.</p>`;
   } else if(e.mode === "national"){
-    h = `<p>Depois das 17h, a conta usa a apuração do TSE: uma amostra fixa de 8.359 seções em todo o país é comparada com ela mesma no 1º turno, e a mudança média é aplicada ao que falta contar em cada estado.</p>`;
+    h = `<p>Depois das 17h, a conta usa a apuração do TSE. Os votos já contados entram como estão. Para o que falta contar, uma amostra fixa de 8.359 seções é comparada com ela mesma no 1º turno, por estado, capital e interior, de dois jeitos: quanto cada um ganhou ou perdeu na mesma seção (peso de 25%) e para onde foram os votos dos outros candidatos (peso de 75%).</p><p>Testamos assim nas eleições de 2018 e 2022, imitando a contagem: com 5% das urnas, o erro típico foi de 0,2 ponto e o pior, 0,7; com 20%, 0,1 e 0,4. A chance de vencer usa esse erro. A projeção só crava o vencedor quando a vantagem passa de quase quatro vezes o erro típico daquela etapa; nos testes, nunca cravou errado.</p>`;
   }
   if(isNum(pj.p_s_lula_pct) && isNum(pj.p_t_lula_pct)){
     const nb = pj.national_baseline || {};
