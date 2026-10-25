@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-24T22:43:47-03:00",
+  "updated_at": "2026-10-24T22:45:58-03:00",
   "stage": "poll-model",
   "estimate": {
     "available": true,
@@ -43,7 +43,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 0,
-    "updated_at": "2026-10-25T01:43:47.237065+00:00",
+    "updated_at": "2026-10-25T01:45:58.579609+00:00",
     "exterior_status": "aguardando_dados",
     "raw_bu_count": 0
   },
