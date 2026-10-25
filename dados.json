@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T09:01:50-03:00",
+  "updated_at": "2026-10-25T09:14:59-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
@@ -17,7 +17,7 @@
     ],
     "lula_win_probability_pct": 36.65268875584912,
     "flavio_win_probability_pct": 63.34731124415088,
-    "updated_at": "2026-10-25T12:01:50.617081+00:00",
+    "updated_at": "2026-10-25T12:14:59.601608+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -139,7 +139,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T12:01:50.617081+00:00",
+    "updated_at": "2026-10-25T12:14:59.601608+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -175,7 +175,8 @@
         "bu_count": 0,
         "continente": "Oceania",
         "flag": null,
-        "robust_z": -0.2702725940896452
+        "robust_z": -0.2702725940896452,
+        "entered_at": "2026-10-25T09:59:40+00:00"
       },
       {
         "scope": "CN",
@@ -185,7 +186,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.022180756115541822
+        "robust_z": 0.022180756115541822,
+        "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
         "scope": "HK",
@@ -195,7 +197,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.022180756115541822
+        "robust_z": -0.022180756115541822,
+        "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
         "scope": "ID",
@@ -205,7 +208,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": "|z| > 3; peso reduzido à metade",
-        "robust_z": 3.1535900770340337
+        "robust_z": 3.1535900770340337,
+        "entered_at": "2026-10-25T10:59:33+00:00"
       },
       {
         "scope": "JP",
@@ -215,7 +219,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.6638740082781573
+        "robust_z": 0.6638740082781573,
+        "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
         "scope": "KR",
@@ -225,7 +230,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.29587288674628454
+        "robust_z": 0.29587288674628454,
+        "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
         "scope": "MY",
@@ -235,7 +241,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": "|z| > 3; peso reduzido à metade",
-        "robust_z": -4.706607072687673
+        "robust_z": -4.706607072687673,
+        "entered_at": "2026-10-25T11:19:11+00:00"
       },
       {
         "scope": "NZ",
@@ -245,7 +252,8 @@
         "bu_count": 0,
         "continente": "Oceania",
         "flag": null,
-        "robust_z": 0.5442415846427906
+        "robust_z": 0.5442415846427906,
+        "entered_at": "2026-10-25T09:21:01+00:00"
       },
       {
         "scope": "PH",
@@ -255,7 +263,8 @@
         "bu_count": 0,
         "continente": null,
         "flag": null,
-        "robust_z": -1.1806633502910557
+        "robust_z": -1.1806633502910557,
+        "entered_at": "2026-10-25T11:19:11+00:00"
       },
       {
         "scope": "SG",
@@ -265,7 +274,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -1.3289052615989747
+        "robust_z": -1.3289052615989747,
+        "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
         "scope": "TH",
@@ -275,7 +285,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 1.3121779210423254
+        "robust_z": 1.3121779210423254,
+        "entered_at": "2026-10-25T10:21:34+00:00"
       },
       {
         "scope": "TW",
@@ -285,7 +296,8 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.08894157415513249
+        "robust_z": -0.08894157415513249,
+        "entered_at": "2026-10-25T09:40:29+00:00"
       }
     ],
     "covered_exterior_v1": 44392,

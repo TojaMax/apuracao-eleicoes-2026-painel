@@ -165,7 +165,7 @@ footer p{margin:4px 0}
 
       <section class="card" id="countriesCard" hidden>
         <h2>Países usados na conta</h2>
-        <div class="sub">Quanto cada país andou para um lado entre o 1º e o 2º turno, em pontos. Toque num país para ver a fonte.</div>
+        <div class="sub">Do mais recente para o mais antigo. O número mostra quanto cada país andou para um lado entre o 1º e o 2º turno, em pontos. Toque num país para ver a fonte.</div>
         <div class="filters" id="filters" role="group" aria-label="Filtrar por tipo de fonte"></div>
         <div class="explain" id="explain" hidden></div>
         <ul class="rows" id="rows"></ul>
@@ -228,7 +228,7 @@ const nomePais = c => NOME_FIX[c] || (NOMES[c] || c).replace(/ (Do|Da|De|Dos|Das
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const STATUS = {aguardando_dados:"Aguardando dados suficientes do exterior.", calculada:"Projeção calculada."};
 const statusTxt = s => STATUS[s] || s;
-let filtro = "todos", ultimo = null;
+let filtro = "todos", ordemPaises = "recentes", ultimo = null;
 const abertos = new Set();
 
 function cabecalho(d){
@@ -296,14 +296,16 @@ function paises(d){
   const card = $("countriesCard");
   if(!lista.length){ card.hidden = true; return; }
   card.hidden = false;
-  lista.sort((a,b) => (b.v1||0) - (a.v1||0));
+  const quando = s => { const d = new Date(s.entered_at || 0); return isNaN(d) ? 0 : d.getTime(); };
+  lista.sort((a,b) => ordemPaises === "maiores" ? (b.v1||0) - (a.v1||0) : quando(b) - quando(a) || (b.v1||0) - (a.v1||0));
   const cont = {todos:lista.length, N1:0, N2:0, N3:0};
   lista.forEach(s => { if(cont[s.level] !== undefined) cont[s.level]++; });
   const quarentena = (d.report && Array.isArray(d.report.quarantine)) ? d.report.quarantine : [];
   const botoes = [["todos","Todos"],["N2",FONTES.N2.rot],["N3",FONTES.N3.rot],["N1",FONTES.N1.rot]].filter(([k]) => k === "todos" || cont[k] > 0);
   $("filters").innerHTML = botoes.map(([k,r]) => `<button type="button" data-k="${k}" aria-pressed="${filtro === k}">${r}<span>${cont[k]}</span></button>`).join("") +
-    (quarentena.length ? `<button type="button" data-k="Q" aria-pressed="${filtro === "Q"}">Em observação<span>${quarentena.length}</span></button>` : "");
-  $("filters").querySelectorAll("button").forEach(b => b.onclick = () => { filtro = b.dataset.k; paises(ultimo); });
+    (quarentena.length ? `<button type="button" data-k="Q" aria-pressed="${filtro === "Q"}">Em observação<span>${quarentena.length}</span></button>` : "") +
+    `<button type="button" data-o="recentes" aria-pressed="${ordemPaises === "recentes"}">Mais recentes</button><button type="button" data-o="maiores" aria-pressed="${ordemPaises === "maiores"}">Maiores</button>`;
+  $("filters").querySelectorAll("button").forEach(b => b.onclick = () => { if(b.dataset.o) ordemPaises = b.dataset.o; else filtro = b.dataset.k; paises(ultimo); });
   const ex = $("explain");
   if(filtro === "Q"){ ex.hidden = false; ex.textContent = "Dados que destoaram dos outros países e ficaram fora da conta até serem conferidos."; }
   else if(FONTES[filtro]){ ex.hidden = false; ex.textContent = FONTES[filtro].exp; }
@@ -326,7 +328,7 @@ function paises(d){
     const alerta = s.flag ? `<p class="alert">Alerta: ${esc(s.flag)}</p>` : "";
     const ab = abertos.has(s.scope);
     return `<li><button class="row" type="button" data-scope="${esc(s.scope)}" aria-expanded="${ab}" aria-controls="m${i}">
-        <span class="n">${esc(nomePais(s.scope))}<small>${fmt0.format(s.v1||0)} votos</small></span>
+        <span class="n">${esc(nomePais(s.scope))}<small>entrou às ${hora(s.entered_at) || "—"} · ${fmt0.format(s.v1||0)} votos</small></span>
         <span class="tag ${fonte.cls}">${fonte.rot}</span>${delta}</button>
       <div class="more" id="m${i}" ${ab ? "" : "hidden"}><p>${fonte.exp}</p><p>${fmt0.format(s.v1||0)} votos válidos no 1º turno${cont ? " · " + esc(cont) : ""}.</p>${isNum(s.bu_count) && s.bu_count > 0 ? `<p>${fmt0.format(s.bu_count)} boletins de urna conferidos.</p>` : ""}${alerta}</div></li>`;
   }).join("") || `<li class="empty">Nenhum país neste grupo ainda.</li>`;
