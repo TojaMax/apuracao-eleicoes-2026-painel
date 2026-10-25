@@ -103,6 +103,11 @@
   <footer class="footer"><div class="footin"><span>Apuração baseada em fontes públicas e boletins identificados.</span><span id="footer-updated"></span></div></footer>
 <script>
 const $ = selector => document.querySelector(selector);
+const DISPLAY_CANDIDATE_ORDER = Object.freeze(['flavio','lula']);
+const displayCandidates = entries => {
+  const rank = new Map(DISPLAY_CANDIDATE_ORDER.map((key,index)=>[key,index]));
+  return [...entries].sort((left,right)=>(rank.get(left[0])??rank.size)-(rank.get(right[0])??rank.size));
+};
 const pct = value => typeof value === 'number' && Number.isFinite(value)
   ? `${value.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})}%` : '—';
 const date = value => {
@@ -142,8 +147,13 @@ function renderCandidates(data){
   const subtitle=$('#estimate-subtitle');
   const note=$('#model-note');
   if(estimate.available===true){
-    target.append(candidateCard('Flávio Bolsonaro',estimate.flavio_pct,estimate.flavio_range_pct,estimate.flavio_win_probability_pct,'flavio',estimate.range_label||'Faixa'));
-    target.append(candidateCard('Lula',estimate.lula_pct,estimate.lula_range_pct,estimate.lula_win_probability_pct,'lula',estimate.range_label||'Faixa'));
+    const cards=displayCandidates([
+      ['lula','Lula',estimate.lula_pct,estimate.lula_range_pct,estimate.lula_win_probability_pct,'lula'],
+      ['flavio','Flávio Bolsonaro',estimate.flavio_pct,estimate.flavio_range_pct,estimate.flavio_win_probability_pct,'flavio'],
+    ]);
+    for(const [,name,value,range,chance,style] of cards){
+      target.append(candidateCard(name,value,range,chance,style,estimate.range_label||'Faixa'));
+    }
     if(estimate.mode==='poll'){
       status.textContent='Modelo de pesquisas';
       subtitle.textContent='Projeção condicional das pesquisas; destaque até o primeiro boletim de urna identificado.';
@@ -194,9 +204,15 @@ function renderBUs(status){
     const head=element('div',null,'bu-row-head');
     head.append(element('strong',label));head.append(element('span',detail,'bu-count'));
     const totals=element('div',null,'bu-votes');
-    const flavio=element('span',null,'flavio');flavio.append(element('strong',`Flávio ${formatVotes(votes?.b)}`));
-    const lula=element('span',null,'lula');lula.append(element('strong',`Lula ${formatVotes(votes?.a)}`));
-    totals.append(flavio,lula);
+    const voteValues=displayCandidates([
+      ['lula','Lula',formatVotes(votes?.a),'lula'],
+      ['flavio','Flávio',formatVotes(votes?.b),'flavio'],
+    ]);
+    for(const [,name,value,style] of voteValues){
+      const candidate=element('span',null,style);
+      candidate.append(element('strong',`${name} ${value}`));
+      totals.append(candidate);
+    }
     row.append(head,totals);list.append(row);
   };
   const received=status.received||{};
@@ -280,7 +296,7 @@ function renderMarket(data){
   grid.append(svgNode('line',{x1:left,y1:bottom,x2:right,y2:bottom,class:'chart-axis'}));
   grid.append(svgNode('text',{x:left,y:132,'text-anchor':'start',class:'chart-label'},'há 24 h'));
   grid.append(svgNode('text',{x:right,y:132,'text-anchor':'end',class:'chart-label'},'agora'));
-  for(const [key,series] of [['flavio',flavio],['lula',lula]]){
+  for(const [key,series] of displayCandidates([['lula',lula],['flavio',flavio]])){
     const points=series.points.filter(point=>Number.isFinite(Number(point.t))&&Number.isFinite(Number(point.probability_pct)));
     const commands=points.map((point,index)=>{
       const x=left+Math.max(0,Math.min(1,(Number(point.t)-start)/(end-start)))*(right-left);
@@ -295,7 +311,7 @@ function renderMarket(data){
   const head=document.createElement('thead'),headRow=document.createElement('tr');
   for(const label of ['Candidato','Agora','Primeiro ponto da janela']){const th=document.createElement('th');th.scope='col';th.textContent=label;headRow.append(th);}head.append(headRow);table.append(head);
   const body=document.createElement('tbody');
-  for(const [name,series,candidateClass] of [['Flávio Bolsonaro',flavio,'flavio'],['Lula',lula,'lula']]){const row=document.createElement('tr'),first=series.points[0];row.className=candidateClass;for(const value of [name,pct(series.price_pct),first?`${pct(first.probability_pct)} · ${new Date(Number(first.t)*1000).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'})}`:'sem ponto histórico']){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}body.append(row);}table.append(body);
+  for(const [,name,series,candidateClass] of displayCandidates([['lula','Lula',lula,'lula'],['flavio','Flávio Bolsonaro',flavio,'flavio']])){const row=document.createElement('tr'),first=series.points[0];row.className=candidateClass;for(const value of [name,pct(series.price_pct),first?`${pct(first.probability_pct)} · ${new Date(Number(first.t)*1000).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'})}`:'sem ponto histórico']){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}body.append(row);}table.append(body);
   $('#market-status').textContent='Leitura obtida pelo GitHub Actions e servida como arquivo estático neste painel.';$('#market-status').classList.remove('error');
 }
 async function refreshMarket(){
