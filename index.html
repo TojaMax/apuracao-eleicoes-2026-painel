@@ -264,7 +264,8 @@ const nomePais = c => NOME_FIX[c] || (NOMES[c] || c).replace(/ (Do|Da|De|Dos|Das
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const STATUS = {aguardando_dados:"Aguardando dados suficientes do exterior.", calculada:"Projeção calculada."};
 const statusTxt = s => STATUS[s] || s;
-let filtro = "todos", ordemPaises = "recentes", ultimo = null, graficoAberto = false;
+let filtro = "todos", ordemPaises = "recentes", ultimo = null;
+const grafAberto = {est:false, apu:false};
 const abertos = new Set();
 
 function cabecalho(d){
@@ -324,21 +325,26 @@ function placar(d){
       <div class="nowl"><span class="f" style="width:${Math.max(30, Math.min(70, pf))}%"><small>${fmt0.format(cb)} ·</small> <b>${pct(pf)}</b></span><span class="l"><b>${pct(100 - pf)}</b> <small>· ${fmt0.format(ca)}</small></span></div></div>`;
   }
   const hist = (Array.isArray(d.history) ? d.history : []).filter(h => isNum(h.f) && h.t);
-  if(hist.length >= 2){
-    atual += `<button type="button" class="vergraf" id="verGraf" aria-expanded="${graficoAberto}">${graficoAberto ? "Fechar gráfico" : "Veja gráfico"}</button><div class="graf" id="graf" ${graficoAberto ? "" : "hidden"}>${grafico(hist)}</div>`;
-  }
+  const histApu = hist.filter(h => isNum(h.ca) && isNum(h.cb) && h.ca + h.cb > 0).map(h => Object.assign({}, h, {f: 100 * h.cb / (h.ca + h.cb), l: 100 * h.ca / (h.ca + h.cb)}));
+  const botao = (k, rot, h, nota) => h.length >= 2 ? `<button type="button" class="vergraf" data-g="${k}" aria-expanded="${grafAberto[k]}">${grafAberto[k] ? "Fechar gráfico" : rot}</button><div class="graf" id="graf-${k}" ${grafAberto[k] ? "" : "hidden"}>${grafico(h, nota)}</div>` : "";
+  const gEst = botao("est", "Veja gráfico estimativo", hist, "na estimativa do resultado final");
+  if(atual) atual = atual.replace(/<\/div>$/, botao("apu", "Veja gráfico da apuração", histApu, "nos votos já apurados") + "</div>");
   el.innerHTML = `
     <div class="esttit">Estimativa do resultado final</div>
     <div class="cols">
       <div class="cand f"><div class="who">Flávio Bolsonaro</div><div class="pct num">${pct(e.flavio_pct)}</div><div class="chance">${chanceF}</div><div class="range">${fr}</div></div>
       <div class="cand l"><div class="who">Lula</div><div class="pct num">${pct(e.lula_pct)}</div><div class="chance">${chanceL}</div><div class="range">${lr}</div></div>
     </div>
+    ${gEst}
     ${atual}`;
-  const bg = $("verGraf");
-  if(bg) bg.onclick = () => { graficoAberto = !graficoAberto; $("graf").hidden = !graficoAberto; bg.textContent = graficoAberto ? "Fechar gráfico" : "Veja gráfico"; bg.setAttribute("aria-expanded", String(graficoAberto)); };
+  const ROT = {est:"Veja gráfico estimativo", apu:"Veja gráfico da apuração"};
+  el.querySelectorAll(".vergraf").forEach(bg => bg.onclick = () => {
+    const k = bg.dataset.g; grafAberto[k] = !grafAberto[k]; $("graf-" + k).hidden = !grafAberto[k];
+    bg.textContent = grafAberto[k] ? "Fechar gráfico" : ROT[k]; bg.setAttribute("aria-expanded", String(grafAberto[k]));
+  });
 }
 
-function grafico(h){
+function grafico(h, nota){
   const W = 330, H = 160, L = 34, R = 58, T = 10, B = 22;
   const ts = h.map(p => new Date(p.t).getTime()), t0 = ts[0], t1 = ts[ts.length - 1] || t0 + 1;
   const vals = h.map(p => p.f);
@@ -360,7 +366,7 @@ function grafico(h){
   g += `<text x="${W - R + 5}" y="${y(ult.f) - 2}" class="gvf">${fmt2.format(ult.f)}</text><text x="${W - R + 5}" y="${y(ult.f) + 10}" class="gvl">Lula ${fmt2.format(ult.l)}</text>`;
   const d0 = ult.f - h[0].f;
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Estimativa ao longo do dia">${g}</svg>
-    <p class="gnote"><b class="cf">Flávio</b> na estimativa do resultado final, a cada atualização desde ${hora(h[0].t)}; o Lula é o que falta para 100%. Escala ampliada: cada linha vale ${fmt2.format(passo)} ponto. Desde o início: Flávio ${d0 >= 0 ? "+" : "−"}${fmt2.format(Math.abs(d0))}, Lula ${d0 > 0 ? "−" : "+"}${fmt2.format(Math.abs(d0))}.</p>`;
+    <p class="gnote"><b class="cf">Flávio</b> ${nota}, a cada atualização desde ${hora(h[0].t)}; o Lula é o que falta para 100%. Escala ampliada: cada linha vale ${fmt2.format(passo)} ponto. Desde o início: Flávio ${d0 >= 0 ? "+" : "−"}${fmt2.format(Math.abs(d0))}, Lula ${d0 > 0 ? "−" : "+"}${fmt2.format(Math.abs(d0))}.</p>`;
 }
 
 function placarPais(s){
