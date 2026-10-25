@@ -302,7 +302,8 @@ function paises(d){
   if(!lista.length){ card.hidden = true; return; }
   card.hidden = false;
   const quando = s => { const d = new Date(s.entered_at || 0); return isNaN(d) ? 0 : d.getTime(); };
-  lista.sort((a,b) => ordemPaises === "maiores" ? (b.v1||0) - (a.v1||0) : quando(b) - quando(a) || (b.v1||0) - (a.v1||0));
+  const v2 = s => isNum(s.a2) && isNum(s.b2) ? s.a2 + s.b2 : (s.v1||0);
+  lista.sort((a,b) => ordemPaises === "maiores" ? v2(b) - v2(a) : quando(b) - quando(a) || v2(b) - v2(a));
   const europa = s => (CONTINENTE[s.continente] || s.continente) === "Europa";
   const nEu = lista.filter(europa).length;
   const quarentena = (d.report && Array.isArray(d.report.quarantine)) ? d.report.quarantine : [];
@@ -328,9 +329,9 @@ function paises(d){
     const alerta = s.flag ? `<p class="alert">Alerta: ${esc(s.flag)}</p>` : "";
     const ab = abertos.has(s.scope);
     return `<li><button class="row" type="button" data-scope="${esc(s.scope)}" aria-expanded="${ab}" aria-controls="m${i}">
-        <span class="n">${esc(nomePais(s.scope))}<small>entrou às ${hora(s.entered_at) || "—"} · ${fmt0.format(s.v1||0)} votos</small></span>
+        <span class="n">${esc(nomePais(s.scope))}<small>entrou às ${hora(s.entered_at) || "—"} · ${isNum(s.a2) && isNum(s.b2) ? fmt0.format(s.a2 + s.b2) + " votos" : "—"}</small></span>
         <span class="tag ${fonte.cls}">${fonte.rot}</span>${delta}</button>
-      <div class="more" id="m${i}" ${ab ? "" : "hidden"}><p>${fonte.exp}</p><p>${fmt0.format(s.v1||0)} votos válidos no 1º turno${cont ? " · " + esc(cont) : ""}.</p>${isNum(s.bu_count) && s.bu_count > 0 ? `<p>${fmt0.format(s.bu_count)} boletins de urna conferidos.</p>` : ""}${alerta}</div></li>`;
+      <div class="more" id="m${i}" ${ab ? "" : "hidden"}><p>${fonte.exp}</p>${isNum(s.a2) && isNum(s.b2) ? `<p>2º turno: Flávio ${fmt0.format(s.b2)} × ${fmt0.format(s.a2)} Lula (${pct(100 * s.b2 / (s.a2 + s.b2))} × ${pct(100 * s.a2 / (s.a2 + s.b2))}).</p>` : ""}${isNum(s.a1) && isNum(s.b1) ? `<p>1º turno: Flávio ${fmt0.format(s.b1)} × ${fmt0.format(s.a1)} Lula, de ${fmt0.format(s.v1||0)} votos válidos${cont ? " · " + esc(cont) : ""}.</p>` : `<p>${fmt0.format(s.v1||0)} votos válidos no 1º turno${cont ? " · " + esc(cont) : ""}.</p>`}${isNum(s.bu_count) && s.bu_count > 0 ? `<p>${fmt0.format(s.bu_count)} boletins de urna conferidos.</p>` : ""}${alerta}</div></li>`;
   }).join("") || `<li class="empty">${filtro === "europa" ? "Nenhum país da Europa ainda; os primeiros devem entrar a partir das 13h." : "Nenhum país ainda."}</li>`;
   $("rows").querySelectorAll(".row").forEach(b => b.onclick = () => {
     const m = $(b.getAttribute("aria-controls")); const ab = m.hidden; m.hidden = !ab; b.setAttribute("aria-expanded", String(ab));
