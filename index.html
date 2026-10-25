@@ -490,13 +490,6 @@ function comoCalculamos(d){
       <tr><td>20%</td><td>0,1</td><td>0,4</td></tr>
       <tr><td>40% ou mais</td><td>menos de 0,1</td><td>0,2</td></tr></tbody></table>
     <p style="margin:6px 0 0;color:var(--muted);font-size:13px">O placar parcial do TSE, sem essa comparação, chegou a errar 9 pontos quando o Sul e o Sudeste foram contados primeiro.</p>`;
-  const cobAtual = isNum(pj.exterior_v1_coverage_pct) ? pj.exterior_v1_coverage_pct : null;
-  const FX = [[0,20,"até 20%","0,1 a 2,5","6,4"],[20,35,"20% a 35%","0,2 a 4,6","5,8"],[35,50,"35% a 50%","0,4 a 1,3","3,2"],[50,75,"50% a 75%","0,2 a 0,6","1,0"],[75,101,"75% ou mais","0,1 a 0,4","0,7"]];
-  h += `<h3 style="font-size:14px;margin:14px 0 4px">Quanto a estimativa pelo exterior pode errar</h3>
-    <p style="margin:0 0 6px;color:var(--muted);font-size:13px">Antes das 17h. Mesmo teste em 2018 e 2022, com os países entrando na ordem do dia (Ásia e Oceania, depois Europa e África, depois Américas), 400 sorteios por eleição. Erro em pontos; o típico varia muito entre as duas eleições, por isso vai em faixa.</p>
-    <table class="erro"><thead><tr><th>Votos do exterior já dentro</th><th>Erro típico</th><th>Pior erro</th></tr></thead><tbody>
-    ${FX.map(([lo,hi,r,t,w]) => `<tr${cobAtual !== null && cobAtual >= lo && cobAtual < hi ? ' class="agora"' : ""}><td>${r}${cobAtual !== null && cobAtual >= lo && cobAtual < hi ? " ← agora" : ""}</td><td>${t}</td><td>${w}</td></tr>`).join("")}</tbody></table>
-    <p style="margin:6px 0 0;color:var(--muted);font-size:13px">Com exatamente os 53 países e cidades que estavam na conta às 16h, a mesma conta teria errado 1,2 ponto em 2018 e 0,4 em 2022.</p>`;
   $("howBody").innerHTML = h || "<p>Os detalhes aparecem quando houver projeção.</p>";
 }
 
