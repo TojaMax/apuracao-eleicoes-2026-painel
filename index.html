@@ -13,6 +13,8 @@
     @media(max-width:430px){main,.headin,.footin{width:calc(100% - 24px)}.headin{min-height:60px}.identity{font-size:.78rem}.state{font-size:.7rem;padding:5px 8px}.candidates{gap:9px;margin-top:18px}.candidate{padding:14px 12px}.candidate-name{font-size:.83rem}.candidate-number{font-size:2.45rem}.chance{font-size:.77rem}.chance strong{display:block;margin:3px 0 0}.reportgrid{gap:8px}.stat{padding:12px}.statvalue{font-size:1rem}}
     .market{margin:18px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,30px);box-shadow:var(--shadow)}.market-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.market-kicker{margin:0 0 5px;color:var(--orange);font-size:.7rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.market h2{margin:0;font-size:1.1rem;letter-spacing:-.015em}.market-updated{margin:6px 0 0;color:var(--muted);font-size:.82rem}.market-link{color:var(--green);font-size:.82rem;font-weight:700;white-space:nowrap}.market-values{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.market-value{border:1px solid var(--line);border-radius:13px;padding:15px;display:flex;align-items:center;justify-content:space-between;gap:10px}.market-value.lula{background:#f2f6f0}.market-value.flavio{background:#faf2ee}.market-name{font-weight:700;font-size:.88rem}.market-percent{font-size:1.65rem;font-weight:780;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.market-figure{margin:18px 0 0}.market-legend{display:flex;gap:18px;align-items:center;margin-bottom:4px;color:var(--muted);font-size:.78rem}.legend-key{display:inline-flex;align-items:center;gap:7px}.legend-swatch{width:16px;height:3px;border-radius:5px;background:var(--green)}.legend-swatch.flavio{background:var(--orange)}#market-chart{display:block;width:100%;height:auto;overflow:visible}.chart-gridline{stroke:#e4e6df;stroke-width:1}.chart-label{fill:var(--muted);font-size:11px;font-family:inherit}.chart-axis{stroke:#cdd2ca;stroke-width:1}.chart-series{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.chart-series.lula{stroke:var(--green)}.chart-series.flavio{stroke:var(--orange)}.market-figure figcaption{margin-top:4px;color:var(--muted);font-size:.76rem}.market-source,.market-status{margin:9px 0 0;color:var(--muted);font-size:.76rem}.market-status.error{color:#78351f}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     @media(max-width:520px){.market-head{display:block}.market-link{display:inline-block;margin-top:8px}.market-values{gap:8px}.market-value{padding:12px 10px}.market-name{font-size:.8rem}.market-percent{font-size:1.4rem}.market-legend{gap:12px;font-size:.72rem}}
+    .hero-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}.hero-heading h1{flex:1 1 auto;min-inline-size:0}.market-ribbon{flex:0 1 auto;max-inline-size:100%;margin-block-start:2px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow);text-align:end}.market-ribbon-label{margin:0;color:var(--muted);font-size:.68rem;font-weight:750;letter-spacing:.04em;white-space:nowrap}.market-ribbon-score{margin:2px 0 0;color:var(--ink);font-size:.9rem;font-weight:780;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    @media(max-width:800px){.hero-heading{display:block}.market-ribbon{inline-size:fit-content;max-inline-size:100%;margin-block-start:14px;text-align:start}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -21,7 +23,7 @@
   <main>
     <section class="hero" aria-labelledby="title">
       <p class="kicker">Presidência · 2º turno · 25/10/2026</p>
-      <h1 id="title">O que os boletins do exterior indicam.</h1>
+      <div class="hero-heading"><h1 id="title">O que os boletins do exterior indicam.</h1><aside class="market-ribbon" aria-label="Placar do mercado Polymarket" aria-live="polite"><p class="market-ribbon-label" id="market-ribbon-time">Polymarket, —:—</p><p class="market-ribbon-score" id="market-ribbon-score">Flávio — · Lula —</p></aside></div>
       <p class="deck">Estimativa independente a partir das mesmas seções e âmbitos eleitorais nos dois turnos, com a origem e a cobertura dos dados à vista.</p>
       <p class="summary" id="summary" role="status" aria-live="polite">Carregando a atualização mais recente.</p>
     </section>
@@ -184,6 +186,8 @@ function renderMarket(data){
   $('#market-updated').textContent=`Atualizado pelo Polymarket às ${hhmm} BRT · ${day}`;
   $('#market-lula').textContent=pct(lula.price_pct);
   $('#market-flavio').textContent=pct(flavio.price_pct);
+  $('#market-ribbon-time').textContent=`Polymarket, ${hhmm}`;
+  $('#market-ribbon-score').textContent=`Flávio ${pct(flavio.price_pct)} · Lula ${pct(lula.price_pct)}`;
   const grid=$('#market-chart-grid'),lines=$('#market-chart-lines');grid.replaceChildren();lines.replaceChildren();
   const left=42,right=625,top=14,bottom=177,plotHeight=bottom-top;
   for(const value of [0,50,100]){
