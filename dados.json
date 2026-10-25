@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T18:18:11-03:00",
+  "updated_at": "2026-10-25T18:22:41-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
@@ -18,7 +18,7 @@
     ],
     "counted_sections": 860,
     "preview_ufs": 24,
-    "updated_at": "2026-10-25T18:18:02-03:00",
+    "updated_at": "2026-10-25T18:22:32-03:00",
     "source": "boletins de urna publicados pelo TSE como Recebidos (ainda nao totalizados), pareados com o 1o turno da mesma secao"
   },
   "report": {
@@ -512,7 +512,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T21:18:11.307798+00:00",
+    "updated_at": "2026-10-25T21:22:41.034234+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
