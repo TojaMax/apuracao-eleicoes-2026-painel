@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T06:41:11-03:00",
+  "updated_at": "2026-10-25T06:59:59-03:00",
   "stage": "poll-model",
   "estimate": {
     "available": true,
@@ -30,7 +30,7 @@
         "bus": 0
       },
       "N2": {
-        "scopes": 5,
+        "scopes": 6,
         "bus": 0
       },
       "N3": {
@@ -39,11 +39,11 @@
       }
     },
     "used_bu_count": 0,
-    "used_scope_count": 7,
+    "used_scope_count": 8,
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T09:41:11.874815+00:00",
+    "updated_at": "2026-10-25T09:59:58.990166+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
