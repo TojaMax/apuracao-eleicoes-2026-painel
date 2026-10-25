@@ -298,6 +298,10 @@ function cabecalho(d){
   else if(e.mode === "national" && e.preview) base = `Base: ${fmt0.format(e.counted_sections || 0)} urnas de ${e.preview_ufs || ""} estados, com boletim oficial já publicado pelo TSE e ainda não somado ao placar; cada seção comparada com ela mesma no 1º turno. Prévia: margem de ±${fmt1.format(e.preview_margin || 1.5)} ponto.`;
   else if(e.mode === "national") base = (isNum(e.official_pct) ? `${fmt2.format(e.official_pct)}% das urnas do país já apuradas. ` : "") + (isNum(e.counted_sections) ? `Base: apuração no Brasil — ${fmt0.format(e.counted_sections)} seções contadas pelo TSE.` : "Base: apuração no Brasil.");
   else if(e.status) base = statusTxt(e.status);
+  // Aviso da prorrogação: some sozinho às 19h30 de Brasília.
+  const agoraBrt = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Sao_Paulo"}));
+  if(agoraBrt.getFullYear() === 2026 && agoraBrt.getMonth() === 9 && agoraBrt.getDate() === 25 && (agoraBrt.getHours() < 19 || (agoraBrt.getHours() === 19 && agoraBrt.getMinutes() < 30)))
+    base = "Votação prorrogada por 2 horas: o TSE volta a divulgar a partir das 19h. " + base;
   $("basis").textContent = base;
 }
 

@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T18:53:44-03:00",
+  "updated_at": "2026-10-25T18:56:37-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
@@ -21,7 +21,7 @@
     "preview_margin": 2.5,
     "lula_win_probability_pct": 85.25775471250606,
     "flavio_win_probability_pct": 14.742245287493944,
-    "updated_at": "2026-10-25T18:53:37-03:00",
+    "updated_at": "2026-10-25T18:56:37-03:00",
     "source": "boletins de urna publicados pelo TSE como Recebidos (ainda nao totalizados), pareados com o 1o turno da mesma secao"
   },
   "report": {
@@ -515,7 +515,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T21:53:44.357239+00:00",
+    "updated_at": "2026-10-25T21:56:37.849164+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
