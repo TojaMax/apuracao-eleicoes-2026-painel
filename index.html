@@ -59,6 +59,26 @@
     @media(max-width:430px){.headin{min-height:68px}.identity{font-size:.65rem;gap:7px}.symbol{width:24px;height:24px}.symbol:after{width:7px;height:7px;left:6.5px;top:6.5px}.state{font-size:.58rem;padding:4px 6px}.market-ticker{column-gap:7px}.market-ticker-source{font-size:.61rem}.market-ticker-values{font-size:.67rem;letter-spacing:-.01em}.market-quote{gap:2px}.market-quote strong{font-size:.73rem}.market-history{padding:13px 14px}.market-history #market-chart{height:68px;max-height:68px}}
     .projection-method{margin:18px 0 0;border-top:1px solid var(--line);padding-top:10px}
     .projection-method[hidden]{display:none}
+    .mobilization{margin:14px 0 4px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow)}
+    .mobilization[hidden],.mobilization-national[hidden]{display:none}
+    .mobilization-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:8px 14px}
+    .mobilization h3{margin:0;font-size:1rem;line-height:1.25}
+    .mobilization-context{margin:4px 0 0;color:var(--muted);font-size:.74rem}
+    .mobilization-valid{display:grid;justify-items:end;gap:2px;margin:0;text-align:right;font-size:.73rem;color:var(--muted)}
+    .mobilization-valid strong{color:var(--ink);font-size:.9rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .mobilization-valid-change{font-weight:760;color:var(--green)}
+    .mobilization-gains-label{margin:10px 0 0;color:var(--muted);font-size:.76rem;line-height:1.35}
+    .mobilization-gains{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:7px;direction:ltr}
+    .mobilization-candidate{display:grid;gap:3px;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px}
+    .mobilization-candidate.flavio{background:#faf2ee;color:var(--orange)}
+    .mobilization-candidate.lula{background:#f2f6f0;color:var(--green)}
+    .mobilization-candidate-name{font-size:.73rem;font-weight:730;overflow-wrap:anywhere}
+    .mobilization-candidate strong{font-size:.94rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .mobilization-candidate-share{font-size:.72rem;font-weight:680}
+    .mobilization-note,.mobilization-reference,.mobilization-national{margin:9px 0 0;padding-top:8px;border-top:1px solid var(--line);font-size:.73rem;line-height:1.4;color:var(--muted)}
+    .mobilization-reference{color:var(--ink)}
+    .mobilization-national{display:grid;gap:2px}
+    .mobilization-national strong{color:var(--ink)}
     .projection-method>summary{min-block-size:44px;padding:9px 2px;cursor:pointer;font-weight:760;color:var(--green)}
     .projection-method>summary:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:5px}
     .method-mobile-title{display:none}
@@ -95,6 +115,7 @@
     .method-signal{font-size:.72rem;color:var(--muted)}
     .method-limit{margin:12px 0 0;padding:10px 12px;border-left:3px solid var(--gold);background:#eeeee7;color:#48534d;font-size:.79rem}
     @media(max-width:720px){.method-mobile-title{display:inline}.method-desktop-title{display:none}.method-grid{grid-template-columns:1fr}.method-step{padding:12px}.method-parts{grid-template-columns:1fr}.method-candidate{padding:9px}}
+    @media(max-width:720px){.mobilization-head{grid-template-columns:minmax(0,1fr)}.mobilization-valid{justify-items:start;text-align:left}}
     @container (width < 600px){
       .method-table,.method-table thead,.method-table tbody,.method-table tr,.method-table th,.method-table td{display:block}
       .method-table thead{display:none}
@@ -123,6 +144,17 @@
     <section class="board" aria-labelledby="estimate-title">
       <div class="boardtop"><div><h2 id="estimate-title">Estimativa de votos válidos</h2><p class="small" id="estimate-subtitle">Aguardando dados do dia da eleição.</p></div><span class="stamp" id="stamp">Atualização não disponível</span></div>
       <div id="candidates" class="candidates"></div>
+      <section class="mobilization" id="mobilization" aria-labelledby="mobilization-title" hidden>
+        <div class="mobilization-head">
+          <div><h3 id="mobilization-title">Mobilização no exterior</h3><p class="mobilization-context" id="mobilization-context"></p></div>
+          <p class="mobilization-valid"><span>Votos válidos · 1º → 2º turno</span><strong id="mobilization-valid-counts"></strong><span class="mobilization-valid-change" id="mobilization-valid-change"></span></p>
+        </div>
+        <p class="mobilization-gains-label" id="mobilization-gains-label"></p>
+        <div class="mobilization-gains" id="mobilization-gains"></div>
+        <p class="mobilization-note" id="mobilization-note"></p>
+        <p class="mobilization-reference" id="mobilization-reference"></p>
+        <div class="mobilization-national" id="mobilization-national" hidden><strong>Brasil · mesmas seções da amostra</strong><span id="mobilization-national-value"></span></div>
+      </section>
       <details class="projection-method" id="projection-method" open hidden>
         <summary><span class="method-desktop-title">Como a projeção é calculada</span><span class="method-mobile-title">Ver como calculamos</span></summary>
         <div class="method-content">
@@ -373,6 +405,8 @@ function methodNumber(value,digits=2){
 }
 function methodPercent(value){return typeof value==='number'&&Number.isFinite(value)?`${methodNumber(value)}%`:'—';}
 function methodVotes(value){return Number.isSafeInteger(value)?value.toLocaleString('pt-BR'):'—';}
+function methodSignedVotes(value){return Number.isSafeInteger(value)?`${value<0?'−':value>0?'+':''}${methodVotes(Math.abs(value))}`:'—';}
+function methodSignedPercent(value,digits=1){return typeof value==='number'&&Number.isFinite(value)?`${value<0?'−':value>0?'+':''}${methodNumber(Math.abs(value),digits)}%`:'—';}
 function methodPoints(value,signed=false){
   if(typeof value!=='number'||!Number.isFinite(value))return '—';
   const sign=signed?(value<0?'−':'+'):'';
@@ -474,8 +508,42 @@ function renderProjectionMethod(projection){
   }
   disclosure.hidden=false;
 }
+function renderMobilization(mobilization){
+  const panel=$('#mobilization');panel.hidden=true;
+  const exterior=mobilization?.exterior;
+  if(!exterior||exterior.available!==true)return;
+  panel.hidden=false;
+  $('#mobilization-context').textContent=`Nos mesmos ${exterior.scope_count} países e territórios usados na estimativa.`;
+  $('#mobilization-valid-counts').textContent=`${methodVotes(exterior.valid1)} → ${methodVotes(exterior.valid2)}`;
+  $('#mobilization-valid-change').textContent=methodSignedPercent(exterior.valid_change_pct);
+  $('#mobilization-gains-label').textContent=`Votos a mais + votos das outras candidaturas: ${methodVotes(exterior.new_finalist_votes)}.`;
+  const gains=$('#mobilization-gains');gains.replaceChildren();
+  for(const [key,name,votes,share] of displayCandidates([
+    ['flavio','Flávio Bolsonaro',exterior.flavio_change,exterior.flavio_share_pct],
+    ['lula','Lula',exterior.lula_change,exterior.lula_share_pct],
+  ])){
+    const card=element('div',null,`mobilization-candidate ${key}`);
+    card.append(element('span',name,'mobilization-candidate-name'));
+    card.append(element('strong',`${methodSignedVotes(votes)} votos`));
+    card.append(element('span',`${methodSignedPercent(share)} do total que mudou`,'mobilization-candidate-share'));
+    gains.append(card);
+  }
+  $('#mobilization-note').textContent=exterior.unconfirmed_scope_count>0
+    ?`Totais declarados por fontes; ${exterior.unconfirmed_scope_count} âmbitos aguardam confirmação do TSE. A diferença não identifica votos individuais.`
+    :'A diferença entre os totais não identifica votos individuais.';
+  const reference=exterior.reference_2022||{};
+  $('#mobilization-reference').textContent=`Referência fixa de 2022 · ${methodVotes(reference.scope_count)} âmbitos: votos válidos ${methodSignedPercent(reference.valid_change_pct)}; Bolsonaro ficou com mais dos votos que mudaram.`;
+  const national=mobilization.national_sample;
+  const nationalBox=$('#mobilization-national');nationalBox.hidden=true;
+  if(national&&Number.isSafeInteger(national.first_round)&&Number.isSafeInteger(national.second_round)){
+    const matched=Number.isSafeInteger(national.matched_sections)?` em ${methodVotes(national.matched_sections)} seções pareadas`:'';
+    $('#mobilization-national-value').textContent=`${national.label} na amostra${matched}: ${methodVotes(national.first_round)} → ${methodVotes(national.second_round)} (${methodSignedPercent(national.change_pct)}).`;
+    nationalBox.hidden=false;
+  }
+}
 function render(data){
   renderCandidates(data);
+  renderMobilization(data.mobilization);
   renderProjectionMethod(data.projection);
   renderBUs(data.bu_status);
   renderReport(data.report||{});
