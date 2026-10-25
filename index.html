@@ -51,8 +51,12 @@ h1 .f{color:var(--flavio)} h1 .l{color:var(--lula)}
 .split{position:relative;height:10px;border-radius:99px;overflow:hidden;display:flex;margin:12px 2px 4px;background:var(--line)}
 .split i{display:block;height:100%}
 .split .sf{background:var(--flavio)} .split .sl{background:var(--lula)}
-.mid{position:relative;height:0}
-.mid::after{content:"50%";position:absolute;left:50%;transform:translateX(-50%);top:-1px;font-size:10.5px;color:var(--faint)}
+.esttit{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 2px 8px}
+.now{margin-top:12px}
+.now .split{height:6px;margin:4px 2px 3px}
+.nowt{font-size:11.5px;color:var(--muted);margin:0 2px}
+.nowl{display:grid;grid-template-columns:1fr auto 1fr;font-size:11.5px;margin:0 2px;font-variant-numeric:tabular-nums}
+.nowl .f{color:var(--flavio)} .nowl .l{color:var(--lula);text-align:right} .nowl .m{color:var(--faint)}
 .split::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:#fff;opacity:.95}
 .note{font-size:12px;color:var(--muted);margin:14px 2px 0}
 .waiting{padding:18px 6px;text-align:center;color:var(--muted)}
@@ -291,14 +295,27 @@ function placar(d){
   const chanceL = isNum(e.lula_win_probability_pct) ? `<b class="num">${ch(e.lula_win_probability_pct)}</b> de chance de vencer` : "";
   const fr = Array.isArray(e.flavio_range_pct) ? `pode variar de ${fmt0.format(e.flavio_range_pct[0])}% a ${fmt0.format(e.flavio_range_pct[1])}%` : "";
   const lr = Array.isArray(e.lula_range_pct) ? `pode variar de ${fmt0.format(e.lula_range_pct[0])}% a ${fmt0.format(e.lula_range_pct[1])}%` : "";
-  const f = Math.max(0, Math.min(100, e.flavio_pct));
+  // Apurado até agora: placar oficial do TSE depois das 17h; antes, a soma dos países do exterior.
+  const pj = d.projection || {};
+  let ca = null, cb = null, onde = "";
+  if(e.mode === "national" && isNum(e.official_a) && isNum(e.official_b)){ ca = e.official_a; cb = e.official_b; onde = isNum(e.official_pct) ? `${fmt2.format(e.official_pct)}% das urnas` : "TSE"; }
+  else if(e.mode === "exterior" && Array.isArray(pj.used_scopes)){
+    ca = pj.used_scopes.reduce((t,s) => t + (isNum(s.a2) ? s.a2 : 0), 0); cb = pj.used_scopes.reduce((t,s) => t + (isNum(s.b2) ? s.b2 : 0), 0); onde = `${pj.used_scopes.length} países do exterior`;
+  }
+  let atual = "";
+  if(isNum(ca) && isNum(cb) && ca + cb > 0){
+    const pf = 100 * cb / (ca + cb);
+    atual = `<div class="now"><div class="nowt">Apurado até agora · ${fmt0.format(ca + cb)} votos (${onde})</div>
+      <div class="split" role="img" aria-label="Apurado até agora: Flávio ${pct(pf)}, Lula ${pct(100 - pf)}"><i class="sf" style="width:${pf}%"></i><i class="sl" style="width:${100 - pf}%"></i></div>
+      <div class="nowl"><span class="f">Flávio ${pct(pf)} · ${fmt0.format(cb)}</span><span class="m">50%</span><span class="l">${fmt0.format(ca)} · ${pct(100 - pf)} Lula</span></div></div>`;
+  }
   el.innerHTML = `
+    <div class="esttit">Estimativa do resultado final</div>
     <div class="cols">
       <div class="cand f"><div class="who">Flávio Bolsonaro</div><div class="pct num">${pct(e.flavio_pct)}</div><div class="chance">${chanceF}</div><div class="range">${fr}</div></div>
       <div class="cand l"><div class="who">Lula</div><div class="pct num">${pct(e.lula_pct)}</div><div class="chance">${chanceL}</div><div class="range">${lr}</div></div>
     </div>
-    <div class="split" role="img" aria-label="Flávio ${pct(e.flavio_pct)}, Lula ${pct(e.lula_pct)}"><i class="sf" style="width:${f}%"></i><i class="sl" style="width:${100-f}%"></i></div>
-    <div class="mid"></div>`;
+    ${atual}`;
 }
 
 function placarPais(s){
