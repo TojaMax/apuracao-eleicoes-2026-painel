@@ -200,7 +200,7 @@ footer p{margin:4px 0}
   <div class="layout">
     <div>
       <section class="card" id="countriesCard" hidden>
-        <h2>Países usados na conta</h2>
+        <h2 id="countriesTitle">Países usados na conta</h2>
         <div class="filters" id="filters" role="group" aria-label="Filtrar e ordenar países"></div>
         <div class="explain" id="explain" hidden></div>
         <div class="rowhead" aria-hidden="true"><span>País</span><span class="h2t"><i class="f">Flávio</i> % <i class="l">Lula</i><br>no 2º turno</span><span>Avanço desde<br>o 1º turno</span></div>
@@ -405,6 +405,7 @@ function placarPais(s){
 }
 
 function paises(d){
+  $("countriesTitle").textContent = (d.estimate || {}).mode === "national" ? "Exterior: países já apurados" : "Países usados na conta";
   const pj = d.projection || {};
   const lista = Array.isArray(pj.used_scopes) ? pj.used_scopes.slice() : [];
   const card = $("countriesCard");
@@ -492,6 +493,8 @@ function comoCalculamos(d){
   let h = "";
   if(e.mode === "poll"){
     h = `<p>Antes de chegarem votos, o destaque é um modelo próprio de pesquisas, que reúne as pesquisas publicadas e considera o erro delas no 1º turno.</p>`;
+  } else if(e.mode === "national" && e.preview){
+    h = `<p><b>Agora (prévia):</b> o TSE publica o boletim de cada urna assim que ele chega, antes de somar ao placar da TV. Usamos esses boletins oficiais: hoje são ${fmt0.format(e.counted_sections || 0)} seções de ${e.preview_ufs || ""} estados. Cada seção é comparada com ela mesma no 1º turno, separando por estado e por capital e interior, pelos dois métodos (25% a mudança na seção, 75% para onde foram os votos dos outros candidatos). Estados sem urna ainda recebem a mudança média dos outros.</p><p>Enquanto São Paulo, Rio e Minas não tiverem urnas, a margem é de ±${fmt1.format(e.preview_margin || 2.5)} pontos; depois, passa a ser a medida nos testes de 2018 e 2022. A chance de vencer usa essa margem. Quando a nossa amostra fixa tiver 150 seções somadas pelo TSE, a projeção oficial substitui esta prévia.</p>`;
   } else if(e.mode === "national"){
     h = `<p>Depois das 17h, a conta usa a apuração do TSE. Os votos já contados entram como estão. Para o que falta contar, uma amostra fixa de 8.359 seções é comparada com ela mesma no 1º turno, por estado, capital e interior, por dois métodos: quanto cada um ganhou ou perdeu na mesma seção (peso de 25%) e para onde foram os votos dos outros candidatos (peso de 75%).</p><p>Testamos assim nas eleições de 2018 e 2022, imitando a contagem: com 5% das urnas, o erro típico foi de 0,2 ponto e o pior, 0,7; com 20%, 0,1 e 0,4. A chance de vencer usa esse erro. A projeção só crava o vencedor quando a vantagem passa de quase quatro vezes o erro típico daquela etapa; nos testes, nunca cravou errado.</p>`;
   }
