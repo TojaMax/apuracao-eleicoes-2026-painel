@@ -357,9 +357,10 @@ function placar(d){
   if(atual) atual = atual.replace(/<\/div>$/, botao("apu", "Veja gráfico da apuração", histApu, "nos votos já apurados") + "</div>");
   el.innerHTML = `
     ${isNum((d.official || {}).pct) ? `<div class="urnas"><span class="up">${fmt2.format(d.official.pct)}%</span><span class="ut">das urnas do país apuradas pelo TSE<br>${fmt0.format(d.official.counted_sections || 0)} de ${fmt0.format(d.official.total_sections || 0)} seções · às ${hora(d.official.generated_at) || "—"}</span></div><div class="ubar"><i style="width:${Math.min(100, d.official.pct)}%"></i></div>` : ""}
-    <div class="esttit">Estimativa do resultado final${e.preview && e.updated_at ? (() => {
+    <div class="esttit">Estimativa do resultado final${e.updated_at && (e.preview || isNum(e.matched_sections)) ? (() => {
+      const n = e.preview ? (e.counted_sections || 0) : e.matched_sections;
       const min = (Date.now() - new Date(e.updated_at).getTime()) / 60000, parada = min > 10;
-      return ` <span class="estatu${parada ? " parada" : ""}">${parada ? "parada desde" : "atualizada às"} ${hora(e.updated_at)} · ${fmt0.format(e.counted_sections || 0)} seções (${fmt2.format(100 * (e.counted_sections || 0) / 499248)}% das urnas)</span>`;
+      return ` <span class="estatu${parada ? " parada" : ""}">${parada ? "parada desde" : "atualizada às"} ${hora(e.updated_at)} · ${fmt0.format(n)} ${e.preview ? "seções" : "seções da amostra"} (${fmt2.format(100 * n / 499248)}% das urnas)</span>`;
     })() : ""}</div>
     <div class="cols">
       <div class="cand f"><div class="who">Flávio Bolsonaro</div><div class="pct num">${pct(e.flavio_pct)}</div><div class="chance">${chanceF}</div><div class="range">${fr}</div></div>
