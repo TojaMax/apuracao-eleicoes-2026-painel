@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T18:30:42-03:00",
+  "updated_at": "2026-10-25T18:31:57-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
@@ -515,7 +515,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T21:30:42.106622+00:00",
+    "updated_at": "2026-10-25T21:31:57.287732+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -1580,8 +1580,8 @@
       "l": 51.309,
       "m": "national",
       "n": null,
-      "ca": null,
-      "cb": null
+      "ca": 193574,
+      "cb": 142169
     },
     {
       "t": "2026-10-25T18:13:18-03:00",
@@ -1589,8 +1589,8 @@
       "l": 51.306,
       "m": "national",
       "n": null,
-      "ca": null,
-      "cb": null
+      "ca": 193574,
+      "cb": 142169
     },
     {
       "t": "2026-10-25T18:18:11-03:00",
@@ -1598,8 +1598,8 @@
       "l": 51.309,
       "m": "national",
       "n": null,
-      "ca": null,
-      "cb": null
+      "ca": 193574,
+      "cb": 142169
     }
   ]
 }
