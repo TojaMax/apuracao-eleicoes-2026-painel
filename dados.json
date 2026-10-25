@@ -1,27 +1,27 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T19:06:14-03:00",
+  "updated_at": "2026-10-25T19:09:48-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
     "mode": "national",
     "preview": true,
-    "lula_pct": 51.3094404245967,
-    "flavio_pct": 48.6905595754033,
+    "lula_pct": 51.49463465534909,
+    "flavio_pct": 48.50536534465091,
     "lula_range_pct": [
-      48.8094404245967,
-      53.8094404245967
+      48.99463465534909,
+      53.99463465534909
     ],
     "flavio_range_pct": [
-      46.1905595754033,
-      51.1905595754033
+      46.00536534465091,
+      51.00536534465091
     ],
-    "counted_sections": 860,
-    "preview_ufs": 24,
+    "counted_sections": 343,
+    "preview_ufs": 14,
     "preview_margin": 2.5,
-    "lula_win_probability_pct": 85.25775471250606,
-    "flavio_win_probability_pct": 14.742245287493944,
-    "updated_at": "2026-10-25T19:05:43-03:00",
+    "lula_win_probability_pct": 88.40946820009013,
+    "flavio_win_probability_pct": 11.590531799909868,
+    "updated_at": "2026-10-25T19:07:07-03:00",
     "source": "boletins de urna publicados pelo TSE como Recebidos (ainda nao totalizados), pareados com o 1o turno da mesma secao"
   },
   "report": {
@@ -515,7 +515,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T22:06:14.679178+00:00",
+    "updated_at": "2026-10-25T22:09:48.030988+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -1381,12 +1381,12 @@
   "notice": "projeção independente, não oficial",
   "national_probability": "not calculated by the national model; no calibrated probability is supplied",
   "official": {
-    "a": 983482,
-    "b": 898045,
-    "pct": 1.5142774733198732,
-    "counted_sections": 7560,
+    "a": 1040760,
+    "b": 955288,
+    "pct": 1.6034115309425376,
+    "counted_sections": 8005,
     "total_sections": 499248,
-    "generated_at": "2026-10-25T19:05:16-03:00"
+    "generated_at": "2026-10-25T19:09:07-03:00"
   },
   "history": [
     {
@@ -1609,6 +1609,15 @@
       "n": null,
       "ca": 983482,
       "cb": 898045
+    },
+    {
+      "t": "2026-10-25T19:09:48-03:00",
+      "f": 48.505,
+      "l": 51.495,
+      "m": "national",
+      "n": null,
+      "ca": 1040760,
+      "cb": 955288
     }
   ]
 }

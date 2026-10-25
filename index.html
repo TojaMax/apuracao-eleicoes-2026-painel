@@ -300,7 +300,7 @@ function cabecalho(d){
     const geral = isNum(tot) && tot > 0 && v2 > 0 ? ` No total, ${fmt2.format(100 * v2 / tot)}% dos votos do país já apurados.` : "";
     base = `Base: ${pj.used_scope_count} ${pj.used_scope_count === 1 ? "país" : "países"} com resultado completo — ${fmt1.format(pj.exterior_v1_coverage_pct || 0)}% dos votos do exterior.${geral}`;
   }
-  else if(e.mode === "national" && e.preview) base = `Base: ${fmt0.format(e.counted_sections || 0)} urnas de ${e.preview_ufs || ""} estados, com boletim oficial já publicado pelo TSE e ainda não somado ao placar; cada seção comparada com ela mesma no 1º turno. Prévia: margem de ±${fmt1.format(e.preview_margin || 1.5)} ponto.`;
+  else if(e.mode === "national" && e.preview) base = `Base: ${fmt0.format(e.counted_sections || 0)} urnas de ${e.preview_ufs || ""} estados, com boletim oficial já publicado pelo TSE e ainda não somado ao placar; cada seção comparada com ela mesma no 1º turno. Prévia: margem de ±${fmt1.format(e.preview_margin || 1.5)} ponto.${isNum((d.official || {}).counted_sections) && d.official.counted_sections > 3 * (e.counted_sections || 0) ? " Atenção: o TSE parou de publicar os boletins por seção às 17h07; o placar acima segue ao vivo, mas a projeção só volta a andar quando os boletins voltarem." : ""}`;
   else if(e.mode === "national") base = (isNum(e.official_pct) ? `${fmt2.format(e.official_pct)}% das urnas do país já apuradas. ` : "") + (isNum(e.counted_sections) ? `Base: apuração no Brasil — ${fmt0.format(e.counted_sections)} seções contadas pelo TSE.` : "Base: apuração no Brasil.");
   else if(e.status) base = statusTxt(e.status);
   // Aviso da prorrogação: some sozinho às 19h30 de Brasília.
