@@ -57,6 +57,55 @@
     .candidates,.bu-votes,.market-ticker-values,.market-legend{direction:ltr}
     @media(max-width:800px){.headin{grid-template-columns:minmax(0,1fr) max-content;grid-template-areas:"identity state" "ticker ticker";gap:5px 8px;padding-block:8px}.market-ticker{column-gap:8px;row-gap:3px}.market-ticker-source{font-size:.64rem}.market-ticker-values{font-size:.7rem;gap:5px}.market-quote{gap:3px}.market-quote strong{font-size:.77rem}.market-ticker-track{height:3px}.market-history{margin:4px 0 22px;width:100%}}
     @media(max-width:430px){.headin{min-height:68px}.identity{font-size:.65rem;gap:7px}.symbol{width:24px;height:24px}.symbol:after{width:7px;height:7px;left:6.5px;top:6.5px}.state{font-size:.58rem;padding:4px 6px}.market-ticker{column-gap:7px}.market-ticker-source{font-size:.61rem}.market-ticker-values{font-size:.67rem;letter-spacing:-.01em}.market-quote{gap:2px}.market-quote strong{font-size:.73rem}.market-history{padding:13px 14px}.market-history #market-chart{height:68px;max-height:68px}}
+    .projection-method{margin:18px 0 0;border-top:1px solid var(--line);padding-top:10px}
+    .projection-method[hidden]{display:none}
+    .projection-method>summary{min-block-size:44px;padding:9px 2px;cursor:pointer;font-weight:760;color:var(--green)}
+    .projection-method>summary:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:5px}
+    .method-mobile-title{display:none}
+    .method-content{padding:10px 0 2px}
+    .method-intro{margin:0 0 14px;color:var(--muted);font-size:.85rem}
+    .method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .method-step{min-width:0;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fffefa}
+    .method-step h3{margin:0;font-size:.95rem;line-height:1.3}
+    .method-step>p{margin:7px 0 0;color:var(--muted);font-size:.8rem;line-height:1.45}
+    .method-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:11px}
+    .method-candidate{min-width:0;padding:10px;border-radius:10px;border:1px solid var(--line);display:flex;flex-direction:column;gap:5px}
+    .method-candidate.flavio{background:#faf2ee;color:var(--orange)}
+    .method-candidate.lula{background:#f2f6f0;color:var(--green)}
+    .method-candidate-name{font-size:.76rem;font-weight:730}
+    .method-candidate-value{font-size:1.08rem;line-height:1.15;font-weight:790;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .method-other{margin-top:8px!important;padding-top:8px;border-top:1px solid var(--line);font-size:.76rem!important}
+    .method-parts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px;margin:10px 0 0;padding:0;list-style:none}
+    .method-parts li{display:flex;justify-content:space-between;gap:8px;padding-top:6px;border-top:1px solid var(--line);font-size:.76rem}
+    .method-parts strong{white-space:nowrap;font-variant-numeric:tabular-nums}
+    .method-chance{margin-top:12px!important;color:var(--ink)!important;font-weight:720}
+    .method-coverage{margin:15px 0 8px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#f9f8f3;font-size:.82rem}
+    .method-table-wrap{max-inline-size:100%;container-type:inline-size}
+    .method-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.79rem}
+    .method-table caption{text-align:left;padding:0 0 8px;font-weight:740}
+    .method-table th,.method-table td{padding:8px 7px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top;overflow-wrap:anywhere}
+    .method-table thead th{background:#f9f8f3;font-size:.72rem}
+    .method-table tbody th{font-weight:720}
+    .method-level-code{display:block;font-weight:760}
+    .method-level-description{display:block;margin-top:2px;color:var(--muted);font-size:.68rem;line-height:1.3}
+    .method-mobile-label{display:none}
+    .method-delta{display:block;font-weight:730;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .method-delta.flavio{color:var(--orange)}
+    .method-delta.lula{color:var(--green)}
+    .method-signal{font-size:.72rem;color:var(--muted)}
+    .method-limit{margin:12px 0 0;padding:10px 12px;border-left:3px solid var(--gold);background:#eeeee7;color:#48534d;font-size:.79rem}
+    @media(max-width:720px){.method-mobile-title{display:inline}.method-desktop-title{display:none}.method-grid{grid-template-columns:1fr}.method-step{padding:12px}.method-parts{grid-template-columns:1fr}.method-candidate{padding:9px}}
+    @container (width < 600px){
+      .method-table,.method-table thead,.method-table tbody,.method-table tr,.method-table th,.method-table td{display:block}
+      .method-table thead{display:none}
+      .method-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 10px;padding:8px 9px;border:1px solid var(--line);border-radius:10px;margin-block-end:8px;background:#fffefa}
+      .method-table tbody th{grid-column:1/-1;padding:3px 0 8px;border:0;font-size:.86rem}
+      .method-table tbody td{min-width:0;padding:6px 0;border:0;font-size:.73rem}
+      .method-table tbody td:last-child{grid-column:1/-1}
+      .method-table tbody td::before{content:attr(data-label);display:block;margin-bottom:2px;color:var(--muted);font-size:.65rem;font-weight:700}
+      .method-delta{white-space:normal;font-size:.72rem}
+      .method-level-description{font-size:.67rem}
+    }
   </style>
 </head>
 <body>
@@ -73,6 +122,54 @@
     <section class="board" aria-labelledby="estimate-title">
       <div class="boardtop"><div><h2 id="estimate-title">Estimativa de votos válidos</h2><p class="small" id="estimate-subtitle">Aguardando dados do dia da eleição.</p></div><span class="stamp" id="stamp">Atualização não disponível</span></div>
       <div id="candidates" class="candidates"></div>
+      <details class="projection-method" id="projection-method" open hidden>
+        <summary><span class="method-desktop-title">Como a projeção é calculada</span><span class="method-mobile-title">Ver como calculamos</span></summary>
+        <div class="method-content">
+          <p class="method-intro">A estimativa combina dois caminhos calculados com os resultados do exterior e a votação brasileira do 1º turno. P.p. significa pontos percentuais.</p>
+          <div class="method-grid">
+            <article class="method-step">
+              <h3>1. A base brasileira</h3>
+              <p>Votos do 1º turno nos dois finalistas.</p>
+              <div class="method-pair" id="method-base-pair"></div>
+              <p class="method-other" id="method-other-votes"></p>
+            </article>
+            <article class="method-step">
+              <h3>2. Mudança nos mesmos âmbitos</h3>
+              <p>Comparamos cada país completo nos dois turnos. Países com mais votos válidos no 1º turno têm mais peso; a mudança média é aplicada à base do Brasil.</p>
+              <div class="method-pair" id="method-same-scope-pair"></div>
+            </article>
+            <article class="method-step">
+              <h3>3. Destino estimado dos outros votos</h3>
+              <p>O modelo estima a divisão dos votos das demais candidaturas no exterior e aplica a mesma proporção aos votos restantes do Brasil. É uma estimativa agregada, sem identificar o voto de cada pessoa.</p>
+              <p class="method-other" id="method-transfer-label"></p>
+              <div class="method-pair" id="method-transfer-pair"></div>
+              <div class="method-pair" id="method-transfer-result-pair"></div>
+            </article>
+            <article class="method-step">
+              <h3>4. O centro da projeção</h3>
+              <p>Média dos resultados dos dois modelos.</p>
+              <div class="method-pair" id="method-center-pair"></div>
+            </article>
+            <article class="method-step">
+              <h3>5. O que pode variar</h3>
+              <p id="method-total-uncertainty"></p>
+              <ul class="method-parts" id="method-uncertainty-parts"></ul>
+              <p class="method-other">As parcelas são combinadas pelo modelo, sem soma direta.</p>
+              <div class="method-pair" id="method-chance-pair"></div>
+              <p class="method-other" id="method-probability-note"></p>
+            </article>
+          </div>
+          <p class="method-coverage" id="method-coverage"></p>
+          <div class="method-table-wrap">
+            <table class="method-table" id="method-scope-table">
+              <caption>Países e territórios usados nesta rodada</caption>
+              <thead><tr><th scope="col">País/território</th><th scope="col">Evidência</th><th scope="col">Peso no modelo</th><th scope="col">Flávio: mudança</th><th scope="col">Lula: mudança</th><th scope="col">Sinalização</th></tr></thead>
+              <tbody id="method-scope-rows"></tbody>
+            </table>
+          </div>
+          <p class="method-limit" id="method-limit">Os totais de agregador ainda aguardam confirmação do TSE; o exterior pode mudar de preferência de forma diferente do Brasil.</p>
+        </div>
+      </details>
       <section class="bu-board" id="bu-board" aria-labelledby="bu-title" hidden>
         <h3 id="bu-title">Placar bruto dos boletins identificados</h3>
         <p class="bu-source" id="bu-source"></p>
@@ -262,8 +359,123 @@ function renderReport(report){
   if(!list.childElementCount)list.append(element('li','Nenhum item em quarentena nesta atualização.'));
   quarantine.append(list);grid.append(quarantine);
 }
+const METHOD_COUNTRY_NAMES=Object.freeze({AU:'Austrália',CN:'China',HK:'Hong Kong',JP:'Japão',KR:'Coreia do Sul',NZ:'Nova Zelândia',SG:'Singapura',TH:'Tailândia',TW:'Taiwan'});
+const METHOD_CONTINENT_NAMES=Object.freeze({Asia:'Ásia',Oceania:'Oceania',Europe:'Europa','North America':'América do Norte','South America':'América do Sul',Africa:'África'});
+const METHOD_LEVELS=Object.freeze({
+  N1:'BU de seção legível e conferido',
+  N2:'Total completo de país/território, fonte auditada no 1º turno e recorrente',
+  N3:'Total completo de país/território, fonte fraca, nova ou não auditada, aprovado na conferência de diferenças',
+});
+let methodDisclosureInitialized=false;
+function methodNumber(value,digits=2){
+  return typeof value==='number'&&Number.isFinite(value)?value.toLocaleString('pt-BR',{minimumFractionDigits:digits,maximumFractionDigits:digits}):'—';
+}
+function methodPercent(value){return typeof value==='number'&&Number.isFinite(value)?`${methodNumber(value)}%`:'—';}
+function methodVotes(value){return Number.isSafeInteger(value)?value.toLocaleString('pt-BR'):'—';}
+function methodPoints(value,signed=false){
+  if(typeof value!=='number'||!Number.isFinite(value))return '—';
+  const sign=signed?(value<0?'−':'+'):'';
+  return `${sign}${methodNumber(Math.abs(value))} p.p.`;
+}
+function methodCandidatePair(targetId,entries,format){
+  const target=$(`#${targetId}`);target.replaceChildren();
+  for(const [key,name,value] of displayCandidates(entries)){
+    const card=element('div',null,`method-candidate ${key}`);
+    card.append(element('span',name,'method-candidate-name'));
+    card.append(element('strong',format(value),'method-candidate-value'));
+    target.append(card);
+  }
+}
+function methodCountry(scope){
+  const code=String(scope||'');
+  if(METHOD_COUNTRY_NAMES[code])return METHOD_COUNTRY_NAMES[code];
+  try{return typeof Intl.DisplayNames==='function'?new Intl.DisplayNames(['pt-BR'],{type:'region'}).of(code)||code:code;}catch{return code;}
+}
+function methodEvidence(level){
+  const code=typeof level==='string'?level:'—';
+  return {code,description:METHOD_LEVELS[code]||'Nível não descrito no relatório'};
+}
+function methodSignal(flag){
+  if(!flag)return 'Sem alerta';
+  const value=String(flag).toLowerCase();
+  if(value.includes('peso reduzido'))return 'Peso reduzido à metade';
+  if(value.includes('reconferir'))return 'Reconferir o boletim na próxima rodada';
+  return 'Revisão sinalizada';
+}
+function renderMethodTable(projection){
+  const rows=$('#method-scope-rows');rows.replaceChildren();
+  const scopes=Array.isArray(projection.used_scopes)?projection.used_scopes:[];
+  for(const scope of scopes){
+    const row=document.createElement('tr');
+    const country=element('th',methodCountry(scope.scope));country.scope='row';row.append(country);
+    const evidence=methodEvidence(scope.level);
+    const evidenceCell=document.createElement('td');evidenceCell.dataset.label='Evidência';
+    evidenceCell.append(element('span',evidence.code,'method-level-code'),element('span',evidence.description,'method-level-description'));
+    const weight=document.createElement('td');weight.dataset.label='Peso no modelo · votos válidos do 1º turno';weight.textContent=methodVotes(scope.v1);
+    const swing=typeof scope.swing==='number'&&Number.isFinite(scope.swing)?scope.swing*100:null;
+    const flavio=document.createElement('td');flavio.dataset.label='Flávio · mudança em pontos';flavio.append(element('span',swing===null?'—':methodPoints(-swing,true),'method-delta flavio'));
+    const lula=document.createElement('td');lula.dataset.label='Lula · mudança em pontos';lula.append(element('span',swing===null?'—':methodPoints(swing,true),'method-delta lula'));
+    const signal=document.createElement('td');signal.dataset.label='Sinalização';signal.append(element('span',methodSignal(scope.flag),'method-signal'));
+    row.append(evidenceCell,weight,flavio,lula,signal);rows.append(row);
+  }
+}
+function renderProjectionMethod(projection){
+  const disclosure=$('#projection-method');
+  disclosure.hidden=true;
+  if(!projection||projection.displayable!==true)return;
+  const baseline=projection.national_baseline||{};
+  const ps=projection.p_s_lula_pct,pt=projection.p_t_lula_pct,center=projection.mu_lula_pct;
+  methodCandidatePair('method-base-pair',[
+    ['flavio','Flávio Bolsonaro',baseline.b1],['lula','Lula',baseline.a1],
+  ],methodVotes);
+  $('#method-other-votes').textContent=`Outras candidaturas no 1º turno: ${methodVotes(baseline.other1)} votos.`;
+  methodCandidatePair('method-same-scope-pair',[
+    ['flavio','Flávio Bolsonaro',typeof ps==='number'?100-ps:null],['lula','Lula',ps],
+  ],methodPercent);
+  const transfer=projection.transfer_fraction_other_to_lula;
+  methodCandidatePair('method-transfer-pair',[
+    ['flavio','Parte estimada para Flávio',typeof transfer==='number'?(1-transfer)*100:null],
+    ['lula','Parte estimada para Lula',typeof transfer==='number'?transfer*100:null],
+  ],methodPercent);
+  $('#method-transfer-label').textContent='Divisão estimada no exterior entre votos das demais candidaturas.';
+  methodCandidatePair('method-transfer-result-pair',[
+    ['flavio','Resultado no Brasil · Flávio',typeof pt==='number'?100-pt:null],['lula','Resultado no Brasil · Lula',pt],
+  ],methodPercent);
+  methodCandidatePair('method-center-pair',[
+    ['flavio','Flávio Bolsonaro',typeof center==='number'?100-center:null],['lula','Lula',center],
+  ],methodPercent);
+  $('#method-total-uncertainty').textContent=`A incerteza total usada para formar a faixa e as chances é ${methodPoints(projection.sigma_pp)}.`;
+  const components=projection.sigma_components_pp||{};
+  const uncertaintyLabels=[
+    ['amostra','Tamanho da amostra'],['fonte','Confiabilidade das fontes'],
+    ['transferencia','Diferença possível entre exterior e Brasil'],['modelo','Diferença entre os dois modelos'],
+  ];
+  const parts=$('#method-uncertainty-parts');parts.replaceChildren();
+  for(const [key,label] of uncertaintyLabels){
+    const item=document.createElement('li');item.append(element('span',label),element('strong',methodPoints(components[key])));parts.append(item);
+  }
+  methodCandidatePair('method-chance-pair',[
+    ['flavio','Chance de vitória · Flávio',projection.flavio_win_probability_pct],
+    ['lula','Chance de vitória · Lula',projection.lula_win_probability_pct],
+  ],methodPercent);
+  $('#method-probability-note').textContent='Chance estimada pelo modelo; sua precisão não foi comprovada com uma única eleição.';
+  const hasAggregatedTotals=Array.isArray(projection.used_scopes)&&projection.used_scopes.some(scope=>scope.level==='N2'||scope.level==='N3');
+  $('#method-limit').textContent=hasAggregatedTotals
+    ?'Os totais de agregador ainda aguardam confirmação do TSE; o exterior pode mudar de preferência de forma diferente do Brasil.'
+    :'Os boletins do exterior podem avançar em ritmo diferente da votação no Brasil.';
+  const continents=(Array.isArray(projection.continents)?projection.continents:[]).map(name=>METHOD_CONTINENT_NAMES[name]||name);
+  const scopeCount=Number.isSafeInteger(projection.used_scope_count)?projection.used_scope_count:(Array.isArray(projection.used_scopes)?projection.used_scopes.length:0);
+  $('#method-coverage').textContent=`Cobertura nesta rodada: ${scopeCount} países/territórios; ${methodVotes(projection.covered_exterior_v1)} de ${methodVotes(projection.total_exterior_v1)} votos válidos do 1º turno (${methodPercent(projection.exterior_v1_coverage_pct)}), em ${continents.length} continente${continents.length===1?'':'s'}${continents.length?`: ${continents.join(' e ')}`:''}.`;
+  renderMethodTable(projection);
+  if(!methodDisclosureInitialized){
+    disclosure.open=!window.matchMedia('(max-width: 720px)').matches;
+    methodDisclosureInitialized=true;
+  }
+  disclosure.hidden=false;
+}
 function render(data){
   renderCandidates(data);
+  renderProjectionMethod(data.projection);
   renderBUs(data.bu_status);
   renderReport(data.report||{});
   $('#title').textContent=data.estimate?.mode==='poll'?'Pesquisas em destaque até o primeiro boletim.':(data.estimate?.mode==='national'?'Projeção nacional com os boletins oficiais.':'O que os boletins do exterior indicam.');

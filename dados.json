@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T07:21:46-03:00",
+  "updated_at": "2026-10-25T07:37:38-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
@@ -17,7 +17,7 @@
     ],
     "lula_win_probability_pct": 43.70686170729723,
     "flavio_win_probability_pct": 56.29313829270277,
-    "updated_at": "2026-10-25T10:21:46.505339+00:00",
+    "updated_at": "2026-10-25T10:37:38.883410+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -41,9 +41,134 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T10:21:46.505339+00:00",
+    "updated_at": "2026-10-25T10:37:38.883410+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
+  },
+  "projection": {
+    "displayable": true,
+    "national_baseline": {
+      "a1": 53879538,
+      "b1": 56104503,
+      "other1": 9316747,
+      "valid1": 119300788,
+      "sections": 499206
+    },
+    "p_s_lula_pct": 50.75798641008098,
+    "p_t_lula_pct": 48.0595422505115,
+    "mu_lula_pct": 49.408764330296236,
+    "sigma_pp": 3.732417447024018,
+    "sigma_components_pp": {
+      "amostra": 2.3878290677804324,
+      "fonte": 0.3985123854204082,
+      "transferencia": 2.5,
+      "modelo": 1.3492220797847398
+    },
+    "transfer_fraction_other_to_lula": 0.3709314650331441,
+    "lula_win_probability_pct": 43.70686170729723,
+    "flavio_win_probability_pct": 56.29313829270277,
+    "used_scope_count": 9,
+    "used_scopes": [
+      {
+        "scope": "AU",
+        "level": "N2",
+        "swing": -0.004275334324743474,
+        "v1": 8129,
+        "bu_count": 0,
+        "continente": "Oceania",
+        "flag": null,
+        "robust_z": -0.29245335020518703
+      },
+      {
+        "scope": "CN",
+        "level": "N3",
+        "swing": 0.004498266181412136,
+        "v1": 407,
+        "bu_count": 0,
+        "continente": "Asia",
+        "flag": null,
+        "robust_z": 0.0
+      },
+      {
+        "scope": "HK",
+        "level": "N3",
+        "swing": 0.0031674208144796268,
+        "v1": 244,
+        "bu_count": 0,
+        "continente": "Asia",
+        "flag": null,
+        "robust_z": -0.044361512231083644
+      },
+      {
+        "scope": "JP",
+        "level": "N2",
+        "swing": 0.0237490637462906,
+        "v1": 34281,
+        "bu_count": 0,
+        "continente": "Asia",
+        "flag": null,
+        "robust_z": 0.6416932521626155
+      },
+      {
+        "scope": "KR",
+        "level": "N2",
+        "swing": 0.012709030100334417,
+        "v1": 216,
+        "bu_count": 0,
+        "continente": "Asia",
+        "flag": null,
+        "robust_z": 0.2736921306307427
+      },
+      {
+        "scope": "NZ",
+        "level": "N2",
+        "swing": 0.0201600910372296,
+        "v1": 332,
+        "bu_count": 0,
+        "continente": "Oceania",
+        "flag": null,
+        "robust_z": 0.5220608285272488
+      },
+      {
+        "scope": "SG",
+        "level": "N2",
+        "swing": -0.036034314350023355,
+        "v1": 348,
+        "bu_count": 0,
+        "continente": "Asia",
+        "flag": null,
+        "robust_z": -1.3510860177145165
+      },
+      {
+        "scope": "TH",
+        "level": "N2",
+        "swing": 0.04319818112921564,
+        "v1": 99,
+        "bu_count": 0,
+        "continente": "Asia",
+        "flag": null,
+        "robust_z": 1.2899971649267836
+      },
+      {
+        "scope": "TW",
+        "level": "N2",
+        "swing": 0.0011645962732919068,
+        "v1": 218,
+        "bu_count": 0,
+        "continente": "Asia",
+        "flag": null,
+        "robust_z": -0.11112233027067431
+      }
+    ],
+    "covered_exterior_v1": 44274,
+    "total_exterior_v1": 330882,
+    "exterior_v1_coverage_pct": 13.38060093930767,
+    "continents": [
+      "Asia",
+      "Oceania"
+    ],
+    "interval_description": "intervalo normal de 95% do modelo; não é cobertura calibrada",
+    "probability_description": "chance modelada; não calibrada por uma única eleição"
   },
   "notice": "projeção independente, não oficial",
   "national_probability": "not calculated by the national model; no calibrated probability is supplied"
