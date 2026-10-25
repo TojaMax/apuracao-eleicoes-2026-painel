@@ -207,11 +207,6 @@ footer p{margin:4px 0}
         <div class="total" id="totalPaises" hidden></div>
       </section>
 
-      <section class="card" id="parciaisCard" hidden>
-        <h2>Parciais — fora da conta</h2>
-        <div class="sub">Países ainda incompletos. Só para acompanhar: entram na conta quando todas as urnas forem apuradas.</div>
-        <ul class="rows" id="parciais"></ul>
-      </section>
     </div>
     <div>
       <section class="card" id="bulletinCard" hidden>
@@ -436,28 +431,6 @@ function paises(d){
   });
 }
 
-function parciais(d){
-  const p = d.partials, card = $("parciaisCard");
-  const itens = p && Array.isArray(p.items) ? p.items.slice() : [];
-  card.hidden = !itens.length;
-  if(!itens.length) return;
-  itens.sort((x,y) => (y.a + y.b) - (x.a + x.b));
-  $("parciais").innerHTML = itens.map((s,i) => {
-    const pf = 100 * s.b / (s.a + s.b), ab = abertos.has("P:" + s.scope);
-    const cid = (s.cidades || []).filter(c => isNum(c.a) && isNum(c.b) && c.a + c.b > 0).map(c =>
-      `<p>${esc(c.name || "")}: Flávio ${pct(100 * c.b / (c.a + c.b))} · ${fmt0.format(c.b)} × ${fmt0.format(c.a)} · ${pct(100 * c.a / (c.a + c.b))} Lula — ${c.urnas} de ${c.total_urnas} urnas${c.completa ? " (completa)" : ""}</p>`).join("");
-    return `<li><button class="row" type="button" data-scope="P:${esc(s.scope)}" aria-expanded="${ab}" aria-controls="p${i}">
-        <span class="n">${esc(s.name || nomePais(s.scope).split(" — ")[0])}<small>${fmt0.format(s.a + s.b)} votos${s.observed_at ? " · às " + hora(s.observed_at) : ""}</small></span>
-        <span class="res"><span class="rv"><b class="f${pf >= 50 ? " lead" : ""}">${fmt1.format(pf)}</b><b class="l${pf < 50 ? " lead" : ""}">${fmt1.format(100 - pf)}</b></span><span class="rb"><i class="sf" style="width:${pf}%"></i><i class="sl" style="width:${100 - pf}%"></i></span></span>
-        <span class="dv z">urnas<b>${s.urnas} de ${s.total_urnas}</b></span></button>
-      <div class="more" id="p${i}" ${ab ? "" : "hidden"}>${cid || "<p>Sem detalhe por cidade.</p>"}</div></li>`;
-  }).join("");
-  $("parciais").querySelectorAll(".row").forEach(b => b.onclick = () => {
-    const m = $(b.getAttribute("aria-controls")); const ab = m.hidden; m.hidden = !ab; b.setAttribute("aria-expanded", String(ab));
-    if(ab) abertos.add(b.dataset.scope); else abertos.delete(b.dataset.scope);
-  });
-}
-
 function boletins(d){
   const b = d.bu_status, card = $("bulletinCard");
   if(!b || !b.available){ card.hidden = true; return; }
@@ -535,7 +508,7 @@ function tecnico(d){
 
 function render(d){
   ultimo = d;
-  cabecalho(d); placar(d); paises(d); parciais(d); boletins(d); mobilizacao(d); comoCalculamos(d); tecnico(d);
+  cabecalho(d); placar(d); paises(d); boletins(d); mobilizacao(d); comoCalculamos(d); tecnico(d);
 }
 
 async function refresh(){
