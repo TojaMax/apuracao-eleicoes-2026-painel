@@ -55,6 +55,17 @@ h1 .f{color:var(--flavio)} h1 .l{color:var(--lula)}
 .now{margin-top:12px}
 .now .split{height:6px;margin:4px 2px 3px}
 .now .split::after{display:none}
+.vergraf{display:block;margin:8px auto 0;font:inherit;font-size:12.5px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:99px;padding:5px 14px;cursor:pointer}
+.graf{margin-top:8px}
+.graf svg{width:100%;height:auto;display:block}
+.graf .gl{stroke:var(--line);stroke-width:1} .graf .g50{stroke:var(--faint);stroke-dasharray:3 3}
+.graf .gm{stroke:var(--faint);stroke-dasharray:2 3}
+.graf .gy,.graf .gx{font-size:9.5px;fill:var(--faint)} .graf .gy{text-anchor:end}
+.graf .gf{fill:none;stroke:var(--flavio);stroke-width:2.2;stroke-linejoin:round}
+.graf .glu{fill:none;stroke:var(--lula);stroke-width:2.2;stroke-linejoin:round}
+.graf .gvf{font-size:12px;font-weight:800;fill:var(--flavio)} .graf .gvl{font-size:9.5px;font-weight:700;fill:var(--lula)}
+.graf .gd{fill:var(--flavio)} .gnote .cf{color:var(--flavio)}
+.gnote{font-size:11.5px;color:var(--muted);margin:4px 2px 0}
 .nowt{font-size:11.5px;color:var(--muted);margin:0 2px}
 .nowl{display:flex;font-size:14px;margin:0 2px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .nowl .f{color:var(--flavio);text-align:right;padding-right:7px;box-sizing:border-box}
@@ -253,7 +264,7 @@ const nomePais = c => NOME_FIX[c] || (NOMES[c] || c).replace(/ (Do|Da|De|Dos|Das
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const STATUS = {aguardando_dados:"Aguardando dados suficientes do exterior.", calculada:"Projeção calculada."};
 const statusTxt = s => STATUS[s] || s;
-let filtro = "todos", ordemPaises = "recentes", ultimo = null;
+let filtro = "todos", ordemPaises = "recentes", ultimo = null, graficoAberto = false;
 const abertos = new Set();
 
 function cabecalho(d){
@@ -312,6 +323,10 @@ function placar(d){
       <div class="split" role="img" aria-label="Apurado até agora: Flávio ${pct(pf)}, Lula ${pct(100 - pf)}"><i class="sf" style="width:${pf}%"></i><i class="sl" style="width:${100 - pf}%"></i></div>
       <div class="nowl"><span class="f" style="width:${Math.max(30, Math.min(70, pf))}%"><small>${fmt0.format(cb)} ·</small> <b>${pct(pf)}</b></span><span class="l"><b>${pct(100 - pf)}</b> <small>· ${fmt0.format(ca)}</small></span></div></div>`;
   }
+  const hist = (Array.isArray(d.history) ? d.history : []).filter(h => isNum(h.f) && h.t);
+  if(hist.length >= 2){
+    atual += `<button type="button" class="vergraf" id="verGraf" aria-expanded="${graficoAberto}">${graficoAberto ? "Fechar gráfico" : "Veja gráfico"}</button><div class="graf" id="graf" ${graficoAberto ? "" : "hidden"}>${grafico(hist)}</div>`;
+  }
   el.innerHTML = `
     <div class="esttit">Estimativa do resultado final</div>
     <div class="cols">
@@ -319,6 +334,33 @@ function placar(d){
       <div class="cand l"><div class="who">Lula</div><div class="pct num">${pct(e.lula_pct)}</div><div class="chance">${chanceL}</div><div class="range">${lr}</div></div>
     </div>
     ${atual}`;
+  const bg = $("verGraf");
+  if(bg) bg.onclick = () => { graficoAberto = !graficoAberto; $("graf").hidden = !graficoAberto; bg.textContent = graficoAberto ? "Fechar gráfico" : "Veja gráfico"; bg.setAttribute("aria-expanded", String(graficoAberto)); };
+}
+
+function grafico(h){
+  const W = 330, H = 160, L = 34, R = 58, T = 10, B = 22;
+  const ts = h.map(p => new Date(p.t).getTime()), t0 = ts[0], t1 = ts[ts.length - 1] || t0 + 1;
+  const vals = h.map(p => p.f);
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  const pad = Math.max(.05, (hi - lo) * .15); lo -= pad; hi += pad;
+  const passo = [.05,.1,.2,.25,.5,1,2,5].find(x => (hi - lo) / x <= 5) || 5;
+  const x = t => L + (W - L - R) * (t - t0) / Math.max(1, t1 - t0);
+  const y = v => T + (H - T - B) * (hi - v) / (hi - lo);
+  let g = "";
+  for(let v = Math.ceil(lo / passo) * passo; v <= hi; v += passo){
+    g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" class="gl${Math.abs(v - 50) < 1e-9 ? " g50" : ""}"/><text x="${L - 4}" y="${y(v) + 3}" class="gy">${fmt2.format(v)}</text>`;
+  }
+  h.forEach((p,i) => { if(i && p.m !== h[i-1].m) g += `<line x1="${x(ts[i])}" x2="${x(ts[i])}" y1="${T}" y2="${H - B}" class="gm"/><text x="${x(ts[i]) + 3}" y="${T + 9}" class="gx">apuração do Brasil</text>`; });
+  const lin = k => h.map((p,i) => `${i ? "L" : "M"}${x(ts[i]).toFixed(1)},${y(p[k]).toFixed(1)}`).join("");
+  const ult = h[h.length - 1];
+  const nh = [0, Math.floor((h.length - 1) / 2), h.length - 1].filter((v,i,a) => a.indexOf(v) === i);
+  g += nh.map(i => `<text x="${x(ts[i])}" y="${H - 8}" class="gx" text-anchor="middle">${hora(h[i].t)}</text>`).join("");
+  g += `<path d="${lin("f")}" class="gf"/>` + `<circle cx="${x(t1)}" cy="${y(ult.f)}" r="3" class="gd"/>`;
+  g += `<text x="${W - R + 5}" y="${y(ult.f) - 2}" class="gvf">${fmt2.format(ult.f)}</text><text x="${W - R + 5}" y="${y(ult.f) + 10}" class="gvl">Lula ${fmt2.format(ult.l)}</text>`;
+  const d0 = ult.f - h[0].f;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Estimativa ao longo do dia">${g}</svg>
+    <p class="gnote"><b class="cf">Flávio</b> na estimativa do resultado final, a cada atualização desde ${hora(h[0].t)}; o Lula é o que falta para 100%. Escala ampliada: cada linha vale ${fmt2.format(passo)} ponto. Desde o início: Flávio ${d0 >= 0 ? "+" : "−"}${fmt2.format(Math.abs(d0))}, Lula ${d0 > 0 ? "−" : "+"}${fmt2.format(Math.abs(d0))}.</p>`;
 }
 
 function placarPais(s){
