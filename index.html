@@ -360,7 +360,8 @@ function placar(d){
     <div class="esttit">Estimativa do resultado final${e.updated_at && (e.preview || isNum(e.matched_sections)) ? (() => {
       const n = e.preview ? (e.counted_sections || 0) : e.matched_sections;
       const min = (Date.now() - new Date(e.updated_at).getTime()) / 60000, parada = min > 10;
-      return ` <span class="estatu${parada ? " parada" : ""}">${parada ? "parada desde" : "atualizada às"} ${hora(e.updated_at)} · ${fmt0.format(n)} ${e.preview ? "seções" : "seções da amostra"} (${fmt2.format(100 * n / 499248)}% das urnas)</span>`;
+      const extra = !e.preview && isNum(e.preview_sections) ? ` · conferida com ${fmt0.format(e.preview_sections)} seções (${fmt1.format(100 * e.preview_sections / 499248)}% das urnas): Lula ${fmt2.format(e.preview_lula_pct)}%` : "";
+      return ` <span class="estatu${parada ? " parada" : ""}">${parada ? "parada desde" : "atualizada às"} ${hora(e.updated_at)} · ${fmt0.format(n)} ${e.preview ? "seções" : "seções da amostra sorteada"} (${fmt2.format(100 * n / 499248)}% das urnas)${extra}</span>`;
     })() : ""}</div>
     <div class="cols">
       <div class="cand f"><div class="who">Flávio Bolsonaro</div><div class="pct num">${pct(e.flavio_pct)}</div><div class="chance">${chanceF}</div><div class="range">${fr}</div></div>
