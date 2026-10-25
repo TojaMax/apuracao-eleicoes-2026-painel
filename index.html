@@ -54,9 +54,12 @@ h1 .f{color:var(--flavio)} h1 .l{color:var(--lula)}
 .esttit{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 2px 8px}
 .now{margin-top:12px}
 .now .split{height:6px;margin:4px 2px 3px}
+.now .split::after{display:none}
 .nowt{font-size:11.5px;color:var(--muted);margin:0 2px}
-.nowl{display:grid;grid-template-columns:1fr auto 1fr;font-size:11.5px;margin:0 2px;font-variant-numeric:tabular-nums}
-.nowl .f{color:var(--flavio)} .nowl .l{color:var(--lula);text-align:right} .nowl .m{color:var(--faint)}
+.nowl{display:flex;font-size:14px;margin:0 2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.nowl .f{color:var(--flavio);text-align:right;padding-right:7px;box-sizing:border-box}
+.nowl .l{color:var(--lula);padding-left:7px}
+.nowl b{font-weight:800} .nowl small{font-size:11.5px;opacity:.8}
 .split::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:#fff;opacity:.95}
 .note{font-size:12px;color:var(--muted);margin:14px 2px 0}
 .waiting{padding:18px 6px;text-align:center;color:var(--muted)}
@@ -307,7 +310,7 @@ function placar(d){
     const pf = 100 * cb / (ca + cb);
     atual = `<div class="now"><div class="nowt">Apurado até agora · ${fmt0.format(ca + cb)} votos (${onde})</div>
       <div class="split" role="img" aria-label="Apurado até agora: Flávio ${pct(pf)}, Lula ${pct(100 - pf)}"><i class="sf" style="width:${pf}%"></i><i class="sl" style="width:${100 - pf}%"></i></div>
-      <div class="nowl"><span class="f">Flávio ${pct(pf)} · ${fmt0.format(cb)}</span><span class="m">50%</span><span class="l">${fmt0.format(ca)} · ${pct(100 - pf)} Lula</span></div></div>`;
+      <div class="nowl"><span class="f" style="width:${Math.max(30, Math.min(70, pf))}%"><small>${fmt0.format(cb)} ·</small> <b>${pct(pf)}</b></span><span class="l"><b>${pct(100 - pf)}</b> <small>· ${fmt0.format(ca)}</small></span></div></div>`;
   }
   el.innerHTML = `
     <div class="esttit">Estimativa do resultado final</div>
