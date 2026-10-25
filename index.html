@@ -13,6 +13,8 @@
     @media(max-width:430px){main,.headin,.footin{width:calc(100% - 24px)}.headin{min-height:60px}.identity{font-size:.78rem}.state{font-size:.7rem;padding:5px 8px}.candidates{gap:9px;margin-top:18px}.candidate{padding:14px 12px}.candidate-name{font-size:.83rem}.candidate-number{font-size:2.45rem}.chance{font-size:.77rem}.chance strong{display:block;margin:3px 0 0}.reportgrid{gap:8px}.stat{padding:12px}.statvalue{font-size:1rem}}
     .market{margin:18px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,30px);box-shadow:var(--shadow)}.market-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.market-kicker{margin:0 0 5px;color:var(--orange);font-size:.7rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.market h2{margin:0;font-size:1.1rem;letter-spacing:-.015em}.market-updated{margin:6px 0 0;color:var(--muted);font-size:.82rem}.market-link{color:var(--green);font-size:.82rem;font-weight:700;white-space:nowrap}.market-values{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.market-value{border:1px solid var(--line);border-radius:13px;padding:15px;display:flex;align-items:center;justify-content:space-between;gap:10px}.market-value.lula{background:#f2f6f0}.market-value.flavio{background:#faf2ee}.market-name{font-weight:700;font-size:.88rem}.market-percent{font-size:1.65rem;font-weight:780;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.market-figure{margin:18px 0 0}.market-legend{display:flex;gap:18px;align-items:center;margin-bottom:4px;color:var(--muted);font-size:.78rem}.legend-key{display:inline-flex;align-items:center;gap:7px}.legend-swatch{width:16px;height:3px;border-radius:5px;background:var(--green)}.legend-swatch.flavio{background:var(--orange)}#market-chart{display:block;width:100%;height:auto;overflow:visible}.chart-gridline{stroke:#e4e6df;stroke-width:1}.chart-label{fill:var(--muted);font-size:11px;font-family:inherit}.chart-axis{stroke:#cdd2ca;stroke-width:1}.chart-series{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.chart-series.lula{stroke:var(--green)}.chart-series.flavio{stroke:var(--orange)}.market-figure figcaption{margin-top:4px;color:var(--muted);font-size:.76rem}.market-source,.market-status{margin:9px 0 0;color:var(--muted);font-size:.76rem}.market-status.error{color:#78351f}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}#market-access-table{table-layout:fixed;inset-inline-start:-10000px}
     @media(max-width:520px){.market-head{display:block}.market-link{display:inline-block;margin-top:8px}.market-values{grid-template-columns:1fr;gap:8px}.market-value{padding:12px 10px}.market-name{font-size:.8rem}.market-percent{font-size:1.4rem}.market-legend{gap:12px;font-size:.72rem}}
+    .bu-board{margin-top:16px;padding:17px;border:1px solid var(--line);border-radius:15px;background:#f9f8f3}.bu-board[hidden]{display:none}.bu-board h3{margin:0;font-size:.98rem}.bu-source,.bu-note{margin:5px 0 0;color:var(--muted);font-size:.78rem}.bu-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.bu-row{min-width:0;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.bu-row-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.bu-row-head strong{font-size:.9rem}.bu-count{color:var(--muted);font-size:.75rem;text-align:right}.bu-votes{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:8px;font-size:.8rem;font-variant-numeric:tabular-nums}.bu-votes strong{font-weight:760}.bu-note{margin-top:10px}
+    @media(max-width:520px){.bu-list{grid-template-columns:1fr}.bu-row{padding:11px}.bu-votes{justify-content:space-between}}
     .hero-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}.hero-heading h1{flex:1 1 auto;min-inline-size:0}.market-ribbon{flex:0 1 auto;max-inline-size:100%;margin-block-start:2px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow);text-align:end}.market-ribbon-label{margin:0;color:var(--muted);font-size:.68rem;font-weight:750;letter-spacing:.04em;white-space:nowrap}.market-ribbon-score{margin:2px 0 0;color:var(--ink);font-size:.9rem;font-weight:780;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
     @media(max-width:800px){.hero-heading{display:block}.market-ribbon{inline-size:fit-content;max-inline-size:100%;margin-block-start:14px;text-align:start}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
@@ -30,6 +32,12 @@
     <section class="board" aria-labelledby="estimate-title">
       <div class="boardtop"><div><h2 id="estimate-title">Estimativa de votos válidos</h2><p class="small" id="estimate-subtitle">Aguardando dados do dia da eleição.</p></div><span class="stamp" id="stamp">Atualização não disponível</span></div>
       <div id="candidates" class="candidates"></div>
+      <section class="bu-board" id="bu-board" aria-labelledby="bu-title" hidden>
+        <h3 id="bu-title">Placar bruto dos boletins identificados</h3>
+        <p class="bu-source" id="bu-source"></p>
+        <div class="bu-list" id="bu-list"></div>
+        <p class="bu-note" id="bu-note"></p>
+      </section>
       <p class="notice" id="model-note">A faixa do modelo e a probabilidade não substituem o resultado oficial.</p>
     </section>
     <section class="market" aria-labelledby="market-title">
@@ -114,16 +122,41 @@ function renderCandidates(data){
       note.textContent='A faixa é um intervalo do modelo e não tem cobertura calibrada; a chance não é uma probabilidade oficial.';
     }
   }else{
-    status.textContent=data.stage==='pre-election'?'Preparação':'Aguardando dados';
+    status.textContent=data.bu_status?.available?'BU exterior identificado':(data.stage==='pre-election'?'Preparação':'Aguardando dados');
     subtitle.textContent=estimate.status||estimate.reason||'A estimativa aparecerá quando houver evidência quente e pareável suficiente.';
     const waiting=element('div',null,'waiting');
-    waiting.append(element('strong','Estimativa ainda não disponível'));
-    waiting.append(element('span',estimate.raw_a||estimate.raw_b?`Placar bruto identificado: Lula ${estimate.raw_a||0} · Flávio ${estimate.raw_b||0}`:'Os dados aguardam conferência e comparação com o mesmo âmbito do primeiro turno.'));
+    waiting.append(element('strong',data.bu_status?.available?'Projeção do exterior ainda não disponível':'Estimativa ainda não disponível'));
+    waiting.append(element('span',data.bu_status?.available?'O placar bruto recente aparece abaixo; a projeção aguarda evidência comparável suficiente.':(estimate.raw_a||estimate.raw_b?`Placar bruto identificado: Lula ${estimate.raw_a||0} · Flávio ${estimate.raw_b||0}`:'Os dados aguardam conferência e comparação com o mesmo âmbito do primeiro turno.')));
     target.append(waiting);
-    note.textContent='O placar bruto não é uma projeção. Só entram dados do segundo turno publicados depois do fechamento local e com o mesmo recorte no primeiro turno.';
+    note.textContent='O placar bruto é parcial e não é uma projeção. A projeção independente exige dados recentes, publicados depois do fechamento local e comparáveis ao mesmo recorte do primeiro turno.';
   }
   const stampLabel=estimate.mode==='poll'?'Modelo calculado:':estimate.mode==='national'?'Relatório nacional:':'Dados do âmbito:';
   $('#stamp').textContent=estimate.updated_at?`${stampLabel} ${date(estimate.updated_at)}`:'Atualização não disponível';
+}
+function renderBUs(status){
+  const box=$('#bu-board');
+  const list=$('#bu-list');
+  list.replaceChildren();
+  box.hidden=true;
+  if(!status||status.available!==true)return;
+  box.hidden=false;
+  $('#bu-source').textContent=`${status.source_label||'Fonte verificada'} · atualizado ${date(status.updated_at)}`;
+  const formatVotes=value=>Number.isSafeInteger(value)?value.toLocaleString('pt-BR'):'não confirmado';
+  const addRow=(label,detail,votes)=>{
+    const row=element('article',null,'bu-row');
+    const head=element('div',null,'bu-row-head');
+    head.append(element('strong',label));head.append(element('span',detail,'bu-count'));
+    const totals=element('div',null,'bu-votes');
+    const lula=element('span');lula.append(element('strong',`Lula ${formatVotes(votes?.a)}`));
+    const flavio=element('span');flavio.append(element('strong',`Flávio ${formatVotes(votes?.b)}`));
+    totals.append(lula,flavio);
+    row.append(head,totals);list.append(row);
+  };
+  const received=status.received||{};
+  const totalized=status.totalized||{};
+  addRow('Recebida',Number.isSafeInteger(received.sections)?`${received.sections.toLocaleString('pt-BR')} BUs`:'quantidade não confirmada',received);
+  addRow('Totalizada',Number.isSafeInteger(totalized.sections)?`${totalized.sections.toLocaleString('pt-BR')} BUs`:'sem confirmação do TSE',totalized);
+  $('#bu-note').textContent=status.note||'O placar bruto é parcial e não representa a totalidade dos votos do exterior.';
 }
 function stat(label,value){
   const card=element('div',null,'stat');card.append(element('span',label,'statlabel'));card.append(element('strong',value,'statvalue'));return card;
@@ -155,6 +188,7 @@ function renderReport(report){
 }
 function render(data){
   renderCandidates(data);
+  renderBUs(data.bu_status);
   renderReport(data.report||{});
   $('#title').textContent=data.estimate?.mode==='poll'?'Pesquisas em destaque até o primeiro boletim.':(data.estimate?.mode==='national'?'Projeção nacional com os boletins oficiais.':'O que os boletins do exterior indicam.');
   const summary=data.estimate?.mode==='poll'?'Chance do modelo de pesquisas; sai do destaque no primeiro BU.':(data.estimate?.available?'Estimativa atualizada com os dados identificados.':(data.estimate?.status||data.estimate?.reason||'Aguardando evidências do segundo turno.'));
