@@ -295,7 +295,7 @@ function cabecalho(d){
     const geral = isNum(tot) && tot > 0 && v2 > 0 ? ` No total, ${fmt2.format(100 * v2 / tot)}% dos votos do país já apurados.` : "";
     base = `Base: ${pj.used_scope_count} ${pj.used_scope_count === 1 ? "país" : "países"} com resultado completo — ${fmt1.format(pj.exterior_v1_coverage_pct || 0)}% dos votos do exterior.${geral}`;
   }
-  else if(e.mode === "national" && e.preview) base = `Base: ${fmt0.format(e.counted_sections || 0)} urnas de ${e.preview_ufs || ""} estados, com boletim oficial já publicado pelo TSE e ainda não somado ao placar; cada seção comparada com ela mesma no 1º turno. Prévia: margem de ±1,5 ponto.`;
+  else if(e.mode === "national" && e.preview) base = `Base: ${fmt0.format(e.counted_sections || 0)} urnas de ${e.preview_ufs || ""} estados, com boletim oficial já publicado pelo TSE e ainda não somado ao placar; cada seção comparada com ela mesma no 1º turno. Prévia: margem de ±${fmt1.format(e.preview_margin || 1.5)} ponto.`;
   else if(e.mode === "national") base = (isNum(e.official_pct) ? `${fmt2.format(e.official_pct)}% das urnas do país já apuradas. ` : "") + (isNum(e.counted_sections) ? `Base: apuração no Brasil — ${fmt0.format(e.counted_sections)} seções contadas pelo TSE.` : "Base: apuração no Brasil.");
   else if(e.status) base = statusTxt(e.status);
   $("basis").textContent = base;
@@ -312,8 +312,8 @@ function placar(d){
   const ch = v => v >= 99.5 ? "mais de 99%" : v <= 0.5 ? "menos de 1%" : fmt0.format(v) + "%";
   const chanceF = isNum(e.flavio_win_probability_pct) ? `<b class="num">${ch(e.flavio_win_probability_pct)}</b> de chance de vencer` : "";
   const chanceL = isNum(e.lula_win_probability_pct) ? `<b class="num">${ch(e.lula_win_probability_pct)}</b> de chance de vencer` : "";
-  const fr = Array.isArray(e.flavio_range_pct) ? `pode variar de ${fmt0.format(e.flavio_range_pct[0])}% a ${fmt0.format(e.flavio_range_pct[1])}%` : "";
-  const lr = Array.isArray(e.lula_range_pct) ? `pode variar de ${fmt0.format(e.lula_range_pct[0])}% a ${fmt0.format(e.lula_range_pct[1])}%` : "";
+  const fr = Array.isArray(e.flavio_range_pct) ? `pode variar de ${fmt1.format(e.flavio_range_pct[0])}% a ${fmt1.format(e.flavio_range_pct[1])}%` : "";
+  const lr = Array.isArray(e.lula_range_pct) ? `pode variar de ${fmt1.format(e.lula_range_pct[0])}% a ${fmt1.format(e.lula_range_pct[1])}%` : "";
   // Apurado até agora: placar oficial do TSE depois das 17h; antes, a soma dos países do exterior.
   const pj = d.projection || {};
   let ca = null, cb = null, onde = "";

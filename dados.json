@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T18:22:41-03:00",
+  "updated_at": "2026-10-25T18:24:34-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
@@ -9,16 +9,17 @@
     "lula_pct": 51.3094404245967,
     "flavio_pct": 48.6905595754033,
     "lula_range_pct": [
-      49.8094404245967,
-      52.8094404245967
+      48.8094404245967,
+      53.8094404245967
     ],
     "flavio_range_pct": [
-      47.1905595754033,
-      50.1905595754033
+      46.1905595754033,
+      51.1905595754033
     ],
     "counted_sections": 860,
     "preview_ufs": 24,
-    "updated_at": "2026-10-25T18:22:32-03:00",
+    "preview_margin": 2.5,
+    "updated_at": "2026-10-25T18:24:33-03:00",
     "source": "boletins de urna publicados pelo TSE como Recebidos (ainda nao totalizados), pareados com o 1o turno da mesma secao"
   },
   "report": {
@@ -512,7 +513,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T21:22:41.034234+00:00",
+    "updated_at": "2026-10-25T21:24:34.324548+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
