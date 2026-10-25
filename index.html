@@ -219,9 +219,10 @@ const FONTES = {
 };
 const fmt1 = new Intl.NumberFormat("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});
 const fmt0 = new Intl.NumberFormat("pt-BR",{maximumFractionDigits:0});
+const fmt2 = new Intl.NumberFormat("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
 const $ = id => document.getElementById(id);
 const isNum = v => typeof v === "number" && isFinite(v);
-const pct = v => isNum(v) ? fmt1.format(v) + "%" : "—";
+const pct = v => isNum(v) ? fmt2.format(v) + "%" : "—";
 const hora = iso => { if(!iso) return ""; const d = new Date(iso); if(isNaN(d)) return ""; return d.toLocaleTimeString("pt-BR",{timeZone:"America/Sao_Paulo",hour:"2-digit",minute:"2-digit"}).replace(":", "h"); };
 const nomePais = c => NOME_FIX[c] || (NOMES[c] || c).replace(/ (Do|Da|De|Dos|Das|E) /g, m => m.toLowerCase());
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -241,7 +242,7 @@ function cabecalho(d){
   } else if(temNum){
     const m = Math.abs(e.flavio_pct - e.lula_pct);
     const quem = e.flavio_pct >= e.lula_pct ? '<span class="f">Flávio</span>' : '<span class="l">Lula</span>';
-    $("headline").innerHTML = m < 0.3 ? `Empate ${onde}` : `${quem} à frente por ${fmt1.format(m)} ${m < 2 ? "ponto" : "pontos"} ${onde}`;
+    $("headline").innerHTML = m < 0.3 ? `Empate ${onde}` : `${quem} à frente por ${fmt2.format(m)} ${m < 2 ? "ponto" : "pontos"} ${onde}`;
   } else {
     $("headline").textContent = e.mode === "national" ? "Apuração começou; projeção nacional em preparo" : "Aguardando os primeiros resultados";
   }
