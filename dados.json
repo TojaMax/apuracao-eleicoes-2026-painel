@@ -1,23 +1,23 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T07:13:36-03:00",
+  "updated_at": "2026-10-25T07:21:46-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
     "mode": "exterior",
-    "lula_pct": 49.4059065670208,
-    "flavio_pct": 50.59409343297921,
+    "lula_pct": 49.408764330296236,
+    "flavio_pct": 50.591235669703764,
     "lula_range_pct": [
-      42.085500055486754,
-      56.726313078554846
+      42.09322613412916,
+      56.72430252646331
     ],
     "flavio_range_pct": [
-      43.273686921445154,
-      57.914499944513246
+      43.27569747353669,
+      57.90677386587084
     ],
-    "lula_win_probability_pct": 43.68086880099449,
-    "flavio_win_probability_pct": 56.31913119900551,
-    "updated_at": "2026-10-25T10:13:36.377025+00:00",
+    "lula_win_probability_pct": 43.70686170729723,
+    "flavio_win_probability_pct": 56.29313829270277,
+    "updated_at": "2026-10-25T10:21:46.505339+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -28,7 +28,7 @@
         "bus": 0
       },
       "N2": {
-        "scopes": 6,
+        "scopes": 7,
         "bus": 0
       },
       "N3": {
@@ -37,11 +37,11 @@
       }
     },
     "used_bu_count": 0,
-    "used_scope_count": 8,
+    "used_scope_count": 9,
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T10:13:36.377025+00:00",
+    "updated_at": "2026-10-25T10:21:46.505339+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
