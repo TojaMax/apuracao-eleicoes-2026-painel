@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T14:24:17-03:00",
+  "updated_at": "2026-10-25T14:34:26-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
@@ -17,7 +17,7 @@
     ],
     "lula_win_probability_pct": 32.559093058681164,
     "flavio_win_probability_pct": 67.44090694131883,
-    "updated_at": "2026-10-25T17:24:17.836629+00:00",
+    "updated_at": "2026-10-25T17:34:26.203337+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -427,7 +427,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T17:24:17.836629+00:00",
+    "updated_at": "2026-10-25T17:34:26.203337+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },

@@ -79,7 +79,7 @@ section.card h2{font-size:15.5px;margin:0 0 8px;letter-spacing:-.005em}
 .rows{list-style:none;margin:0;padding:0}
 .rows li{border-top:1px solid var(--line)}
 .rows li:first-child{border-top:0}
-.row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;width:100%;min-height:44px;padding:8px 2px;cursor:pointer}
+.row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:1fr 104px 66px;align-items:center;gap:8px;width:100%;min-height:44px;padding:8px 2px;cursor:pointer}
 .row:focus-visible{outline:2px solid var(--flavio);outline-offset:2px;border-radius:8px}
 .row .n{font-weight:600;font-size:14px;line-height:1.2}
 .row .n small{display:block;font-weight:400;color:var(--faint);font-size:11.5px}
@@ -87,6 +87,18 @@ section.card h2{font-size:15.5px;margin:0 0 8px;letter-spacing:-.005em}
 .tag.t1{color:#0b6e4f;border-color:#bfe3d3;background:#f0faf5}
 .tag.t2{color:#3c4a63;border-color:#d6dce8;background:#f5f7fb}
 .tag.t3{color:var(--warn);border-color:#f0d8b4;background:#fff8ee}
+.rowhead{display:grid;grid-template-columns:1fr 104px 66px;gap:8px;padding:4px 2px 6px;font-size:10.5px;line-height:1.25;color:var(--faint);border-bottom:1px solid var(--line);align-items:end}
+.rowhead span:nth-child(2){text-align:center}.rowhead span:nth-child(3){text-align:right}
+.rowhead i{font-style:normal;font-weight:600}.rowhead i.f{color:var(--flavio)}.rowhead i.l{color:var(--lula)}
+.res{display:flex;flex-direction:column;gap:3px}
+.rv{display:flex;justify-content:space-between;font-size:13.5px;font-variant-numeric:tabular-nums}
+.rv b{font-weight:500;opacity:.7}.rv b.lead{font-weight:800;opacity:1}
+.rv .f{color:var(--flavio)}.rv .l{color:var(--lula)}
+.rb{display:flex;height:5px;border-radius:99px;overflow:hidden;background:var(--line)}
+.rb .sf{background:var(--flavio)}.rb .sl{background:var(--lula)}
+.dv{display:flex;flex-direction:column;align-items:flex-end;font-size:10.5px;line-height:1.15;color:var(--muted);white-space:nowrap}
+.dv b{font-size:12.5px;font-weight:700}
+.dv.f b{color:var(--flavio)}.dv.l b{color:var(--lula)}
 .delta{font-weight:700;font-size:13.5px;white-space:nowrap;min-width:84px;text-align:right}
 .delta small{font-weight:500;font-size:11px;opacity:.8}
 .delta.f{color:var(--flavio)} .delta.l{color:var(--lula)} .delta.z{color:var(--muted)}
@@ -172,6 +184,7 @@ footer p{margin:4px 0}
         <h2>Países usados na conta</h2>
         <div class="filters" id="filters" role="group" aria-label="Filtrar e ordenar países"></div>
         <div class="explain" id="explain" hidden></div>
+        <div class="rowhead" aria-hidden="true"><span>País</span><span class="h2t"><i class="f">Flávio</i> % <i class="l">Lula</i><br>no 2º turno</span><span>Avanço desde<br>o 1º turno</span></div>
         <ul class="rows" id="rows"></ul>
         <div class="total" id="totalPaises" hidden></div>
       </section>
@@ -317,20 +330,23 @@ function paises(d){
   const vis = lista.filter(s => filtro !== "europa" || europa(s));
   $("rows").innerHTML = vis.map((s,i) => {
     const sw = isNum(s.swing) ? s.swing * 100 : null;
-    let delta = '<span class="delta z">—</span>';
+    let delta = '<span class="dv z">—</span>';
     if(sw !== null){
-      if(Math.abs(sw) < 0.05) delta = '<span class="delta z">estável</span>';
-      else if(sw > 0) delta = `<span class="delta l">Lula +${fmt1.format(sw)}<small> pts</small></span>`;
-      else delta = `<span class="delta f">Flávio +${fmt1.format(-sw)}<small> pts</small></span>`;
+      if(Math.abs(sw) < 0.05) delta = '<span class="dv z">igual</span>';
+      else if(sw > 0) delta = `<span class="dv l">Lula<b>+${fmt1.format(sw)} pts</b></span>`;
+      else delta = `<span class="dv f">Flávio<b>+${fmt1.format(-sw)} pts</b></span>`;
     }
+    const tem2 = isNum(s.a2) && isNum(s.b2) && s.a2 + s.b2 > 0;
+    const pf = tem2 ? 100 * s.b2 / (s.a2 + s.b2) : null;
+    const res = tem2 ? `<span class="res"><span class="rv"><b class="f${pf >= 50 ? " lead" : ""}">${fmt1.format(pf)}</b><b class="l${pf < 50 ? " lead" : ""}">${fmt1.format(100 - pf)}</b></span><span class="rb"><i class="sf" style="width:${pf}%"></i><i class="sl" style="width:${100 - pf}%"></i></span></span>` : '<span class="res"></span>';
     const fonte = FONTES[s.level] || {rot:s.level, cls:"", exp:""};
     const cont = CONTINENTE[s.continente] || s.continente || "";
     const alerta = s.flag ? `<p class="alert">Alerta: ${esc(s.flag)}</p>` : "";
     const ab = abertos.has(s.scope);
     return `<li><button class="row" type="button" data-scope="${esc(s.scope)}" aria-expanded="${ab}" aria-controls="m${i}">
-        <span class="n">${esc(nomePais(s.scope))}<small>entrou às ${hora(s.entered_at) || "—"} · ${isNum(s.a2) && isNum(s.b2) ? fmt0.format(s.a2 + s.b2) + " votos" : "—"}</small></span>
-        <span class="tag ${fonte.cls}">${fonte.rot}</span>${delta}</button>
-      <div class="more" id="m${i}" ${ab ? "" : "hidden"}>${placarPais(s)}<p>${fonte.exp}${cont ? " " + esc(cont) + "." : ""}</p>${isNum(s.bu_count) && s.bu_count > 0 ? `<p>${fmt0.format(s.bu_count)} boletins de urna conferidos.</p>` : ""}${alerta}</div></li>`;
+        <span class="n">${esc(nomePais(s.scope).split(" — ")[0])}<small>às ${hora(s.entered_at) || "—"} · ${isNum(s.a2) && isNum(s.b2) ? fmt0.format(s.a2 + s.b2) + " votos" : "—"}</small></span>
+        ${res}${delta}</button>
+      <div class="more" id="m${i}" ${ab ? "" : "hidden"}>${placarPais(s)}<p><b>${fonte.rot}:</b> ${fonte.exp}${cont ? " " + esc(cont) + "." : ""}</p>${isNum(s.bu_count) && s.bu_count > 0 ? `<p>${fmt0.format(s.bu_count)} boletins de urna conferidos.</p>` : ""}${alerta}</div></li>`;
   }).join("") || `<li class="empty">${filtro === "europa" ? "Nenhum país da Europa ainda; os primeiros devem entrar a partir das 13h." : "Nenhum país ainda."}</li>`;
   const soma = k => vis.reduce((t,s) => t + (isNum(s[k]) ? s[k] : 0), 0);
   const tp = $("totalPaises");
