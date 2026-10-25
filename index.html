@@ -56,6 +56,8 @@ h1 .f{color:var(--flavio)} h1 .l{color:var(--lula)}
 .urnas .ut{font-size:12px;color:var(--muted);line-height:1.3}
 .ubar{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin:0 2px 12px}
 .ubar i{display:block;height:100%;background:var(--ink)}
+.estatu{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:99px;background:#e8f3ec;color:#1d7a4a;font-size:11.5px;letter-spacing:0;text-transform:none;font-weight:700}
+.estatu.parada{background:#fff1dc;color:#9a5b00}
 .esttit{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 2px 8px}
 .now{margin-top:12px}
 .now .split{height:6px;margin:4px 2px 3px}
@@ -309,7 +311,7 @@ function cabecalho(d){
     const geral = isNum(tot) && tot > 0 && v2 > 0 ? ` No total, ${fmt2.format(100 * v2 / tot)}% dos votos do país já apurados.` : "";
     base = `Base: ${pj.used_scope_count} ${pj.used_scope_count === 1 ? "país" : "países"} com resultado completo — ${fmt1.format(pj.exterior_v1_coverage_pct || 0)}% dos votos do exterior.${geral}`;
   }
-  else if(e.mode === "national" && e.preview) base = `Base: ${fmt0.format(e.counted_sections || 0)} urnas de ${e.preview_ufs || ""} estados, com boletim oficial já publicado pelo TSE e ainda não somado ao placar; cada seção comparada com ela mesma no 1º turno. Prévia: margem de ±${fmt1.format(e.preview_margin || 1.5)} ponto.${isNum((d.official || {}).counted_sections) && d.official.counted_sections > 3 * (e.counted_sections || 0) ? " Atenção: o TSE parou de publicar os boletins por seção às 17h07; o placar acima segue ao vivo, mas a projeção só volta a andar quando os boletins voltarem." : ""}`;
+  else if(e.mode === "national" && e.preview) base = `Base: ${fmt0.format(e.counted_sections || 0)} urnas de ${e.preview_ufs || ""} estados, com boletim oficial já publicado pelo TSE e ainda não somado ao placar; cada seção comparada com ela mesma no 1º turno. Prévia: margem de ±${fmt1.format(e.preview_margin || 1.5)} ponto.`;
   else if(e.mode === "national") base = (isNum(e.official_pct) ? `${fmt2.format(e.official_pct)}% das urnas do país já apuradas. ` : "") + (isNum(e.counted_sections) ? `Base: apuração no Brasil — ${fmt0.format(e.counted_sections)} seções contadas pelo TSE.` : "Base: apuração no Brasil.");
   else if(e.status) base = statusTxt(e.status);
   // Aviso da prorrogação: some sozinho às 19h30 de Brasília.
@@ -355,7 +357,10 @@ function placar(d){
   if(atual) atual = atual.replace(/<\/div>$/, botao("apu", "Veja gráfico da apuração", histApu, "nos votos já apurados") + "</div>");
   el.innerHTML = `
     ${isNum((d.official || {}).pct) ? `<div class="urnas"><span class="up">${fmt2.format(d.official.pct)}%</span><span class="ut">das urnas do país apuradas pelo TSE<br>${fmt0.format(d.official.counted_sections || 0)} de ${fmt0.format(d.official.total_sections || 0)} seções · às ${hora(d.official.generated_at) || "—"}</span></div><div class="ubar"><i style="width:${Math.min(100, d.official.pct)}%"></i></div>` : ""}
-    <div class="esttit">Estimativa do resultado final</div>
+    <div class="esttit">Estimativa do resultado final${e.preview && e.updated_at ? (() => {
+      const min = (Date.now() - new Date(e.updated_at).getTime()) / 60000, parada = min > 10;
+      return ` <span class="estatu${parada ? " parada" : ""}">${parada ? "parada desde" : "atualizada às"} ${hora(e.updated_at)} · ${fmt0.format(e.counted_sections || 0)} seções (${fmt2.format(100 * (e.counted_sections || 0) / 499248)}% das urnas)</span>`;
+    })() : ""}</div>
     <div class="cols">
       <div class="cand f"><div class="who">Flávio Bolsonaro</div><div class="pct num">${pct(e.flavio_pct)}</div><div class="chance">${chanceF}</div><div class="range">${fr}</div></div>
       <div class="cand l"><div class="who">Lula</div><div class="pct num">${pct(e.lula_pct)}</div><div class="chance">${chanceL}</div><div class="range">${lr}</div></div>
