@@ -17,6 +17,9 @@
     @media(max-width:520px){.bu-list{grid-template-columns:1fr}.bu-row{padding:11px}.bu-votes{justify-content:space-between}}
     .hero-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}.hero-heading h1{flex:1 1 auto;min-inline-size:0}.market-ribbon{flex:0 1 auto;max-inline-size:100%;margin-block-start:2px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow);text-align:end}.market-ribbon-label{margin:0;color:var(--muted);font-size:.68rem;font-weight:750;letter-spacing:.04em;white-space:nowrap}.market-ribbon-score{margin:2px 0 0;color:var(--ink);font-size:.9rem;font-weight:780;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
     @media(max-width:800px){.hero-heading{display:block}.market-ribbon{inline-size:fit-content;max-inline-size:100%;margin-block-start:14px;text-align:start}}
+    .hero-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,360px);align-items:start;gap:24px}.hero-heading h1{min-inline-size:0;max-inline-size:none}.hero-heading .market-ribbon{width:100%;min-width:0;max-inline-size:100%;margin-block-start:2px;padding:14px 15px;text-align:start}.market-ribbon-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.market-ribbon-label{font-size:.72rem}.market-link{font-size:.77rem}.market-ribbon-values{display:grid;grid-template-columns:1fr;gap:0;margin-top:7px}.market-ribbon-value{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--line)}.market-ribbon-value span{color:var(--muted);font-size:.78rem}.market-ribbon-value strong{font-size:clamp(1.35rem,1.8vw,1.7rem);line-height:1.1;font-weight:790;letter-spacing:-.035em;font-variant-numeric:tabular-nums}.market-ribbon-figure{margin:8px 0 0}.market-ribbon-legend{gap:9px;margin:0;color:var(--muted);font-size:.66rem}.market-ribbon-legend .legend-swatch{width:12px}.market-ribbon-figure figcaption{margin-top:0;font-size:.65rem}.market-ribbon .market-status{margin-top:6px;font-size:.65rem;line-height:1.35}#market-chart{max-height:116px}
+    @media(max-width:800px){.hero-heading{grid-template-columns:minmax(0,1fr);gap:0}.hero-heading .market-ribbon{inline-size:100%;width:100%;max-inline-size:100%;margin-block-start:14px}}
+    @media(max-width:430px){.hero-heading .market-ribbon{padding:12px}.market-ribbon-value strong{font-size:1.5rem}#market-chart{max-height:108px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -25,7 +28,31 @@
   <main>
     <section class="hero" aria-labelledby="title">
       <p class="kicker">Presidência · 2º turno · 25/10/2026</p>
-      <div class="hero-heading"><h1 id="title">O que os boletins do exterior indicam.</h1><aside class="market-ribbon" aria-label="Placar do mercado Polymarket" aria-live="polite"><p class="market-ribbon-label" id="market-ribbon-time">Polymarket, —:—</p><p class="market-ribbon-score" id="market-ribbon-score">Flávio — · Lula —</p></aside></div>
+      <div class="hero-heading">
+        <h1 id="title">O que os boletins do exterior indicam.</h1>
+        <aside class="market-ribbon" aria-label="Polymarket: probabilidades e gráfico das últimas 24 horas" aria-live="polite">
+          <div class="market-ribbon-head">
+            <p class="market-ribbon-label" id="market-ribbon-time">Polymarket, —:—</p>
+            <a class="market-link" href="https://polymarket.com/event/brazil-presidential-election" target="_blank" rel="noopener noreferrer">Abrir mercado</a>
+          </div>
+          <div class="market-ribbon-values" aria-label="Probabilidade atual de vitória no mercado">
+            <div class="market-ribbon-value flavio"><span>Flávio Bolsonaro</span><strong id="market-ribbon-flavio">—</strong></div>
+            <div class="market-ribbon-value lula"><span>Lula</span><strong id="market-ribbon-lula">—</strong></div>
+          </div>
+          <figure class="market-ribbon-figure">
+            <div class="market-legend market-ribbon-legend" aria-hidden="true"><span class="legend-key"><i class="legend-swatch"></i>Lula</span><span class="legend-key"><i class="legend-swatch flavio"></i>Flávio</span><span>últimas 24 h</span></div>
+            <svg id="market-chart" role="img" aria-labelledby="market-chart-title market-chart-desc" viewBox="0 0 640 210">
+              <title id="market-chart-title">Probabilidades do Polymarket nas últimas 24 horas</title>
+              <desc id="market-chart-desc">O gráfico será preenchido após a primeira leitura automatizada.</desc>
+              <g id="market-chart-grid"></g><g id="market-chart-lines"></g>
+            </svg>
+            <figcaption id="market-chart-caption">Probabilidade implícita do mercado nas últimas 24 horas.</figcaption>
+          </figure>
+          <table class="sr-only" id="market-access-table"></table>
+          <p class="market-status" id="market-status">A página exibe o arquivo publicado pelo GitHub Actions; não consulta a API da Polymarket no navegador.</p>
+          <p class="sr-only" id="market-updated" role="status" aria-live="polite">Aguardando a primeira leitura automatizada.</p>
+        </aside>
+      </div>
       <p class="deck">Estimativa independente a partir das mesmas seções e âmbitos eleitorais nos dois turnos, com a origem e a cobertura dos dados à vista.</p>
       <p class="summary" id="summary" role="status" aria-live="polite">Carregando a atualização mais recente.</p>
     </section>
@@ -39,24 +66,6 @@
         <p class="bu-note" id="bu-note"></p>
       </section>
       <p class="notice" id="model-note">A faixa do modelo e a probabilidade não substituem o resultado oficial.</p>
-    </section>
-    <section class="market" aria-labelledby="market-title">
-      <div class="market-head"><div><p class="market-kicker">Mercado de previsão</p><h2 id="market-title">Probabilidades no Polymarket</h2><p class="market-updated" id="market-updated" role="status" aria-live="polite">Aguardando a primeira leitura automatizada.</p></div><a class="market-link" href="https://polymarket.com/event/brazil-presidential-election" target="_blank" rel="noopener noreferrer">Abrir mercado</a></div>
-      <div class="market-values" aria-label="Probabilidade atual de vitória no mercado">
-        <article class="market-value lula"><span class="market-name">Lula</span><strong class="market-percent" id="market-lula">—</strong></article>
-        <article class="market-value flavio"><span class="market-name">Flávio Bolsonaro</span><strong class="market-percent" id="market-flavio">—</strong></article>
-      </div>
-      <figure class="market-figure">
-        <div class="market-legend" aria-hidden="true"><span class="legend-key"><i class="legend-swatch"></i>Lula</span><span class="legend-key"><i class="legend-swatch flavio"></i>Flávio</span><span>últimas 24 horas</span></div>
-        <svg id="market-chart" role="img" aria-labelledby="market-chart-title market-chart-desc" viewBox="0 0 640 210">
-          <title id="market-chart-title">Probabilidades do Polymarket nas últimas 24 horas</title>
-          <desc id="market-chart-desc">O gráfico será preenchido após a primeira leitura automatizada.</desc>
-          <g id="market-chart-grid"></g><g id="market-chart-lines"></g>
-        </svg>
-        <figcaption id="market-chart-caption">As linhas mostram o preço de cada resultado convertido em probabilidade implícita.</figcaption>
-      </figure>
-      <table class="sr-only" id="market-access-table"></table>
-      <p class="market-status" id="market-status">A página exibe o arquivo publicado pelo GitHub Actions; não consulta a API da Polymarket no navegador.</p>
     </section>
     <section class="report" aria-labelledby="report-title">
       <div class="reporthead"><div><h2 id="report-title">Relatório de evidências</h2><p class="small">Cada âmbito aparece uma vez; parciais, sobreposições e conflitos ficam fora da estimativa.</p></div></div>
@@ -218,10 +227,9 @@ function renderMarket(data){
   const hhmm=time.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'});
   const day=time.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',timeZone:'America/Sao_Paulo'});
   $('#market-updated').textContent=`Atualizado pelo Polymarket às ${hhmm} BRT · ${day}`;
-  $('#market-lula').textContent=pct(lula.price_pct);
-  $('#market-flavio').textContent=pct(flavio.price_pct);
   $('#market-ribbon-time').textContent=`Polymarket, ${hhmm}`;
-  $('#market-ribbon-score').textContent=`Flávio ${pct(flavio.price_pct)} · Lula ${pct(lula.price_pct)}`;
+  $('#market-ribbon-flavio').textContent=pct(flavio.price_pct);
+  $('#market-ribbon-lula').textContent=pct(lula.price_pct);
   const grid=$('#market-chart-grid'),lines=$('#market-chart-lines');grid.replaceChildren();lines.replaceChildren();
   const left=42,right=625,top=14,bottom=177,plotHeight=bottom-top;
   for(const value of [0,50,100]){
@@ -252,7 +260,7 @@ function renderMarket(data){
 }
 async function refreshMarket(){
   try{const response=await fetch(`./polymarket.json?at=${Date.now()}`,{cache:'no-store'});if(!response.ok)throw new Error('Snapshot indisponível');renderMarket(await response.json());}
-  catch(error){if(!$('#market-lula').textContent||$('#market-lula').textContent==='—')$('#market-updated').textContent='Aguardando a primeira leitura automatizada do GitHub Actions.';$('#market-status').textContent='A última leitura do mercado não está disponível; a página não consulta a API externa.';$('#market-status').classList.add('error');}
+  catch(error){if(!$('#market-ribbon-flavio').textContent||$('#market-ribbon-flavio').textContent==='—')$('#market-updated').textContent='Aguardando a primeira leitura automatizada do GitHub Actions.';$('#market-status').textContent='A última leitura do mercado não está disponível; a página não consulta a API externa.';$('#market-status').classList.add('error');}
 }
 refreshMarket();setInterval(refreshMarket,120000);
 </script>
