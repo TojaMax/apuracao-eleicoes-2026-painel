@@ -1,23 +1,23 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T12:15:38-03:00",
+  "updated_at": "2026-10-25T12:22:55-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
     "mode": "exterior",
-    "lula_pct": 48.704294994380106,
-    "flavio_pct": 51.29570500561989,
+    "lula_pct": 48.68937021331213,
+    "flavio_pct": 51.31062978668787,
     "lula_range_pct": [
-      41.623115449315975,
-      55.785474539444245
+      41.67056807361611,
+      55.70817235300816
     ],
     "flavio_range_pct": [
-      44.214525460555755,
-      58.376884550684025
+      44.29182764699184,
+      58.32943192638389
     ],
-    "lula_win_probability_pct": 35.99328657478063,
-    "flavio_win_probability_pct": 64.00671342521936,
-    "updated_at": "2026-10-25T15:15:38.327744+00:00",
+    "lula_win_probability_pct": 35.71850468551202,
+    "flavio_win_probability_pct": 64.28149531448798,
+    "updated_at": "2026-10-25T15:22:55.455742+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -32,12 +32,12 @@
         "bus": 0
       },
       "N3": {
-        "scopes": 10,
+        "scopes": 13,
         "bus": 0
       }
     },
     "used_bu_count": 0,
-    "used_scope_count": 20,
+    "used_scope_count": 23,
     "country_sources": [
       {
         "country": "AU",
@@ -160,6 +160,14 @@
         "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
       },
       {
+        "country": "TSE_CHIPRE",
+        "scope_label": "Chipre",
+        "source_level": "N3",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T12:21:41-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
         "country": "TSE_EGITO",
         "scope_label": "Egito",
         "source_level": "N3",
@@ -173,6 +181,22 @@
         "source_level": "N3",
         "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
         "observed_at": "2026-10-25T10:42:00-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "TSE_ESTONIA",
+        "scope_label": "Estônia",
+        "source_level": "N3",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T12:21:41-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "TSE_GRECIA",
+        "scope_label": "Grécia",
+        "source_level": "N3",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T12:21:41-03:00",
         "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
       },
       {
@@ -219,7 +243,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T15:15:38.327744+00:00",
+    "updated_at": "2026-10-25T15:22:55.455742+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -232,20 +256,20 @@
       "valid1": 119300788,
       "sections": 499206
     },
-    "p_s_lula_pct": 50.62979639517955,
-    "p_t_lula_pct": 48.062461194113624,
-    "mu_lula_pct": 48.704294994380106,
-    "sigma_pp": 3.6128467066653775,
+    "p_s_lula_pct": 50.570002789388354,
+    "p_t_lula_pct": 48.06249268795339,
+    "mu_lula_pct": 48.68937021331213,
+    "sigma_pp": 3.5810214998449093,
     "sigma_components_pp": {
-      "amostra": 2.238507437946197,
-      "fonte": 0.37939856017698603,
+      "amostra": 2.2049254652217734,
+      "fonte": 0.3743219843509427,
       "transferencia": 2.5,
-      "modelo": 1.2836676005329617
+      "modelo": 1.2537550507174866
     },
-    "transfer_fraction_other_to_lula": 0.3713052352684646,
-    "lula_win_probability_pct": 35.99328657478063,
-    "flavio_win_probability_pct": 64.00671342521936,
-    "used_scope_count": 20,
+    "transfer_fraction_other_to_lula": 0.37130926804932807,
+    "lula_win_probability_pct": 35.71850468551202,
+    "flavio_win_probability_pct": 64.28149531448798,
+    "used_scope_count": 23,
     "used_scopes": [
       {
         "scope": "AU",
@@ -259,7 +283,7 @@
         "bu_count": 0,
         "continente": "Oceania",
         "flag": null,
-        "robust_z": -0.08851049173697456,
+        "robust_z": 0.0,
         "entered_at": "2026-10-25T09:59:40+00:00"
       },
       {
@@ -274,7 +298,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.16670455573239146,
+        "robust_z": 0.26378241481025505,
         "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
@@ -289,7 +313,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.12799162786910834,
+        "robust_z": 0.2237699245695385,
         "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
@@ -303,8 +327,8 @@
         "b2": 23,
         "bu_count": 0,
         "continente": "Asia",
-        "flag": null,
-        "robust_z": 2.899389197312037,
+        "flag": "|z| > 3; peso reduzido à metade",
+        "robust_z": 3.088201119029874,
         "entered_at": "2026-10-25T10:59:33+00:00"
       },
       {
@@ -319,7 +343,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.7266905285261785,
+        "robust_z": 0.842566673920782,
         "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
@@ -334,7 +358,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.40554726367849464,
+        "robust_z": 0.5106428836053245,
         "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
@@ -349,7 +373,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": "|z| > 3; peso reduzido à metade",
-        "robust_z": -3.9599631994970625,
+        "robust_z": -4.001414313939447,
         "entered_at": "2026-10-25T11:19:11+00:00"
       },
       {
@@ -364,7 +388,7 @@
         "bu_count": 0,
         "continente": "Oceania",
         "flag": null,
-        "robust_z": 0.6222909904270117,
+        "robust_z": 0.734662525878026,
         "entered_at": "2026-10-25T09:21:01+00:00"
       },
       {
@@ -379,7 +403,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.8829805154060489,
+        "robust_z": -0.8211397541633736,
         "entered_at": "2026-10-25T11:19:11+00:00"
       },
       {
@@ -394,7 +418,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -1.0123466738202227,
+        "robust_z": -0.9548486322236016,
         "entered_at": "2026-10-25T09:40:29+00:00"
       },
       {
@@ -409,7 +433,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 1.2924454215872336,
+        "robust_z": 1.4273135113903708,
         "entered_at": "2026-10-25T10:21:34+00:00"
       },
       {
@@ -424,7 +448,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -2.5880495788098785,
+        "robust_z": -2.5834466378000394,
         "entered_at": "2026-10-25T14:23:45+00:00"
       },
       {
@@ -439,8 +463,23 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.2615062139444019,
+        "robust_z": -0.17880305181142075,
         "entered_at": "2026-10-25T14:42:17+00:00"
+      },
+      {
+        "scope": "TSE_CHIPRE",
+        "level": "N3",
+        "swing": -0.008417508417508324,
+        "v1": 57,
+        "a1": 24,
+        "b1": 20,
+        "a2": 29,
+        "b2": 25,
+        "bu_count": 0,
+        "continente": "Europe",
+        "flag": null,
+        "robust_z": -0.12453640714406725,
+        "entered_at": "2026-10-25T15:21:41+00:00"
       },
       {
         "scope": "TSE_EGITO",
@@ -454,7 +493,7 @@
         "bu_count": 0,
         "continente": "Africa",
         "flag": null,
-        "robust_z": -0.06973151447627624,
+        "robust_z": 0.019409372678499532,
         "entered_at": "2026-10-25T14:23:45+00:00"
       },
       {
@@ -469,8 +508,38 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.5357145213495755,
+        "robust_z": 0.6451797531910719,
         "entered_at": "2026-10-25T13:42:00+00:00"
+      },
+      {
+        "scope": "TSE_ESTONIA",
+        "level": "N3",
+        "swing": -0.05297203359830083,
+        "v1": 190,
+        "a1": 142,
+        "b1": 19,
+        "a2": 160,
+        "b2": 33,
+        "bu_count": 0,
+        "continente": "Europe",
+        "flag": null,
+        "robust_z": -1.4640891067077184,
+        "entered_at": "2026-10-25T15:21:41+00:00"
+      },
+      {
+        "scope": "TSE_GRECIA",
+        "level": "N3",
+        "swing": -0.009563861377925975,
+        "v1": 494,
+        "a1": 196,
+        "b1": 230,
+        "a2": 255,
+        "b2": 311,
+        "bu_count": 0,
+        "continente": "Europe",
+        "flag": null,
+        "robust_z": -0.15900204663969916,
+        "entered_at": "2026-10-25T15:21:41+00:00"
       },
       {
         "scope": "TSE_JORDANIA",
@@ -484,7 +553,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.38593341041871604,
+        "robust_z": -0.3074071708847849,
         "entered_at": "2026-10-25T15:01:05+00:00"
       },
       {
@@ -499,7 +568,7 @@
         "bu_count": 0,
         "continente": "Africa",
         "flag": null,
-        "robust_z": 1.1934003852135688,
+        "robust_z": 1.324943611462151,
         "entered_at": "2026-10-25T14:23:45+00:00"
       },
       {
@@ -514,7 +583,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.9348937066853609,
+        "robust_z": -0.8747956302253337,
         "entered_at": "2026-10-25T14:42:17+00:00"
       },
       {
@@ -529,7 +598,7 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": -0.7410945213482452,
+        "robust_z": -0.6744907594765951,
         "entered_at": "2026-10-25T14:23:45+00:00"
       },
       {
@@ -544,16 +613,17 @@
         "bu_count": 0,
         "continente": "Asia",
         "flag": null,
-        "robust_z": 0.06973151447627624,
+        "robust_z": 0.16355406523732105,
         "entered_at": "2026-10-25T09:40:29+00:00"
       }
     ],
-    "covered_exterior_v1": 47277,
+    "covered_exterior_v1": 48002,
     "total_exterior_v1": 330882,
-    "exterior_v1_coverage_pct": 14.288175240720257,
+    "exterior_v1_coverage_pct": 14.50743769682243,
     "continents": [
       "Africa",
       "Asia",
+      "Europe",
       "Oceania"
     ],
     "interval_description": "intervalo normal de 95% do modelo; não é cobertura calibrada",
@@ -562,7 +632,7 @@
   "mobilization": {
     "exterior": {
       "available": false,
-      "scope_count": 20,
+      "scope_count": 23,
       "reference_2022": {
         "scope_count": 99,
         "valid_change_pct": 1.2,
