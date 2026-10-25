@@ -1,23 +1,23 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T15:21:07-03:00",
+  "updated_at": "2026-10-25T15:23:31-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
     "mode": "exterior",
-    "lula_pct": 49.13383649727018,
-    "flavio_pct": 50.86616350272982,
+    "lula_pct": 49.41855288568037,
+    "flavio_pct": 50.58144711431962,
     "lula_range_pct": [
-      45.1915145810523,
-      53.07615841348805
+      45.72713897768412,
+      53.10996679367662
     ],
     "flavio_range_pct": [
-      46.92384158651195,
-      54.8084854189477
+      46.89003320632338,
+      54.27286102231588
     ],
-    "lula_win_probability_pct": 33.33688616271028,
-    "flavio_win_probability_pct": 66.66311383728973,
-    "updated_at": "2026-10-25T18:21:07.555932+00:00",
+    "lula_win_probability_pct": 37.87648899803217,
+    "flavio_win_probability_pct": 62.12351100196783,
+    "updated_at": "2026-10-25T18:23:31.661954+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -32,12 +32,12 @@
         "bus": 0
       },
       "N3": {
-        "scopes": 39,
+        "scopes": 41,
         "bus": 0
       }
     },
     "used_bu_count": 0,
-    "used_scope_count": 49,
+    "used_scope_count": 51,
     "country_sources": [
       {
         "country": "AU",
@@ -61,6 +61,14 @@
         "source_level": "N3",
         "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
         "observed_at": "2026-10-25T06:40:29-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "DE",
+        "scope_label": "Alemanha",
+        "source_level": "N3",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T15:20:18-03:00",
         "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
       },
       {
@@ -110,6 +118,14 @@
         "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
         "observed_at": "2026-10-25T11:45:13-03:00",
         "status": "divergencia_de_fontes"
+      },
+      {
+        "country": "IT",
+        "scope_label": "Itália",
+        "source_level": "N3",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T15:20:18-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
       },
       {
         "country": "JP",
@@ -474,7 +490,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T18:21:07.555932+00:00",
+    "updated_at": "2026-10-25T18:23:31.661954+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -487,20 +503,20 @@
       "valid1": 119300788,
       "sections": 499206
     },
-    "p_s_lula_pct": 50.1134707901412,
-    "p_t_lula_pct": 48.80729173297984,
-    "mu_lula_pct": 49.13383649727018,
-    "sigma_pp": 2.011388732764223,
+    "p_s_lula_pct": 49.98358345958272,
+    "p_t_lula_pct": 49.230209361046256,
+    "mu_lula_pct": 49.41855288568037,
+    "sigma_pp": 1.8833744428552295,
     "sigma_components_pp": {
-      "amostra": 1.088920730936236,
-      "fonte": 0.42826433856489216,
+      "amostra": 0.9743311843352479,
+      "fonte": 0.45374541556440207,
       "transferencia": 1.5,
-      "modelo": 0.6530895285806804
+      "modelo": 0.3766870492682317
     },
-    "transfer_fraction_other_to_lula": 0.4666806599882777,
-    "lula_win_probability_pct": 33.33688616271028,
-    "flavio_win_probability_pct": 66.66311383728973,
-    "used_scope_count": 49,
+    "transfer_fraction_other_to_lula": 0.5208351908426778,
+    "lula_win_probability_pct": 37.87648899803217,
+    "flavio_win_probability_pct": 62.12351100196783,
+    "used_scope_count": 51,
     "used_scopes": [
       {
         "scope": "AU",
@@ -546,6 +562,21 @@
         "flag": null,
         "robust_z": 0.14569299295535226,
         "entered_at": "2026-10-25T09:40:29+00:00"
+      },
+      {
+        "scope": "DE",
+        "level": "N3",
+        "swing": -0.00198182818767767,
+        "v1": 18802,
+        "a1": 13525,
+        "b1": 3532,
+        "a2": 16549,
+        "b2": 4374,
+        "bu_count": 0,
+        "continente": "Europe",
+        "flag": null,
+        "robust_z": -0.07031015268097462,
+        "entered_at": "2026-10-25T18:20:18+00:00"
       },
       {
         "scope": "ES",
@@ -606,6 +637,21 @@
         "flag": "|z| > 3; peso reduzido à metade",
         "robust_z": 3.277102313873844,
         "entered_at": "2026-10-25T10:59:33+00:00"
+      },
+      {
+        "scope": "IT",
+        "level": "N3",
+        "swing": 0.016260024305250198,
+        "v1": 11595,
+        "a1": 6148,
+        "b1": 4386,
+        "a2": 7921,
+        "b2": 5283,
+        "bu_count": 0,
+        "continente": "Europe",
+        "flag": null,
+        "robust_z": 0.5377515970832877,
+        "entered_at": "2026-10-25T18:20:18+00:00"
       },
       {
         "scope": "JP",
@@ -1238,9 +1284,9 @@
         "entered_at": "2026-10-25T09:40:29+00:00"
       }
     ],
-    "covered_exterior_v1": 116409,
+    "covered_exterior_v1": 146806,
     "total_exterior_v1": 330882,
-    "exterior_v1_coverage_pct": 35.18157530479144,
+    "exterior_v1_coverage_pct": 44.368233992782926,
     "continents": [
       "Africa",
       "Asia",
@@ -1253,7 +1299,7 @@
   "mobilization": {
     "exterior": {
       "available": false,
-      "scope_count": 49,
+      "scope_count": 51,
       "reference_2022": {
         "scope_count": 99,
         "valid_change_pct": 1.2,
@@ -1412,6 +1458,15 @@
       "n": 49,
       "ca": 71409,
       "cb": 56000
+    },
+    {
+      "t": "2026-10-25T15:23:31-03:00",
+      "f": 50.581,
+      "l": 49.419,
+      "m": "exterior",
+      "n": 51,
+      "ca": 95879,
+      "cb": 65657
     }
   ]
 }
