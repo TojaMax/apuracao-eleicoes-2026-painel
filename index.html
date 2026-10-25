@@ -98,6 +98,7 @@
     @container (width < 600px){
       .method-table,.method-table thead,.method-table tbody,.method-table tr,.method-table th,.method-table td{display:block}
       .method-table thead{display:none}
+      .method-table caption{display:block;width:100%}
       .method-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 10px;padding:8px 9px;border:1px solid var(--line);border-radius:10px;margin-block-end:8px;background:#fffefa}
       .method-table tbody th{grid-column:1/-1;padding:3px 0 8px;border:0;font-size:.86rem}
       .method-table tbody td{min-width:0;padding:6px 0;border:0;font-size:.73rem}
@@ -444,7 +445,7 @@ function renderProjectionMethod(projection){
   methodCandidatePair('method-center-pair',[
     ['flavio','Flávio Bolsonaro',typeof center==='number'?100-center:null],['lula','Lula',center],
   ],methodPercent);
-  $('#method-total-uncertainty').textContent=`A incerteza total usada para formar a faixa e as chances é ${methodPoints(projection.sigma_pp)}.`;
+  $('#method-total-uncertainty').textContent=`A incerteza total usada para formar a faixa e as chances é ${methodNumber(projection.sigma_pp)} pontos percentuais.`;
   const components=projection.sigma_components_pp||{};
   const uncertaintyLabels=[
     ['amostra','Tamanho da amostra'],['fonte','Confiabilidade das fontes'],
