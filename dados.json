@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T15:14:23-03:00",
+  "updated_at": "2026-10-25T15:21:07-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
@@ -17,7 +17,7 @@
     ],
     "lula_win_probability_pct": 33.33688616271028,
     "flavio_win_probability_pct": 66.66311383728973,
-    "updated_at": "2026-10-25T18:14:23.117574+00:00",
+    "updated_at": "2026-10-25T18:21:07.555932+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -474,7 +474,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-25T18:14:23.117574+00:00",
+    "updated_at": "2026-10-25T18:21:07.555932+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -1268,7 +1268,7 @@
     "available": true,
     "source": "tse",
     "source_label": "Relatório do TSE exterior",
-    "updated_at": "2026-10-25T18:00:51.241658+00:00",
+    "updated_at": "2026-10-25T18:20:41.188978+00:00",
     "received": {
       "sections": 291,
       "a": 39367,
