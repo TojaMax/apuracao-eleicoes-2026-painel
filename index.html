@@ -532,7 +532,7 @@ function renderMobilization(mobilization){
     ?`Totais declarados por fontes; ${exterior.unconfirmed_scope_count} âmbitos aguardam confirmação do TSE. A diferença não identifica votos individuais.`
     :'A diferença entre os totais não identifica votos individuais.';
   const reference=exterior.reference_2022||{};
-  $('#mobilization-reference').textContent=`Referência fixa de 2022 · ${methodVotes(reference.scope_count)} âmbitos: votos válidos ${methodSignedPercent(reference.valid_change_pct)}; Bolsonaro ficou com mais dos votos que mudaram.`;
+  $('#mobilization-reference').textContent=`Referência fixa de 2022 · ${methodVotes(reference.scope_count)} âmbitos: votos válidos ${methodSignedPercent(reference.valid_change_pct)}; entre os votos que mudaram, Bolsonaro ficou com parcela maior que Lula.`;
   const national=mobilization.national_sample;
   const nationalBox=$('#mobilization-national');nationalBox.hidden=true;
   if(national&&Number.isSafeInteger(national.first_round)&&Number.isSafeInteger(national.second_round)){
