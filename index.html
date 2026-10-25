@@ -23,10 +23,10 @@
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
     main{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);grid-template-areas:"hero market" "board board" "report report";column-gap:24px;align-items:start}
     .hero{grid-area:hero}.hero-heading{display:block}.board{grid-area:board}.report{grid-area:report}
-    .market-ribbon{grid-area:market;align-self:start;width:100%;min-inline-size:0;margin:78px 0 0;padding:10px 12px 8px;text-align:start}
-    .market-ribbon-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.market-ribbon-label{margin:0;font-size:.66rem;line-height:1.2;font-weight:700;white-space:nowrap}.market-ribbon-head .market-link{font-size:.67rem;line-height:1.2}
-    .market-ribbon-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0 0}.market-ribbon-value{display:flex;align-items:baseline;justify-content:space-between;gap:6px;min-width:0;padding:2px 0;border:0;border-radius:0;background:transparent!important}.market-ribbon-value span{font-size:.72rem;white-space:nowrap}.market-ribbon-value.flavio span{color:var(--orange)}.market-ribbon-value.lula span{color:var(--green)}.market-ribbon-value strong{font-size:clamp(1.15rem,1.6vw,1.45rem);line-height:1;font-weight:790;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
-    .market-ribbon-figure{margin:0}#market-chart{display:block;width:100%;height:74px;max-height:none;overflow:visible}.chart-label{font-size:14px}
+    .market-ribbon{grid-area:market;align-self:start;width:100%;min-inline-size:0;margin:78px 0 0;padding:6px 12px 4px;text-align:start}
+    .market-ribbon-head{display:flex;align-items:center;justify-content:space-between;gap:6px}.market-ribbon-label{margin:0;font-size:.62rem;line-height:1.15;font-weight:700;white-space:nowrap}.market-ribbon-head .market-link{font-size:.63rem;line-height:1.15}
+    .market-ribbon-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:2px 0 0}.market-ribbon-value{display:flex;align-items:baseline;justify-content:space-between;gap:4px;min-width:0;padding:0;border:0;border-radius:0;background:transparent!important}.market-ribbon-value span{font-size:.68rem;white-space:nowrap}.market-ribbon-value.flavio span{color:var(--orange)}.market-ribbon-value.lula span{color:var(--green)}.market-ribbon-value strong{font-size:clamp(1.05rem,1.4vw,1.3rem);line-height:1;font-weight:790;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+    .market-ribbon-figure{margin:0}#market-chart{display:block;width:100%;height:24px;max-height:none;overflow:visible}#market-chart .chart-series{stroke-width:9}.chart-label{display:none}
     @media(max-width:800px){main{grid-template-columns:minmax(0,1fr);grid-template-areas:"hero" "board" "report" "market";column-gap:0}.market-ribbon{margin:0 0 24px;width:100%}.hero-heading{display:block}}
   </style>
 </head>
