@@ -129,6 +129,17 @@ footer p{margin:4px 0}
   .score{padding:18px}
   .cand{padding:16px}
 }
+@media (max-width:430px){
+  .pm .wrap{gap:5px;font-size:11px}
+  .pm .nm{font-size:11px}
+  .pm .bar{min-width:20px}
+  .score .cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .cand{min-width:0;padding:10px 8px 8px}
+  .cand .pct{font-size:clamp(28px,8vw,32px)}
+  .row{grid-template-columns:minmax(0,1fr) auto auto;gap:4px}
+  .delta{min-width:0;font-size:11px}
+  .tag{font-size:10px;padding:2px 4px}
+}
 </style>
 </head>
 <body>
