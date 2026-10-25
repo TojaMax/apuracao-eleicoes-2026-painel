@@ -28,10 +28,36 @@
     .market-ribbon-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:1px 0 0}.market-ribbon-value{display:flex;align-items:baseline;justify-content:space-between;gap:4px;min-width:0;padding:0;border:0;border-radius:0;background:transparent!important}.market-ribbon-value span{font-size:.56rem;line-height:1;white-space:nowrap}.market-ribbon-value.flavio span{color:var(--orange)}.market-ribbon-value.lula span{color:var(--green)}.market-ribbon-value strong{font-size:clamp(.75rem,1vw,.85rem);line-height:1;font-weight:790;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
     .market-ribbon-figure{margin:0}#market-chart{display:block;width:100%;height:10px;max-height:none;overflow:visible}#market-chart .chart-series{stroke-width:14}.chart-label{display:none}
     @media(max-width:800px){main{grid-template-columns:minmax(0,1fr);grid-template-areas:"hero" "board" "report" "market";column-gap:0}.market-ribbon{margin:0 0 24px;width:100%}.hero-heading{display:block}}
+    /* Compact Polymarket ticker in the site header; its 24 h chart stays in the footer card. */
+    .headin{min-height:70px;display:grid;grid-template-columns:max-content minmax(0,1fr) max-content;grid-template-areas:"identity ticker state";align-items:center;gap:clamp(10px,2vw,24px)}
+    .identity{grid-area:identity;white-space:nowrap}.state{grid-area:state;white-space:nowrap}
+    .market-ticker{grid-area:ticker;min-width:0;display:grid;grid-template-columns:max-content minmax(0,1fr);grid-template-areas:"source values" "track track";align-items:center;column-gap:12px;row-gap:4px;--flavio-share:50%}
+    .market-ticker-source{grid-area:source;color:var(--muted);font-size:.7rem;font-weight:700;white-space:nowrap;text-decoration:none}
+    .market-ticker-source:hover{text-decoration:underline;text-underline-offset:2px}
+    .market-ticker-values{grid-area:values;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.76rem;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .market-quote{display:inline-flex;align-items:baseline;gap:4px;min-width:0;font-weight:690}
+    .market-quote.flavio{color:var(--orange)}.market-quote.lula{color:var(--green)}
+    .market-quote strong{font-size:.85rem;font-weight:790;letter-spacing:-.02em}
+    .market-ticker-track{grid-area:track;height:3px;border-radius:99px;background:linear-gradient(to right,var(--orange) 0 var(--flavio-share),var(--green) var(--flavio-share) 100%)}
+    .market-ticker:not(.has-data) .market-ticker-track{background:var(--line)}
+    main{display:block}
+    .market-history{width:min(460px,100%);margin:4px 0 28px auto;padding:15px 18px 13px;background:var(--card);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}
+    .market-history-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+    .market-history h2{margin:0;font-size:.92rem;letter-spacing:-.01em}
+    .market-history .market-kicker{margin:0 0 2px;font-size:.58rem;letter-spacing:.1em}
+    .market-history .market-updated{margin:0;text-align:right;font-size:.66rem;white-space:nowrap}
+    .market-history .market-legend{gap:12px;margin:8px 0 0;font-size:.68rem}
+    .market-history .legend-swatch{width:11px}
+    .market-history .market-figure{margin:3px 0 0}
+    .market-history #market-chart{height:78px;max-height:78px}
+    .market-history .market-figure figcaption{margin-top:0;font-size:.65rem}
+    .market-history .market-status{margin-top:5px;font-size:.65rem;line-height:1.35}
+    @media(max-width:800px){.headin{grid-template-columns:minmax(0,1fr) max-content;grid-template-areas:"identity state" "ticker ticker";gap:5px 8px;padding-block:8px}.market-ticker{column-gap:8px;row-gap:3px}.market-ticker-source{font-size:.64rem}.market-ticker-values{font-size:.7rem;gap:5px}.market-quote{gap:3px}.market-quote strong{font-size:.77rem}.market-ticker-track{height:3px}.market-history{margin:4px 0 22px;width:100%}}
+    @media(max-width:430px){.headin{min-height:68px}.market-ticker{column-gap:7px}.market-ticker-source{font-size:.61rem}.market-ticker-values{font-size:.67rem;letter-spacing:-.01em}.market-quote{gap:2px}.market-quote strong{font-size:.73rem}.market-history{padding:13px 14px}.market-history #market-chart{height:68px;max-height:68px}}
   </style>
 </head>
 <body>
-  <header class="top"><div class="headin"><div class="identity"><span class="symbol" aria-hidden="true"></span><span>ACOMPANHAMENTO ELEITORAL</span></div><span class="state" id="state">Preparação</span></div></header>
+  <header class="top"><div class="headin"><div class="identity"><span class="symbol" aria-hidden="true"></span><span>ACOMPANHAMENTO ELEITORAL</span></div><aside class="market-ticker" id="market-ticker" aria-label="Probabilidades atuais do Polymarket" aria-live="polite"><a class="market-ticker-source" id="market-ribbon-time" href="https://polymarket.com/event/brazil-presidential-election" target="_blank" rel="noopener noreferrer">Polymarket, —:—</a><div class="market-ticker-values" aria-label="Probabilidade atual de vitória no mercado"><span class="market-quote flavio">Flávio <strong id="market-ribbon-flavio">—</strong></span><span class="market-quote lula"><strong id="market-ribbon-lula">—</strong> Lula</span></div><div class="market-ticker-track" aria-hidden="true"></div></aside><span class="state" id="state">Preparação</span></div></header>
   <main>
     <section class="hero" aria-labelledby="title">
       <p class="kicker">Presidência · 2º turno · 25/10/2026</p>
@@ -57,27 +83,19 @@
       <div class="reportgrid" id="report-grid"></div>
       <p class="notice">projeção independente, não oficial</p>
     </section>
-    <aside class="market-ribbon" aria-label="Polymarket: probabilidades e gráfico das últimas 24 horas" aria-live="polite">
-      <div class="market-ribbon-head">
-        <p class="market-ribbon-label" id="market-ribbon-time">Polymarket, —:—</p>
-        <a class="market-link" href="https://polymarket.com/event/brazil-presidential-election" target="_blank" rel="noopener noreferrer">Abrir mercado</a>
-      </div>
-      <div class="market-ribbon-values" aria-label="Probabilidade atual de vitória no mercado">
-        <div class="market-ribbon-value flavio"><span>Flávio</span><strong id="market-ribbon-flavio">—</strong></div>
-        <div class="market-ribbon-value lula"><span>Lula</span><strong id="market-ribbon-lula">—</strong></div>
-      </div>
-      <figure class="market-ribbon-figure">
-        <div class="market-legend market-ribbon-legend sr-only" aria-hidden="true"><span class="legend-key"><i class="legend-swatch"></i>Lula</span><span class="legend-key"><i class="legend-swatch flavio"></i>Flávio</span><span>últimas 24 h</span></div>
+    <aside class="market-history" aria-label="Histórico do mercado Polymarket nas últimas 24 horas" aria-live="polite">
+      <div class="market-history-head"><div><p class="market-kicker">Polymarket</p><h2>Últimas 24 horas</h2></div><p class="market-updated" id="market-updated" role="status" aria-live="polite">Aguardando a primeira leitura automatizada.</p></div>
+      <div class="market-legend" aria-hidden="true"><span class="legend-key"><i class="legend-swatch"></i>Lula</span><span class="legend-key"><i class="legend-swatch flavio"></i>Flávio</span></div>
+      <figure class="market-figure">
         <svg id="market-chart" role="img" aria-labelledby="market-chart-title market-chart-desc" viewBox="0 0 640 140" preserveAspectRatio="none">
           <title id="market-chart-title">Probabilidades do Polymarket nas últimas 24 horas</title>
           <desc id="market-chart-desc">O gráfico será preenchido após a primeira leitura automatizada.</desc>
           <g id="market-chart-grid"></g><g id="market-chart-lines"></g>
         </svg>
-        <figcaption class="sr-only" id="market-chart-caption">Probabilidade implícita do mercado nas últimas 24 horas.</figcaption>
+        <figcaption id="market-chart-caption">Probabilidade implícita do mercado nas últimas 24 horas.</figcaption>
       </figure>
       <table class="sr-only" id="market-access-table"></table>
-      <p class="market-status sr-only" id="market-status">A página exibe o arquivo publicado pelo GitHub Actions; não consulta a API da Polymarket no navegador.</p>
-      <p class="sr-only" id="market-updated" role="status" aria-live="polite">Aguardando a primeira leitura automatizada.</p>
+      <p class="market-status" id="market-status">A página exibe o arquivo publicado pelo GitHub Actions; não consulta a API da Polymarket no navegador.</p>
     </aside>
   </main>
   <footer class="footer"><div class="footin"><span>Apuração baseada em fontes públicas e boletins identificados.</span><span id="footer-updated"></span></div></footer>
@@ -237,6 +255,8 @@ function renderMarket(data){
   $('#market-ribbon-time').textContent=`Polymarket, ${hhmm}`;
   $('#market-ribbon-flavio').textContent=pct(flavio.price_pct);
   $('#market-ribbon-lula').textContent=pct(lula.price_pct);
+  const flavioPrice=Number(flavio.price_pct),lulaPrice=Number(lula.price_pct),total=flavioPrice+lulaPrice;
+  if(Number.isFinite(flavioPrice)&&Number.isFinite(lulaPrice)&&flavioPrice>=0&&lulaPrice>=0&&total>0){$('#market-ticker').style.setProperty('--flavio-share',`${(100*flavioPrice/total).toFixed(3)}%`);$('#market-ticker').classList.add('has-data');}
   const grid=$('#market-chart-grid'),lines=$('#market-chart-lines');grid.replaceChildren();lines.replaceChildren();
   const left=36,right=625,top=10,bottom=100,plotHeight=bottom-top;
   for(const value of [0,50,100]){
