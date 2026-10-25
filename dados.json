@@ -1,23 +1,23 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T08:46:20-03:00",
+  "updated_at": "2026-10-25T08:48:56-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
     "mode": "exterior",
-    "lula_pct": 49.3995720297483,
-    "flavio_pct": 50.6004279702517,
+    "lula_pct": 48.7295571401299,
+    "flavio_pct": 51.2704428598701,
     "lula_range_pct": [
-      42.09873632650506,
-      56.70040773299153
+      41.42872143688666,
+      56.030392843373136
     ],
     "flavio_range_pct": [
-      43.29959226700847,
-      57.90126367349494
+      43.969607156626864,
+      58.57127856311334
     ],
-    "lula_win_probability_pct": 43.597095535333416,
-    "flavio_win_probability_pct": 56.402904464666584,
-    "updated_at": "2026-10-25T11:46:20.691866+00:00",
+    "lula_win_probability_pct": 36.65268875584912,
+    "flavio_win_probability_pct": 63.34731124415088,
+    "updated_at": "2026-10-25T11:48:56.076857+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -139,7 +139,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T11:46:20.691866+00:00",
+    "updated_at": "2026-10-25T11:48:56.076857+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -154,7 +154,7 @@
     },
     "p_s_lula_pct": 50.73960180898509,
     "p_t_lula_pct": 48.0595422505115,
-    "mu_lula_pct": 49.3995720297483,
+    "mu_lula_pct": 48.7295571401299,
     "sigma_pp": 3.724916175124101,
     "sigma_components_pp": {
       "amostra": 2.3814605969239238,
@@ -163,8 +163,8 @@
       "modelo": 1.3400297792367954
     },
     "transfer_fraction_other_to_lula": 0.3709314650331441,
-    "lula_win_probability_pct": 43.597095535333416,
-    "flavio_win_probability_pct": 56.402904464666584,
+    "lula_win_probability_pct": 36.65268875584912,
+    "flavio_win_probability_pct": 63.34731124415088,
     "used_scope_count": 12,
     "used_scopes": [
       {
