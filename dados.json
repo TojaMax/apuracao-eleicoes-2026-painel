@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T12:02:59-03:00",
+  "updated_at": "2026-10-25T12:14:33-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
@@ -17,7 +17,7 @@
     ],
     "lula_win_probability_pct": 35.99328657478063,
     "flavio_win_probability_pct": 64.00671342521936,
-    "updated_at": "2026-10-25T15:02:59.356633+00:00",
+    "updated_at": "2026-10-25T15:14:33.780039+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -77,7 +77,15 @@
         "source_level": "N3",
         "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
         "observed_at": "2026-10-25T11:45:13-03:00",
-        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+        "status": "divergencia_de_fontes"
+      },
+      {
+        "country": "IN-DELHI",
+        "scope_label": "Nova Délhi — parcial da Índia, sem Mumbai",
+        "source_level": "N3",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T11:45:13-03:00",
+        "status": "divergencia_de_fontes"
       },
       {
         "country": "JP",
@@ -211,7 +219,7 @@
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T15:02:59.356633+00:00",
+    "updated_at": "2026-10-25T15:14:33.780039+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },

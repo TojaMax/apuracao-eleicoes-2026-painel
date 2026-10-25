@@ -161,13 +161,6 @@ footer p{margin:4px 0}
 
   <div class="layout">
     <div>
-      <section class="card" id="coverageCard" hidden>
-        <h2>Quanto do exterior já entrou</h2>
-        <div class="sub" id="coverageText"></div>
-        <div class="progress" aria-hidden="true"><i id="coverageBar" style="width:0"></i></div>
-        <div class="timeline" id="timeline"></div>
-      </section>
-
       <section class="card" id="countriesCard" hidden>
         <h2>Países usados na conta</h2>
         <div class="sub">Do mais recente para o mais antigo. O número mostra quanto cada país andou para um lado entre o 1º e o 2º turno, em pontos. Toque num país para ver a fonte.</div>
@@ -280,19 +273,6 @@ function placar(d){
     </div>
     <div class="split" role="img" aria-label="Flávio ${pct(e.flavio_pct)}, Lula ${pct(e.lula_pct)}"><i class="sf" style="width:${f}%"></i><i class="sl" style="width:${100-f}%"></i></div>
     <div class="mid"></div>`;
-}
-
-function cobertura(d){
-  const pj = d.projection || {};
-  const card = $("coverageCard");
-  if(!isNum(pj.exterior_v1_coverage_pct)){ card.hidden = true; return; }
-  card.hidden = false;
-  const p = Math.max(0, Math.min(100, pj.exterior_v1_coverage_pct));
-  $("coverageBar").style.width = p + "%";
-  $("coverageText").textContent = `${fmt1.format(p)}% dos votos do exterior (${fmt0.format(pj.covered_exterior_v1 || 0)} de ${fmt0.format(pj.total_exterior_v1 || 0)} votos do 1º turno).`;
-  const ja = new Set((pj.continents || []).map(c => CONTINENTE[c] || c));
-  const etapas = [["Ásia e Oceania","madrugada",["Ásia","Oceania"]],["Europa e África","a partir das 13h",["Europa","África","Oriente Médio"]],["Américas","a partir das 17h",["Américas"]]];
-  $("timeline").innerHTML = etapas.map(([n,q,cs]) => { const ok = cs.some(c => ja.has(c)); return `<span class="chip ${ok ? "done" : ""}">${ok ? "✓ " : ""}${n} · ${ok ? "já entrou" : q}</span>`; }).join("");
 }
 
 function paises(d){
@@ -416,7 +396,7 @@ function tecnico(d){
 
 function render(d){
   ultimo = d;
-  cabecalho(d); placar(d); cobertura(d); paises(d); boletins(d); mobilizacao(d); comoCalculamos(d); tecnico(d);
+  cabecalho(d); placar(d); paises(d); boletins(d); mobilizacao(d); comoCalculamos(d); tecnico(d);
 }
 
 async function refresh(){
