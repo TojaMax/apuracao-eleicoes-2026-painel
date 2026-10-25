@@ -415,6 +415,20 @@ async function refreshMarket(){
     $("pm").hidden = false;
   }catch(_){}
 }
+// Contador de visitas: só números, sem cookie nem dado pessoal. Abrir com #eu tira o aparelho da contagem.
+(function contar(){
+  try{
+    if(location.hash === "#eu") localStorage.setItem("naoContar", "1");
+    if(localStorage.getItem("naoContar") || sessionStorage.getItem("contado")) return;
+    sessionStorage.setItem("contado", "1");
+    const base = "https://abacus.jasoncameron.dev/hit/tojamax-apuracao2026/";
+    const hit = k => fetch(base + k, {mode:"cors", keepalive:true}).catch(() => {});
+    hit("visitas");
+    if(!localStorage.getItem("jaVeio")){ localStorage.setItem("jaVeio", "1"); hit("aparelhos"); }
+    const de = (new URLSearchParams(location.search).get("de") || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20);
+    if(de) hit("de-" + de);
+  }catch(_){}
+})();
 if(window.matchMedia("(min-width:860px)").matches) $("how").open = true;
 refresh(); refreshMarket();
 setInterval(refresh, 30000); setInterval(refreshMarket, 120000);
