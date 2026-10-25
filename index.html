@@ -383,6 +383,15 @@ function comoCalculamos(d){
       <li><h3>Quanto pode variar</h3><p>Margem de ${fmt1.format(pj.sigma_pp||0)} pontos para cada lado, por quatro motivos: poucos países (${fmt1.format(sc.amostra||0)}), qualidade das fontes (${fmt1.format(sc.fonte||0)}), o exterior pode mudar diferente do Brasil (${fmt1.format(sc.transferencia||0)}) e os dois métodos discordam (${fmt1.format(sc.modelo||0)}). Daí sai a chance de vencer.</p></li>
     </ol>`;
   }
+  h += `<h3 style="font-size:14px;margin:14px 0 4px">Quanto a projeção da apuração pode errar</h3>
+    <p style="margin:0 0 6px;color:var(--muted);font-size:13px">Teste nas eleições de 2018 e 2022, imitando a contagem do TSE (1.440 simulações), com o peso 25% método 1 e 75% método 2. Erro em pontos percentuais.</p>
+    <div class="kv"><span><b>Urnas apuradas</b></span><span><b>Erro típico · pior erro</b></span>
+      <span>1% a 2%</span><span class="num">0,3 a 0,4 · 1,4</span>
+      <span>5%</span><span class="num">0,2 · 0,7</span>
+      <span>10%</span><span class="num">0,1 · 0,4</span>
+      <span>20%</span><span class="num">0,1 · 0,4</span>
+      <span>40% ou mais</span><span class="num">menos de 0,1 · 0,2</span></div>
+    <p style="margin:6px 0 0;color:var(--muted);font-size:13px">O placar parcial do TSE, sem essa comparação, chegou a errar 9 pontos quando o Sul e o Sudeste foram contados primeiro.</p>`;
   $("howBody").innerHTML = h || "<p>Os detalhes aparecem quando houver projeção.</p>";
 }
 
