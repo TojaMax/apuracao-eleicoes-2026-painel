@@ -268,7 +268,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">"
 const STATUS = {aguardando_dados:"Aguardando dados suficientes do exterior.", calculada:"Projeção calculada."};
 const statusTxt = s => STATUS[s] || s;
 let filtro = "todos", ordemPaises = "recentes", ultimo = null;
-const grafAberto = {est:false, apu:false};
+const grafAberto = {est:false, apu:false, pm:false};
 const abertos = new Set();
 
 function cabecalho(d){
@@ -339,15 +339,38 @@ function placar(d){
       <div class="cand l"><div class="who">Lula</div><div class="pct num">${pct(e.lula_pct)}</div><div class="chance">${chanceL}</div><div class="range">${lr}</div></div>
     </div>
     ${gEst}
-    ${atual}`;
-  const ROT = {est:"Veja gráfico estimativo", apu:"Veja gráfico da apuração"};
+    ${atual}
+    <div id="pmGrafBox"></div>`;
+  ligaBotoes(el);
+  graficoMercado();
+}
+
+const ROT = {est:"Veja gráfico estimativo", apu:"Veja gráfico da apuração", pm:"Veja gráfico do Polymarket"};
+function ligaBotoes(el){
   el.querySelectorAll(".vergraf").forEach(bg => bg.onclick = () => {
     const k = bg.dataset.g; grafAberto[k] = !grafAberto[k]; $("graf-" + k).hidden = !grafAberto[k];
     bg.textContent = grafAberto[k] ? "Fechar gráfico" : ROT[k]; bg.setAttribute("aria-expanded", String(grafAberto[k]));
   });
 }
 
-function grafico(h, nota){
+// Polymarket: últimas 24 horas, linha do Flávio; Lula ao lado do último ponto.
+let mercado = null;
+function graficoMercado(){
+  const box = $("pmGrafBox"); if(!box) return;
+  const s = mercado && mercado.series || {};
+  const fp = (s.flavio && s.flavio.points || []).filter(x => isNum(x.t) && isNum(x.probability_pct)).sort((a,b) => a.t - b.t);
+  const lp = (s.lula && s.lula.points || []).filter(x => isNum(x.t) && isNum(x.probability_pct)).sort((a,b) => a.t - b.t);
+  if(fp.length < 2){ box.innerHTML = ""; return; }
+  const lulaEm = t => { let v = null; for(const x of lp){ if(x.t <= t) v = x.probability_pct; else break; } return v === null ? 100 - fp[0].probability_pct : v; };
+  const h = fp.map(x => ({t: new Date(x.t * 1000).toISOString(), f: x.probability_pct, l: lulaEm(x.t)}));
+  const ult = h[h.length - 1];
+  if(isNum(s.flavio.price_pct)) ult.f = s.flavio.price_pct;
+  if(s.lula && isNum(s.lula.price_pct)) ult.l = s.lula.price_pct;
+  box.innerHTML = `<button type="button" class="vergraf" data-g="pm" aria-expanded="${grafAberto.pm}">${grafAberto.pm ? "Fechar gráfico" : ROT.pm}</button><div class="graf" id="graf-pm" ${grafAberto.pm ? "" : "hidden"}>${grafico(h, "", `<b class="cf">Flávio</b> no Polymarket (chance de vencer apostada), últimas 24 horas, desde ${new Date(h[0].t).toDateString() !== new Date().toDateString() ? "ontem às " : ""}${hora(h[0].t)}. Escala ampliada: cada linha vale PASSO pontos. Lula ao lado do último ponto.`)}</div>`;
+  ligaBotoes(box);
+}
+
+function grafico(h, nota, notaPropria){
   const W = 330, H = 160, L = 34, R = 58, T = 10, B = 22;
   const ts = h.map(p => new Date(p.t).getTime()), t0 = ts[0], t1 = ts[ts.length - 1] || t0 + 1;
   const vals = h.map(p => p.f);
@@ -369,7 +392,7 @@ function grafico(h, nota){
   g += `<text x="${W - R + 5}" y="${y(ult.f) - 2}" class="gvf">${fmt2.format(ult.f)}</text><text x="${W - R + 5}" y="${y(ult.f) + 10}" class="gvl">Lula ${fmt2.format(ult.l)}</text>`;
   const d0 = ult.f - h[0].f;
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Estimativa ao longo do dia">${g}</svg>
-    <p class="gnote"><b class="cf">Flávio</b> ${nota}, a cada atualização desde ${hora(h[0].t)}; o Lula é o que falta para 100%. Escala ampliada: cada linha vale ${fmt2.format(passo)} ponto. Desde o início: Flávio ${d0 >= 0 ? "+" : "−"}${fmt2.format(Math.abs(d0))}, Lula ${d0 > 0 ? "−" : "+"}${fmt2.format(Math.abs(d0))}.</p>`;
+    <p class="gnote">${notaPropria ? notaPropria.replace("PASSO", fmt2.format(passo)) : `<b class="cf">Flávio</b> ${nota}, a cada atualização desde ${hora(h[0].t)}; o Lula é o que falta para 100%. Escala ampliada: cada linha vale ${fmt2.format(passo)} ponto. Desde o início: Flávio ${d0 >= 0 ? "+" : "−"}${fmt2.format(Math.abs(d0))}, Lula ${d0 > 0 ? "−" : "+"}${fmt2.format(Math.abs(d0))}.`}</p>`;
 }
 
 function placarPais(s){
@@ -528,6 +551,7 @@ async function refreshMarket(){
     $("pmBf").style.width = (100 * f / tot) + "%"; $("pmBl").style.width = (100 * l / tot) + "%";
     $("pmTime").textContent = hora(p.updated_at_utc || p.updated_at_brt);
     $("pm").hidden = false;
+    mercado = p; graficoMercado();
   }catch(_){}
 }
 // Contador de visitas: só números, sem cookie nem dado pessoal. Abrir com #eu tira o aparelho da contagem.
