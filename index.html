@@ -114,6 +114,8 @@ section.card h2{font-size:15.5px;margin:0 0 8px;letter-spacing:-.005em}
 .rowhead span:nth-child(2){text-align:center}.rowhead span:nth-child(3){text-align:right}
 .rowhead i{font-style:normal;font-weight:600}.rowhead i.f{color:var(--flavio)}.rowhead i.l{color:var(--lula)}
 .res{display:flex;flex-direction:column;gap:3px}
+.row.reg .n{font-weight:800}
+.rows li:has(.row.reg)+li:has(.row:not(.reg)){border-top:2px solid var(--ink)}
 .rv{display:flex;justify-content:space-between;font-size:13.5px;font-variant-numeric:tabular-nums}
 .rv b{font-weight:500;opacity:.7}.rv b.lead{font-weight:800;opacity:1}
 .rv .f{color:var(--flavio)}.rv .l{color:var(--lula)}
@@ -204,6 +206,13 @@ footer p{margin:4px 0}
 
   <div class="layout">
     <div>
+      <section class="card" id="statesCard" hidden>
+        <h2>Brasil por região e estado</h2>
+        <div class="rowhead" aria-hidden="true"><span>Região / estado</span><span class="h2t"><i class="f">Flávio</i> % <i class="l">Lula</i><br>apurado TSE</span><span>Avanço desde<br>o 1º turno</span></div>
+        <ul class="rows" id="statesRows"></ul>
+        <div class="explain" style="margin-top:8px">Placar: votos já somados pelo TSE em cada estado. Avanço: comparação nas mesmas seções com boletim publicado (— quando ainda não há).</div>
+      </section>
+
       <section class="card" id="countriesCard" hidden>
         <h2 id="countriesTitle">Países usados na conta</h2>
         <div class="filters" id="filters" role="group" aria-label="Filtrar e ordenar países"></div>
@@ -414,7 +423,31 @@ function placarPais(s){
   return linha("2º", s.a2, s.b2, "t2t") + linha("1º", s.a1, s.b1, "t1t");
 }
 
+const UF_NOME = {AC:"Acre",AL:"Alagoas",AM:"Amazonas",AP:"Amapá",BA:"Bahia",CE:"Ceará",DF:"Distrito Federal",ES:"Espírito Santo",GO:"Goiás",MA:"Maranhão",MG:"Minas Gerais",MS:"Mato Grosso do Sul",MT:"Mato Grosso",PA:"Pará",PB:"Paraíba",PE:"Pernambuco",PI:"Piauí",PR:"Paraná",RJ:"Rio de Janeiro",RN:"Rio Grande do Norte",RO:"Rondônia",RR:"Roraima",RS:"Rio Grande do Sul",SC:"Santa Catarina",SE:"Sergipe",SP:"São Paulo",TO:"Tocantins"};
+function estados(d){
+  const lista = Array.isArray(d.states) ? d.states : [], card = $("statesCard");
+  card.hidden = !lista.length;
+  if(!lista.length) return;
+  const soma = itens => itens.reduce((t,x) => { t.a += x.a; t.b += x.b; t.st += x.st; t.ts += x.ts;
+    if(x.paired){ t.p = t.p || {sections:0,a1:0,b1:0,a2:0,b2:0}; for(const k in x.paired) t.p[k] += x.paired[k]; } return t; }, {a:0,b:0,st:0,ts:0,p:null});
+  const linha = (nome, x, regiao) => {
+    const tot = x.a + x.b, pf = tot ? 100 * x.b / tot : null;
+    const res = pf === null ? '<span class="res"><span class="rv"><b>—</b><b>—</b></span></span>' : `<span class="res"><span class="rv"><b class="f${pf >= 50 ? " lead" : ""}">${fmt1.format(pf)}</b><b class="l${pf < 50 ? " lead" : ""}">${fmt1.format(100 - pf)}</b></span><span class="rb"><i class="sf" style="width:${pf}%"></i><i class="sl" style="width:${100 - pf}%"></i></span></span>`;
+    let dv = '<span class="dv z">—</span>';
+    if(x.p && x.p.a1 + x.p.b1 > 0 && x.p.a2 + x.p.b2 > 0){
+      const sw = 100 * (x.p.a2 / (x.p.a2 + x.p.b2) - x.p.a1 / (x.p.a1 + x.p.b1));
+      dv = Math.abs(sw) < .05 ? '<span class="dv z">igual</span>' : sw > 0 ? `<span class="dv l">Lula<b>+${fmt1.format(sw)} pts</b></span>` : `<span class="dv f">Flávio<b>+${fmt1.format(-sw)} pts</b></span>`;
+    }
+    return `<li><div class="row${regiao ? " reg" : ""}" style="cursor:default"><span class="n">${nome}<small>${fmt2.format(x.ts ? 100 * x.st / x.ts : 0)}% das urnas · ${fmt0.format(tot)} votos</small></span>${res}${dv}</div></li>`;
+  };
+  const ordem = ["Norte","Nordeste","Centro-Oeste","Sudeste","Sul"];
+  let h = ordem.map(r => linha(r, soma(lista.filter(x => x.region === r)), true)).join("");
+  h += lista.slice().sort((x,y) => (y.st / y.ts) - (x.st / x.ts) || (y.a + y.b) - (x.a + x.b)).map(x => linha(UF_NOME[x.uf] || x.uf, Object.assign({}, x, {p: x.paired || null}), false)).join("");
+  $("statesRows").innerHTML = h;
+}
+
 function paises(d){
+  if((d.estimate || {}).mode === "national" && Array.isArray(d.states) && d.states.length){ $("countriesCard").hidden = true; return; }
   $("countriesTitle").textContent = (d.estimate || {}).mode === "national" ? "Exterior: países já apurados" : "Países usados na conta";
   const pj = d.projection || {};
   const lista = Array.isArray(pj.used_scopes) ? pj.used_scopes.slice() : [];
@@ -549,7 +582,7 @@ function tecnico(d){
 
 function render(d){
   ultimo = d;
-  cabecalho(d); placar(d); paises(d); boletins(d); mobilizacao(d); comoCalculamos(d); tecnico(d);
+  cabecalho(d); placar(d); estados(d); paises(d); boletins(d); mobilizacao(d); comoCalculamos(d); tecnico(d);
 }
 
 async function refresh(){
