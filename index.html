@@ -68,10 +68,11 @@ section.card h2{font-size:15.5px;margin:0 0 8px;letter-spacing:-.005em}
 .timeline .chip.done{color:var(--ok);border-color:rgba(29,122,74,.35);background:#eef7f1}
 
 /* Países */
-.filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:6px;scrollbar-width:none}
-.filters::-webkit-scrollbar{display:none}
-.filters button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 10px;color:var(--ink);cursor:pointer;white-space:nowrap}
-.filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.filters{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:#fff}
+.filters button{font:inherit;font-size:12.5px;border:0;background:transparent;padding:6px 11px;color:var(--ink);cursor:pointer;white-space:nowrap;min-height:32px}
+.seg button+button{border-left:1px solid var(--line)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
 .filters button span{color:var(--faint);margin-left:4px}
 .filters button[aria-pressed="true"] span{color:#c9ccd2}
 .explain{font-size:12.5px;color:var(--muted);background:#f7f6f2;border-radius:10px;padding:8px 10px;margin:4px 0 8px}
@@ -120,6 +121,10 @@ details.card .body{padding:0 14px 14px;font-size:14px}
 .pair .f{color:var(--flavio)} .pair .l{color:var(--lula)}
 .kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:13px;margin:6px 0}
 .kv span:nth-child(odd){color:var(--muted)}
+table.erro{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0;font-variant-numeric:tabular-nums}
+table.erro th,table.erro td{padding:5px 4px;border-top:1px solid var(--line);text-align:right;white-space:nowrap}
+table.erro th{border-top:0;font-size:12px;color:var(--muted);font-weight:600}
+table.erro th:first-child,table.erro td:first-child{text-align:left;color:var(--muted)}
 footer{font-size:12px;color:var(--faint);padding:8px 0 28px}
 footer p{margin:4px 0}
 
@@ -166,7 +171,7 @@ footer p{margin:4px 0}
       <section class="card" id="countriesCard" hidden>
         <h2>Países usados na conta</h2>
         <div class="sub">Do mais recente para o mais antigo. O número mostra quanto cada país andou para um lado entre o 1º e o 2º turno, em pontos. Toque num país para ver a fonte.</div>
-        <div class="filters" id="filters" role="group" aria-label="Filtrar por tipo de fonte"></div>
+        <div class="filters" id="filters" role="group" aria-label="Filtrar e ordenar países"></div>
         <div class="explain" id="explain" hidden></div>
         <ul class="rows" id="rows"></ul>
       </section>
@@ -298,23 +303,18 @@ function paises(d){
   card.hidden = false;
   const quando = s => { const d = new Date(s.entered_at || 0); return isNaN(d) ? 0 : d.getTime(); };
   lista.sort((a,b) => ordemPaises === "maiores" ? (b.v1||0) - (a.v1||0) : quando(b) - quando(a) || (b.v1||0) - (a.v1||0));
-  const cont = {todos:lista.length, N1:0, N2:0, N3:0};
-  lista.forEach(s => { if(cont[s.level] !== undefined) cont[s.level]++; });
+  const europa = s => (CONTINENTE[s.continente] || s.continente) === "Europa";
+  const nEu = lista.filter(europa).length;
   const quarentena = (d.report && Array.isArray(d.report.quarantine)) ? d.report.quarantine : [];
-  const botoes = [["todos","Todos"],["N2",FONTES.N2.rot],["N3",FONTES.N3.rot],["N1",FONTES.N1.rot]].filter(([k]) => k === "todos" || cont[k] > 0);
-  $("filters").innerHTML = botoes.map(([k,r]) => `<button type="button" data-k="${k}" aria-pressed="${filtro === k}">${r}<span>${cont[k]}</span></button>`).join("") +
-    (quarentena.length ? `<button type="button" data-k="Q" aria-pressed="${filtro === "Q"}">Em observação<span>${quarentena.length}</span></button>` : "") +
-    `<button type="button" data-o="recentes" aria-pressed="${ordemPaises === "recentes"}">Mais recentes</button><button type="button" data-o="maiores" aria-pressed="${ordemPaises === "maiores"}">Maiores</button>`;
+  const bt = (attr, v, atual, rot) => `<button type="button" data-${attr}="${v}" aria-pressed="${atual === v}">${rot}</button>`;
+  $("filters").innerHTML =
+    `<span class="seg" role="group" aria-label="Quais países">${bt("k","todos",filtro,`Todos<span>${lista.length}</span>`)}${bt("k","europa",filtro,`Europa<span>${nEu}</span>`)}</span>` +
+    `<span class="seg" role="group" aria-label="Ordem">${bt("o","recentes",ordemPaises,"Recentes")}${bt("o","maiores",ordemPaises,"Maiores")}</span>`;
   $("filters").querySelectorAll("button").forEach(b => b.onclick = () => { if(b.dataset.o) ordemPaises = b.dataset.o; else filtro = b.dataset.k; paises(ultimo); });
   const ex = $("explain");
-  if(filtro === "Q"){ ex.hidden = false; ex.textContent = "Dados que destoaram dos outros países e ficaram fora da conta até serem conferidos."; }
-  else if(FONTES[filtro]){ ex.hidden = false; ex.textContent = FONTES[filtro].exp; }
+  if(quarentena.length){ ex.hidden = false; ex.textContent = `Em observação, fora da conta até serem conferidos: ${quarentena.map(q => nomePais(q.scope || q.country || "?")).join(", ")}.`; }
   else ex.hidden = true;
-  if(filtro === "Q"){
-    $("rows").innerHTML = quarentena.map(q => `<li><div class="row" style="cursor:default"><span class="n">${esc(nomePais(q.scope || q.country || "?"))}<small>${esc(q.reason || q.motivo || "em observação")}</small></span><span></span><span></span></div></li>`).join("") || `<li class="empty">Nada em observação.</li>`;
-    return;
-  }
-  const vis = lista.filter(s => filtro === "todos" || s.level === filtro);
+  const vis = lista.filter(s => filtro !== "europa" || europa(s));
   $("rows").innerHTML = vis.map((s,i) => {
     const sw = isNum(s.swing) ? s.swing * 100 : null;
     let delta = '<span class="delta z">—</span>';
@@ -331,7 +331,7 @@ function paises(d){
         <span class="n">${esc(nomePais(s.scope))}<small>entrou às ${hora(s.entered_at) || "—"} · ${fmt0.format(s.v1||0)} votos</small></span>
         <span class="tag ${fonte.cls}">${fonte.rot}</span>${delta}</button>
       <div class="more" id="m${i}" ${ab ? "" : "hidden"}><p>${fonte.exp}</p><p>${fmt0.format(s.v1||0)} votos válidos no 1º turno${cont ? " · " + esc(cont) : ""}.</p>${isNum(s.bu_count) && s.bu_count > 0 ? `<p>${fmt0.format(s.bu_count)} boletins de urna conferidos.</p>` : ""}${alerta}</div></li>`;
-  }).join("") || `<li class="empty">Nenhum país neste grupo ainda.</li>`;
+  }).join("") || `<li class="empty">${filtro === "europa" ? "Nenhum país da Europa ainda; os primeiros devem entrar a partir das 13h." : "Nenhum país ainda."}</li>`;
   $("rows").querySelectorAll(".row").forEach(b => b.onclick = () => {
     const m = $(b.getAttribute("aria-controls")); const ab = m.hidden; m.hidden = !ab; b.setAttribute("aria-expanded", String(ab));
     if(ab) abertos.add(b.dataset.scope); else abertos.delete(b.dataset.scope);
@@ -388,12 +388,12 @@ function comoCalculamos(d){
   }
   h += `<h3 style="font-size:14px;margin:14px 0 4px">Quanto a projeção da apuração pode errar</h3>
     <p style="margin:0 0 6px;color:var(--muted);font-size:13px">Teste nas eleições de 2018 e 2022, imitando a contagem do TSE (1.440 simulações), com o peso 25% método 1 e 75% método 2. Erro em pontos percentuais.</p>
-    <div class="kv"><span><b>Urnas apuradas</b></span><span><b>Erro típico · pior erro</b></span>
-      <span>1% a 2%</span><span class="num">0,3 a 0,4 · 1,4</span>
-      <span>5%</span><span class="num">0,2 · 0,7</span>
-      <span>10%</span><span class="num">0,1 · 0,4</span>
-      <span>20%</span><span class="num">0,1 · 0,4</span>
-      <span>40% ou mais</span><span class="num">menos de 0,1 · 0,2</span></div>
+    <table class="erro"><thead><tr><th>Urnas apuradas</th><th>Erro típico</th><th>Pior erro</th></tr></thead><tbody>
+      <tr><td>1% a 2%</td><td>0,3 a 0,4</td><td>1,4</td></tr>
+      <tr><td>5%</td><td>0,2</td><td>0,7</td></tr>
+      <tr><td>10%</td><td>0,1</td><td>0,4</td></tr>
+      <tr><td>20%</td><td>0,1</td><td>0,4</td></tr>
+      <tr><td>40% ou mais</td><td>menos de 0,1</td><td>0,2</td></tr></tbody></table>
     <p style="margin:6px 0 0;color:var(--muted);font-size:13px">O placar parcial do TSE, sem essa comparação, chegou a errar 9 pontos quando o Sul e o Sudeste foram contados primeiro.</p>`;
   $("howBody").innerHTML = h || "<p>Os detalhes aparecem quando houver projeção.</p>";
 }
