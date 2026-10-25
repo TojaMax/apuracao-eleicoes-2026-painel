@@ -261,8 +261,9 @@ function placar(d){
     el.innerHTML = `<div class="waiting"><b>Projeção ainda não disponível</b>${esc(statusTxt(e.status) || "Aguardando dados suficientes.")}${raw}</div>`;
     return;
   }
-  const chanceF = isNum(e.flavio_win_probability_pct) ? `<b class="num">${fmt0.format(e.flavio_win_probability_pct)}%</b> de chance de vencer` : "";
-  const chanceL = isNum(e.lula_win_probability_pct) ? `<b class="num">${fmt0.format(e.lula_win_probability_pct)}%</b> de chance de vencer` : "";
+  const ch = v => v >= 99.5 ? "mais de 99%" : v <= 0.5 ? "menos de 1%" : fmt0.format(v) + "%";
+  const chanceF = isNum(e.flavio_win_probability_pct) ? `<b class="num">${ch(e.flavio_win_probability_pct)}</b> de chance de vencer` : "";
+  const chanceL = isNum(e.lula_win_probability_pct) ? `<b class="num">${ch(e.lula_win_probability_pct)}</b> de chance de vencer` : "";
   const fr = Array.isArray(e.flavio_range_pct) ? `pode variar de ${fmt0.format(e.flavio_range_pct[0])}% a ${fmt0.format(e.flavio_range_pct[1])}%` : "";
   const lr = Array.isArray(e.lula_range_pct) ? `pode variar de ${fmt0.format(e.lula_range_pct[0])}% a ${fmt0.format(e.lula_range_pct[1])}%` : "";
   const f = Math.max(0, Math.min(100, e.flavio_pct));
