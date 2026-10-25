@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T07:59:39-03:00",
+  "updated_at": "2026-10-25T08:07:55-03:00",
   "stage": "exterior",
   "estimate": {
     "available": true,
@@ -17,7 +17,7 @@
     ],
     "lula_win_probability_pct": 43.736555354188766,
     "flavio_win_probability_pct": 56.263444645811234,
-    "updated_at": "2026-10-25T10:59:39.209915+00:00",
+    "updated_at": "2026-10-25T11:07:55.084741+00:00",
     "source": "pares BU e âmbitos completos do exterior",
     "range_label": "intervalo do modelo"
   },
@@ -38,10 +38,92 @@
     },
     "used_bu_count": 0,
     "used_scope_count": 10,
+    "country_sources": [
+      {
+        "country": "AU",
+        "scope_label": "Austrália",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T06:59:40-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "CN",
+        "scope_label": "China",
+        "source_level": "N3",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T06:40:29-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "HK",
+        "scope_label": "Hong Kong",
+        "source_level": "N3",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T06:40:29-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "ID",
+        "scope_label": "Indonésia",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T07:59:33-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "JP",
+        "scope_label": "Japão",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T06:40:29-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "KR",
+        "scope_label": "Coréia",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T06:40:29-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "NZ",
+        "scope_label": "Nova Zelândia",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T06:21:01-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "SG",
+        "scope_label": "Singapura",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T06:40:29-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "TH",
+        "scope_label": "Tailândia",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T07:21:34-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      },
+      {
+        "country": "TW",
+        "scope_label": "Taiwan",
+        "source_level": "N2",
+        "source_url": "https://jornalrazao.com/eleicoes/d2/ext.json",
+        "observed_at": "2026-10-25T06:40:29-03:00",
+        "status": "total declarado pela fonte; ainda não confirmado pelo TSE 2º turno"
+      }
+    ],
     "quarantine_count": 0,
     "quarantine": [],
     "partial_count": 1,
-    "updated_at": "2026-10-25T10:59:39.209915+00:00",
+    "updated_at": "2026-10-25T11:07:55.084741+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
