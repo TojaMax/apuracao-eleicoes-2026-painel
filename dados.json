@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T23:05:12-03:00",
+  "updated_at": "2026-10-25T23:06:26-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
@@ -22,7 +22,7 @@
     "official_a": 64255891,
     "official_b": 59825984,
     "matched_sections": 8356,
-    "updated_at": "2026-10-26T02:04:01.524793+00:00",
+    "updated_at": "2026-10-26T02:05:54.917872+00:00",
     "counted_sections": 499246,
     "source": "modelo nacional de amostra fixa e placar oficial do TSE",
     "range_label": "faixa de cenários",
@@ -520,7 +520,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-26T02:05:12.475518+00:00",
+    "updated_at": "2026-10-26T02:06:26.061904+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
