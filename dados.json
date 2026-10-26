@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-26T00:16:53-03:00",
+  "updated_at": "2026-10-26T00:18:07-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
@@ -515,7 +515,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-26T03:16:53.721419+00:00",
+    "updated_at": "2026-10-26T03:18:07.454780+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
