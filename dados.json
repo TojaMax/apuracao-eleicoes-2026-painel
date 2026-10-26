@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T23:42:54-03:00",
+  "updated_at": "2026-10-25T23:44:06-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
@@ -22,12 +22,12 @@
     "official_a": 64256232,
     "official_b": 59826041,
     "matched_sections": 8356,
-    "updated_at": "2026-10-26T02:41:27.871605+00:00",
+    "updated_at": "2026-10-26T02:43:17.459417+00:00",
     "counted_sections": 499248,
     "source": "modelo nacional de amostra fixa e placar oficial do TSE",
     "range_label": "faixa de cenários",
-    "preview_sections": 101214,
-    "preview_lula_pct": 51.619577172376886
+    "preview_sections": 101814,
+    "preview_lula_pct": 51.61869715676788
   },
   "report": {
     "evidence_levels": {
@@ -520,7 +520,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-26T02:42:53.909450+00:00",
+    "updated_at": "2026-10-26T02:44:05.980684+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
