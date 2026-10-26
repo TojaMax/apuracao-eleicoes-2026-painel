@@ -2,14 +2,14 @@
   "schema": 1,
   "source": "Polymarket public Gamma API and CLOB prices-history",
   "event_slug": "brazil-presidential-election",
-  "updated_at_utc": "2026-10-26T02:06:01Z",
-  "updated_at_brt": "2026-10-25T23:06:01-03:00",
-  "window_start_ts": 1792893961,
-  "window_end_ts": 1792980361,
+  "updated_at_utc": "2026-10-26T02:09:02Z",
+  "updated_at_brt": "2026-10-25T23:09:02-03:00",
+  "window_start_ts": 1792894141,
+  "window_end_ts": 1792980541,
   "series": {
     "lula": {
       "label": "Lula",
-      "price_pct": 99.75,
+      "price_pct": 99.95,
       "points": [
         {
           "t": 1792897233,
@@ -88,14 +88,14 @@
           "probability_pct": 99.85
         },
         {
-          "t": 1792980321,
-          "probability_pct": 99.85
+          "t": 1792980514,
+          "probability_pct": 99.95
         }
       ]
     },
     "flavio": {
       "label": "Flávio Bolsonaro",
-      "price_pct": 0.15,
+      "price_pct": 0.05,
       "points": [
         {
           "t": 1792897220,
@@ -170,7 +170,7 @@
           "probability_pct": 0.2
         },
         {
-          "t": 1792980318,
+          "t": 1792980511,
           "probability_pct": 0.05
         }
       ]
