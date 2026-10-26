@@ -2,10 +2,10 @@
   "schema": 1,
   "source": "Polymarket public Gamma API and CLOB prices-history",
   "event_slug": "brazil-presidential-election",
-  "updated_at_utc": "2026-10-26T05:24:01Z",
-  "updated_at_brt": "2026-10-26T02:24:01-03:00",
-  "window_start_ts": 1792905841,
-  "window_end_ts": 1792992241,
+  "updated_at_utc": "2026-10-26T05:27:01Z",
+  "updated_at_brt": "2026-10-26T02:27:01-03:00",
+  "window_start_ts": 1792906021,
+  "window_end_ts": 1792992421,
   "series": {
     "lula": {
       "label": "Lula",
