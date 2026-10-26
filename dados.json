@@ -1,29 +1,29 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T23:11:17-03:00",
+  "updated_at": "2026-10-25T23:12:29-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
     "mode": "national",
-    "lula_pct": 51.78517784009125,
-    "flavio_pct": 48.21482215990875,
+    "lula_pct": 51.785181522900416,
+    "flavio_pct": 48.214818477099584,
     "lula_range_pct": [
-      51.78497681353456,
-      51.78536902716138
+      51.78502641179808,
+      51.78532434677127
     ],
     "flavio_range_pct": [
-      48.21463097283862,
-      48.21502318646544
+      48.21467565322873,
+      48.21497358820192
     ],
     "lula_win_probability_pct": 99.9,
     "flavio_win_probability_pct": 0.09999999999999432,
     "projected_winner": "lula",
-    "official_pct": 99.99959939749382,
-    "official_a": 64255891,
-    "official_b": 59825984,
+    "official_pct": 99.99979969874691,
+    "official_a": 64255969,
+    "official_b": 59826002,
     "matched_sections": 8356,
-    "updated_at": "2026-10-26T02:09:48.735617+00:00",
-    "counted_sections": 499246,
+    "updated_at": "2026-10-26T02:11:43.607367+00:00",
+    "counted_sections": 499247,
     "source": "modelo nacional de amostra fixa e placar oficial do TSE",
     "range_label": "faixa de cenários",
     "preview_sections": 88000,
@@ -520,7 +520,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-26T02:11:17.529347+00:00",
+    "updated_at": "2026-10-26T02:12:29.808520+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -3056,6 +3056,15 @@
       "n": 99.99959939749382,
       "ca": 64255891,
       "cb": 59825984
+    },
+    {
+      "t": "2026-10-25T23:12:29-03:00",
+      "f": 48.215,
+      "l": 51.785,
+      "m": "national",
+      "n": 99.99979969874691,
+      "ca": 64255969,
+      "cb": 59826002
     }
   ]
 }
