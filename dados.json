@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updated_at": "2026-10-25T22:29:56-03:00",
+  "updated_at": "2026-10-25T22:31:10-03:00",
   "stage": "national",
   "estimate": {
     "available": true,
@@ -22,7 +22,7 @@
     "official_a": 64252284,
     "official_b": 59824250,
     "matched_sections": 8356,
-    "updated_at": "2026-10-26T01:28:45.814983+00:00",
+    "updated_at": "2026-10-26T01:30:46.050949+00:00",
     "counted_sections": 499223,
     "source": "modelo nacional de amostra fixa e placar oficial do TSE",
     "range_label": "faixa de cenários",
@@ -520,7 +520,7 @@
       }
     ],
     "partial_count": 1,
-    "updated_at": "2026-10-26T01:29:56.722045+00:00",
+    "updated_at": "2026-10-26T01:31:10.829097+00:00",
     "exterior_status": "calculada",
     "raw_bu_count": 0
   },
@@ -1386,12 +1386,12 @@
   "notice": "projeção independente, não oficial",
   "national_probability": "not calculated by the national model; no calibrated probability is supplied",
   "official": {
-    "a": 64252284,
-    "b": 59824250,
-    "pct": 99.99499246867289,
-    "counted_sections": 499223,
+    "a": 64252430,
+    "b": 59824323,
+    "pct": 99.99519276992596,
+    "counted_sections": 499224,
     "total_sections": 499248,
-    "generated_at": "2026-10-25T22:26:12-03:00"
+    "generated_at": "2026-10-25T22:30:32-03:00"
   },
   "states": [
     {
@@ -1529,7 +1529,7 @@
       "b": 2608722,
       "st": 35475,
       "ts": 35476,
-      "hg": "22:26:15",
+      "hg": "22:30:38",
       "paired": {
         "sections": 5122,
         "a1": 805828,
@@ -1557,11 +1557,11 @@
     {
       "uf": "MA",
       "region": "Nordeste",
-      "a": 2807760,
-      "b": 1229770,
-      "st": 18090,
+      "a": 2807906,
+      "b": 1229843,
+      "st": 18091,
       "ts": 18093,
-      "hg": "22:26:09",
+      "hg": "22:30:30",
       "paired": {
         "sections": 2400,
         "a1": 337490,
@@ -1577,7 +1577,7 @@
       "b": 865210,
       "st": 10712,
       "ts": 10712,
-      "hg": "22:26:08",
+      "hg": "22:30:28",
       "paired": {
         "sections": 1504,
         "a1": 215599,
@@ -1593,7 +1593,7 @@
       "b": 1832554,
       "st": 21418,
       "ts": 21418,
-      "hg": "22:26:08",
+      "hg": "22:30:29",
       "paired": {
         "sections": 3351,
         "a1": 560191,
@@ -1609,7 +1609,7 @@
       "b": 525859,
       "st": 10225,
       "ts": 10225,
-      "hg": "22:26:07",
+      "hg": "22:30:29",
       "paired": {
         "sections": 1284,
         "a1": 190211,
@@ -1657,7 +1657,7 @@
       "b": 979542,
       "st": 6969,
       "ts": 6969,
-      "hg": "22:26:06",
+      "hg": "22:30:27",
       "paired": {
         "sections": 1061,
         "a1": 102906,
@@ -1705,7 +1705,7 @@
       "b": 1351099,
       "st": 8287,
       "ts": 8287,
-      "hg": "22:26:07",
+      "hg": "22:30:28",
       "paired": {
         "sections": 1193,
         "a1": 89564,
@@ -1753,7 +1753,7 @@
       "b": 5169033,
       "st": 37675,
       "ts": 37675,
-      "hg": "22:26:08",
+      "hg": "22:30:29",
       "paired": {
         "sections": 5606,
         "a1": 528567,
@@ -1769,7 +1769,7 @@
       "b": 14139178,
       "st": 103656,
       "ts": 103656,
-      "hg": "22:26:15",
+      "hg": "22:30:38",
       "paired": {
         "sections": 14888,
         "a1": 1310106,
@@ -1785,7 +1785,7 @@
       "b": 4291444,
       "st": 27142,
       "ts": 27142,
-      "hg": "22:26:12",
+      "hg": "22:30:35",
       "paired": {
         "sections": 3940,
         "a1": 301686,
@@ -1817,7 +1817,7 @@
       "b": 3220071,
       "st": 17326,
       "ts": 17326,
-      "hg": "22:26:11",
+      "hg": "22:30:31",
       "paired": {
         "sections": 2693,
         "a1": 181956,
